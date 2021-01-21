@@ -1,0 +1,155 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Java基础笔记--学习Java语言--面向对象概念 | SomeExp</title>
+  <meta name="author" content="someexp">
+  
+  <meta name="description" content="什么是对象? 类? 继承? 接口? 包? API文档.">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Java基础笔记--学习Java语言--面向对象概念"/>
+  <meta property="og:site_name" content="SomeExp"/>
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">SomeExp</a></h1>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+      <li><a href="/links">Links</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+    <div class="post-content">
+        <header>
+            
+  
+    <h1 class="title">Java基础笔记--学习Java语言--面向对象概念</h1>
+  
+
+            
+                <time itemprop="datePublished"
+                      datetime="2019-11-25T16:00:00.000Z">2019-11-26</time>
+                To
+                <time itemprop="dateModified"
+                      updated="2020-04-29T16:00:00.000Z">2020-04-30</time>
+            
+        </header>
+        <div class="entry">
+            
+                <p>什么是对象? 类? 继承? 接口? 包? API文档.</p>
+<a id="more"></a>
+<h2 id="什么是对象"><a href="#什么是对象" class="headerlink" title="什么是对象?"></a>什么是对象?</h2><p>简单来说现实中的一个对象包括状态(state)和行为(behavior),在Java中对象的状态存在字段Fields(其他语言叫变量variables)里,对象的行为存在方法Methods(其他语言叫函数function)里,方法基于对象内部状态来操作, 用作对象间通讯的主要机制. 隐藏内部状态和并要求通过对象方法对状态进行交互叫做<strong>数据封装</strong>–它是面向对象程序的基本法则.</p>
+<h2 id="什么是类"><a href="#什么是类" class="headerlink" title="什么是类?"></a>什么是类?</h2><p>官方指南中利用自行车和自行车蓝图来对类和对象进行举例, 来说明类和对象.  一辆用自行车蓝图做出的自行车, 用面向对象的语言来说,  这辆自行车是自行车蓝图这个类的一个实例(instance). 类不是一个程序,而是供其他类调用的一个蓝图,而通过这个蓝图创建一个对象<br>就是属于其他类的责任了. </p>
+<h2 id="什么是继承"><a href="#什么是继承" class="headerlink" title="什么是继承?"></a>什么是继承?</h2><p>每个对象之间都有一定的共同点, 官方文档依旧拿自行车举例, 自行车有很多种, 山地车,公路自行车和双人车等, 它们有共同的特点和不同点, 可以将它们共同的特点单独抽出作为一个自行车超类(superclass), 而山地车, 公路自行车和双人车等类可以使用关键字extends继承超类(superclass). 这样就形成了一种类的等级制度, Java中一个类可以被无数个类继承,但一个子类只能继承一个类(单继承).</p>
+<h2 id="什么是接口"><a href="#什么是接口" class="headerlink" title="什么是接口?"></a>什么是接口?</h2><p>在上面的例子中, 方法就是对象内部和外部世界的一个接口. 在Java中声明的接口中的方法形式上是一组没有身体的方法. 这么做的目的, 是为了让实现接口的类对它承诺提供的功能更加正式, 所以接口更像是类和外部世界的一个契约. 也就是存储一些承诺提供的功能. </p>
+<h2 id="什么是包"><a href="#什么是包" class="headerlink" title="什么是包?"></a>什么是包?</h2><p>简单理解就是同类的东西放进同类的文件夹里, Java把同类的类放进相同的文件夹里, 那个文件夹就相当于是包, 因为程序会越写越大, 所以组织好各种类和接口放进包里是很有意义的. </p>
+<p>Java平台提供一个巨大的类库(API), 它的程序包代表编程中一些最常用的功能, <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/8/docs/api/index.html">Java平台API规范</a>包含了Java SE平台提供的所有软件包, 接口, 类, 字段和方法. </p>
+<p>来源: <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/java/concepts/index.html">Object-Oriented Programming Concepts</a></p>
+
+            
+        </div>
+        
+            
+
+            <footer>
+                
+  
+  <div class="tags">
+    <a href="/tags/Java/">Java</a>
+  </div>
+
+            </footer>
+        
+    </div>
+</article>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  
+<div class="widget tag">
+  <ul class="entry">
+  
+    <li><a href="/tags/Blog/">Blog</a><small>1</small></li>
+  
+    <li><a href="/tags/Docker/">Docker</a><small>1</small></li>
+  
+    <li><a href="/tags/Essay/">Essay</a><small>9</small></li>
+  
+    <li><a href="/tags/Game/">Game</a><small>1</small></li>
+  
+    <li><a href="/tags/Git/">Git</a><small>1</small></li>
+  
+    <li><a href="/tags/Gulp/">Gulp</a><small>1</small></li>
+  
+    <li><a href="/tags/Hexo/">Hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/Java/">Java</a><small>14</small></li>
+  
+    <li><a href="/tags/Java-Web/">Java Web</a><small>1</small></li>
+  
+    <li><a href="/tags/JavaScript/">JavaScript</a><small>1</small></li>
+  
+    <li><a href="/tags/Lifestyle/">Lifestyle</a><small>3</small></li>
+  
+    <li><a href="/tags/Maven/">Maven</a><small>1</small></li>
+  
+    <li><a href="/tags/Network/">Network</a><small>1</small></li>
+  
+    <li><a href="/tags/Nginx/">Nginx</a><small>1</small></li>
+  
+    <li><a href="/tags/Node-js/">Node.js</a><small>1</small></li>
+  
+    <li><a href="/tags/Note/">Note</a><small>10</small></li>
+  
+    <li><a href="/tags/Phaser/">Phaser</a><small>1</small></li>
+  
+    <li><a href="/tags/Phone/">Phone</a><small>1</small></li>
+  
+    <li><a href="/tags/RFID/">RFID</a><small>2</small></li>
+  
+    <li><a href="/tags/Spring/">Spring</a><small>2</small></li>
+  
+    <li><a href="/tags/Virtual-Machine/">Virtual Machine</a><small>2</small></li>
+  
+    <li><a href="/tags/Win10/">Win10</a><small>6</small></li>
+  
+  </ul>
+</div>
+
+
+  <div class="widget footer">
+  
+  <span>&copy;2017-2021 someexp</span>
+  
+  </br>
+  <span>Powered by <a target="_blank" rel="noopener" href="http://hexo.io" >Hexo</a></span>
+  </br>
+    <span>Theme by <a target="_blank" rel="noopener" href="https://github.com/thesomeexp/hexo-theme-light-simple" >hexo-theme-light-simple</a></span>
+</div>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+</body>
+</html>

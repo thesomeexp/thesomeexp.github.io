@@ -1,0 +1,160 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Spring笔记-为什么要使用Spring | SomeExp</title>
+  <meta name="author" content="someexp">
+  
+  <meta name="description" content="虽然在学校也学过SSM了, 但是为什么要用这个呢?">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Spring笔记-为什么要使用Spring"/>
+  <meta property="og:site_name" content="SomeExp"/>
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">SomeExp</a></h1>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+      <li><a href="/links">Links</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+    <div class="post-content">
+        <header>
+            
+  
+    <h1 class="title">Spring笔记-为什么要使用Spring</h1>
+  
+
+            
+                <time itemprop="datePublished"
+                      datetime="2020-04-16T16:00:00.000Z">2020-04-17</time>
+                To
+                <time itemprop="dateModified"
+                      updated="2020-04-29T16:00:00.000Z">2020-04-30</time>
+            
+        </header>
+        <div class="entry">
+            
+                <p>虽然在学校也学过SSM了, 但是为什么要用这个呢? </p>
+<a id="more"></a>
+<p>网上搜到一些文章, 很值得一看, 我就直接把结论记录一下: </p>
+<h1 id="为什么要使用依赖注入"><a href="#为什么要使用依赖注入" class="headerlink" title="为什么要使用依赖注入?"></a>为什么要使用依赖注入?</h1><ul>
+<li>传统的代码, 每个对象负责管理与自己需要依赖的对象, 导致如果需要切换依赖对象的实现类<br>时, 需要修改多处地方. 同时, 过度耦合也使得对象难以进行单元测试. </li>
+<li>依赖注入把对象的创造交给外部去管理, 很好的解决了代码紧耦合(tight couple)的问题,<br>是一种让代码实现松耦合(loose couple)的机制. </li>
+<li>松耦合让代码更具灵活性, 能更好地应对需求变动, 以及方便单元测试. <h1 id="为什么要使用Spring"><a href="#为什么要使用Spring" class="headerlink" title="为什么要使用Spring?"></a>为什么要使用Spring?</h1></li>
+<li>使用Spring框架主要是为了简化Java开发(大多数框架都是为了简化开发), 它帮我们封装<br>好了很多完善的功能, 而且Spring的生态圈也非常庞大. </li>
+<li>基于XML的配置是Spring提供的最原始的依赖注入配置方式, 从Spring诞生之时就有了,<br>功能也是最完善的. (xml配置方式要注意不要不小心配错了(专业术语也叫类型不安全),<br>推荐使用非侵入式的JavaConfig)<h1 id="Constructor注入-vs-Setter注入"><a href="#Constructor注入-vs-Setter注入" class="headerlink" title="Constructor注入 vs Setter注入"></a>Constructor注入 vs Setter注入</h1></li>
+<li>Constructor注入能够强制要求调用者注入构造函数中的所有参数, 否则在容器初始化时就<br>会失败. 但是如果要注入的对象过多, 就会导致构造函数过于庞大. </li>
+<li>Setter注入, 类似于Builder模式, 将原本庞大的构造函数, 拆解为了一个小的构造函数和<br>许多个set方法. setter注入不能保证对象一定会被注入, 但是可以使用@Required注解, 强制<br>要求使用者注入对象, 否则在容器初始化时就会报错. </li>
+<li>总言之Constructor注入更稳妥, 但是随着注入对象的增加代码不优雅开销也比较大. 而<br>Setter注入方式可以决定对象是否需要强制注入, 它可以理解成延迟注入, 它更灵活但要注意<br>不要忘记注入. </li>
+</ul>
+<p>参考:<br><a target="_blank" rel="noopener" href="http://bridgeforyou.cn/2017/09/16/Spring-Novel-1-Why-Use-Dependency-Injection/">柳树的絮叨叨的博客 用小说的形式讲解Spring（1） —— 为什么需要依赖注入</a></p>
+
+            
+        </div>
+        
+            
+
+            <footer>
+                
+  
+  <div class="tags">
+    <a href="/tags/Java/">Java</a>, <a href="/tags/Spring/">Spring</a>
+  </div>
+
+            </footer>
+        
+    </div>
+</article>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  
+<div class="widget tag">
+  <ul class="entry">
+  
+    <li><a href="/tags/Blog/">Blog</a><small>1</small></li>
+  
+    <li><a href="/tags/Docker/">Docker</a><small>1</small></li>
+  
+    <li><a href="/tags/Essay/">Essay</a><small>9</small></li>
+  
+    <li><a href="/tags/Game/">Game</a><small>1</small></li>
+  
+    <li><a href="/tags/Git/">Git</a><small>1</small></li>
+  
+    <li><a href="/tags/Gulp/">Gulp</a><small>1</small></li>
+  
+    <li><a href="/tags/Hexo/">Hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/Java/">Java</a><small>14</small></li>
+  
+    <li><a href="/tags/Java-Web/">Java Web</a><small>1</small></li>
+  
+    <li><a href="/tags/JavaScript/">JavaScript</a><small>1</small></li>
+  
+    <li><a href="/tags/Lifestyle/">Lifestyle</a><small>3</small></li>
+  
+    <li><a href="/tags/Maven/">Maven</a><small>1</small></li>
+  
+    <li><a href="/tags/Network/">Network</a><small>1</small></li>
+  
+    <li><a href="/tags/Nginx/">Nginx</a><small>1</small></li>
+  
+    <li><a href="/tags/Node-js/">Node.js</a><small>1</small></li>
+  
+    <li><a href="/tags/Note/">Note</a><small>10</small></li>
+  
+    <li><a href="/tags/Phaser/">Phaser</a><small>1</small></li>
+  
+    <li><a href="/tags/Phone/">Phone</a><small>1</small></li>
+  
+    <li><a href="/tags/RFID/">RFID</a><small>2</small></li>
+  
+    <li><a href="/tags/Spring/">Spring</a><small>2</small></li>
+  
+    <li><a href="/tags/Virtual-Machine/">Virtual Machine</a><small>2</small></li>
+  
+    <li><a href="/tags/Win10/">Win10</a><small>6</small></li>
+  
+  </ul>
+</div>
+
+
+  <div class="widget footer">
+  
+  <span>&copy;2017-2021 someexp</span>
+  
+  </br>
+  <span>Powered by <a target="_blank" rel="noopener" href="http://hexo.io" >Hexo</a></span>
+  </br>
+    <span>Theme by <a target="_blank" rel="noopener" href="https://github.com/thesomeexp/hexo-theme-light-simple" >hexo-theme-light-simple</a></span>
+</div>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+</body>
+</html>

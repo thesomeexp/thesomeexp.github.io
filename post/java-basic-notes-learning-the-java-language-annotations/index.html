@@ -1,0 +1,166 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Java基础笔记--学习Java语言--注解 | SomeExp</title>
+  <meta name="author" content="someexp">
+  
+  <meta name="description" content="2.4 草草过一下.">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Java基础笔记--学习Java语言--注解"/>
+  <meta property="og:site_name" content="SomeExp"/>
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">SomeExp</a></h1>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+      <li><a href="/links">Links</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+    <div class="post-content">
+        <header>
+            
+  
+    <h1 class="title">Java基础笔记--学习Java语言--注解</h1>
+  
+
+            
+                <time itemprop="datePublished"
+                      datetime="2020-03-29T16:00:00.000Z">2020-03-30</time>
+                To
+                <time itemprop="dateModified"
+                      updated="2020-04-29T16:00:00.000Z">2020-04-30</time>
+            
+        </header>
+        <div class="entry">
+            
+                <p>2.4 草草过一下. </p>
+<a id="more"></a>
+<h1 id="注解Annotations"><a href="#注解Annotations" class="headerlink" title="注解Annotations"></a>注解Annotations</h1><p>注解是元数据的一种, 提供有关程序的数据, 该数据不属于程序本身. 注解对代码本身没有直接的影响. </p>
+<h2 id="注解格式The-Format-of-an-Annotation"><a href="#注解格式The-Format-of-an-Annotation" class="headerlink" title="注解格式The Format of an Annotation"></a>注解格式The Format of an Annotation</h2><p>一个简单的注解看起来是这样子的: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">@Entity</span><br></pre></td></tr></table></figure>
+<p>它用一个艾特@来告诉编译器他后面的内容是注解, 下面的注解名是Override</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@Override</span><br><span class="line">void myMethod()	&#123;...&#125;</span><br></pre></td></tr></table></figure>
+<p>注解可以包括元素, 比如我们使用文档注释的时候, 就会有@author注解</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@Author(</span><br><span class="line">   name &#x3D; &quot;my Name&quot;,</span><br><span class="line">   date &#x3D; &quot;3&#x2F;27&#x2F;2003&quot;</span><br><span class="line">)</span><br><span class="line">class MyClass() &#123; ... &#125;</span><br></pre></td></tr></table></figure>
+<p>或者</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@SuppressWarnings(value &#x3D; &quot;unchecked&quot;)</span><br><span class="line">void myMethod() &#123; ... &#125;</span><br></pre></td></tr></table></figure>
+<p>如果只有一个元素名称叫value, 那么名称可以省略: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">@SuppressWarnings(&quot;unchecked&quot;)</span><br><span class="line">void myMethod() &#123; ... &#125;</span><br></pre></td></tr></table></figure>
+<p>如果注解没有元素, 可以像@Override一样省去括号.<br>可以在声明处声明多个注解: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@Author(name &#x3D; &quot;Jane Doe&quot;)</span><br><span class="line">@EBook</span><br><span class="line">class MyClass &#123; ... &#125;</span><br></pre></td></tr></table></figure>
+<p>如果注解有多个相似的类型, 那么这就是重复注解(repeating annotation): </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">@Author(name &#x3D; &quot;Jane Doe&quot;)</span><br><span class="line">@Author(name &#x3D; &quot;John Smith&quot;)</span><br><span class="line">class MyClass &#123; ... &#125;</span><br></pre></td></tr></table></figure>
+<p>重复注解在Java SE 8版本后支持, 详情: <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/java/annotations/repeating.html">Repeating Annotations.</a><br>上面的Override和SuppressWarnings是Java中预定义的注解, 你自己也可以创建自己的注解.<br>Java8之后注解几乎可以用在各种<a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/java/annotations/basics.html">奇奇怪怪的地方</a>. </p>
+<h2 id="声明一个注解类型Declaring-an-Annotation-Type"><a href="#声明一个注解类型Declaring-an-Annotation-Type" class="headerlink" title="声明一个注解类型Declaring an Annotation Type"></a>声明一个注解类型<a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/java/annotations/declaring.html">Declaring an Annotation Type</a></h2><h2 id="预定义的注解类型Predefined-Annotation-Types"><a href="#预定义的注解类型Predefined-Annotation-Types" class="headerlink" title="预定义的注解类型Predefined Annotation Types"></a>预定义的注解类型<a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/java/annotations/predefined.html">Predefined Annotation Types</a></h2><h2 id="类型注解和可插拔类型系统Type-Annotations-and-Pluggable-Type-Systems"><a href="#类型注解和可插拔类型系统Type-Annotations-and-Pluggable-Type-Systems" class="headerlink" title="类型注解和可插拔类型系统Type Annotations and Pluggable Type Systems"></a>类型注解和可插拔类型系统<a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/java/annotations/type_annotations.html">Type Annotations and Pluggable Type Systems</a></h2><p>Java8之后, 注解可以用在类型上, 所以也叫类型注解. 它是为了支持对Java程序的改进分析, 更强的代码检查方式而出现的. Java8不提供类型检查框架, 它允许你编写或下载类型检查框架.<br>大多数情况下你不需要手动写类型检查模块, 你可以使用<a target="_blank" rel="noopener" href="https://checkerframework.org/">The Checker Framework</a>, 它帮你实现了防止空引用@NonNull, 互斥锁@mutex lock等模块. </p>
+<h2 id="重复注解Repeating-Annotations"><a href="#重复注解Repeating-Annotations" class="headerlink" title="重复注解Repeating Annotations"></a>重复注解<a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/java/annotations/repeating.html">Repeating Annotations</a></h2><p>参考: <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/java/annotations/index.html">Annotations</a></p>
+
+            
+        </div>
+        
+            
+
+            <footer>
+                
+  
+  <div class="tags">
+    <a href="/tags/Java/">Java</a>
+  </div>
+
+            </footer>
+        
+    </div>
+</article>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  
+<div class="widget tag">
+  <ul class="entry">
+  
+    <li><a href="/tags/Blog/">Blog</a><small>1</small></li>
+  
+    <li><a href="/tags/Docker/">Docker</a><small>1</small></li>
+  
+    <li><a href="/tags/Essay/">Essay</a><small>9</small></li>
+  
+    <li><a href="/tags/Game/">Game</a><small>1</small></li>
+  
+    <li><a href="/tags/Git/">Git</a><small>1</small></li>
+  
+    <li><a href="/tags/Gulp/">Gulp</a><small>1</small></li>
+  
+    <li><a href="/tags/Hexo/">Hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/Java/">Java</a><small>14</small></li>
+  
+    <li><a href="/tags/Java-Web/">Java Web</a><small>1</small></li>
+  
+    <li><a href="/tags/JavaScript/">JavaScript</a><small>1</small></li>
+  
+    <li><a href="/tags/Lifestyle/">Lifestyle</a><small>3</small></li>
+  
+    <li><a href="/tags/Maven/">Maven</a><small>1</small></li>
+  
+    <li><a href="/tags/Network/">Network</a><small>1</small></li>
+  
+    <li><a href="/tags/Nginx/">Nginx</a><small>1</small></li>
+  
+    <li><a href="/tags/Node-js/">Node.js</a><small>1</small></li>
+  
+    <li><a href="/tags/Note/">Note</a><small>10</small></li>
+  
+    <li><a href="/tags/Phaser/">Phaser</a><small>1</small></li>
+  
+    <li><a href="/tags/Phone/">Phone</a><small>1</small></li>
+  
+    <li><a href="/tags/RFID/">RFID</a><small>2</small></li>
+  
+    <li><a href="/tags/Spring/">Spring</a><small>2</small></li>
+  
+    <li><a href="/tags/Virtual-Machine/">Virtual Machine</a><small>2</small></li>
+  
+    <li><a href="/tags/Win10/">Win10</a><small>6</small></li>
+  
+  </ul>
+</div>
+
+
+  <div class="widget footer">
+  
+  <span>&copy;2017-2021 someexp</span>
+  
+  </br>
+  <span>Powered by <a target="_blank" rel="noopener" href="http://hexo.io" >Hexo</a></span>
+  </br>
+    <span>Theme by <a target="_blank" rel="noopener" href="https://github.com/thesomeexp/hexo-theme-light-simple" >hexo-theme-light-simple</a></span>
+</div>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+</body>
+</html>

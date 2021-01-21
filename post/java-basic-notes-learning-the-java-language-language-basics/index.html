@@ -1,0 +1,210 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Java基础笔记--学习Java语言--语法基础 | SomeExp</title>
+  <meta name="author" content="someexp">
+  
+  <meta name="description" content="2.2变量, 命名规则, 基础数据类型, 字面量, 数组, 运算符, 语句.">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Java基础笔记--学习Java语言--语法基础"/>
+  <meta property="og:site_name" content="SomeExp"/>
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">SomeExp</a></h1>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+      <li><a href="/links">Links</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+    <div class="post-content">
+        <header>
+            
+  
+    <h1 class="title">Java基础笔记--学习Java语言--语法基础</h1>
+  
+
+            
+                <time itemprop="datePublished"
+                      datetime="2019-11-26T16:00:00.000Z">2019-11-27</time>
+                To
+                <time itemprop="dateModified"
+                      updated="2020-04-29T16:00:00.000Z">2020-04-30</time>
+            
+        </header>
+        <div class="entry">
+            
+                <p>2.2变量, 命名规则, 基础数据类型, 字面量, 数组, 运算符, 语句. </p>
+<a id="more"></a>
+<h1 id="变量Variables"><a href="#变量Variables" class="headerlink" title="变量Variables"></a>变量Variables</h1><h2 id="变量类型"><a href="#变量类型" class="headerlink" title="变量类型:"></a>变量类型:</h2><p>Java程序语言定义了下面几种变量:</p>
+<h3 id="1-实例变量Instance-Variables-非静态字段Non-Static-Fields"><a href="#1-实例变量Instance-Variables-非静态字段Non-Static-Fields" class="headerlink" title="1.实例变量Instance Variables(非静态字段Non-Static Fields)"></a>1.实例变量Instance Variables(非静态字段Non-Static Fields)</h3><p>也就是对象存储它们个体变量的字段, 它们对每个对象来说是不一定相同的, 比如每辆自行车的当前速度是不一样的. </p>
+<h3 id="2-类变量Class-Variables-静态字段Static-Fields"><a href="#2-类变量Class-Variables-静态字段Static-Fields" class="headerlink" title="2.类变量Class Variables(静态字段Static Fields)"></a>2.类变量Class Variables(静态字段Static Fields)</h3><p>标记了静态static的字段是所有实例化该类对象共享的, 比如说自行车的齿轮变量标记了static, 那么通过这个类实例化出来的自行车就应该是有相同的齿轮数量, 如果再加上final关键字, 那么该字段将无法被修改. </p>
+<h3 id="3-局部变量Local-Variables"><a href="#3-局部变量Local-Variables" class="headerlink" title="3.局部变量Local Variables"></a>3.局部变量Local Variables</h3><p>也就是方法里的变量, 基本不需要修饰, 只能在该方法里使用, 其他类无法访问的变量. </p>
+<h3 id="4-参数Parameters"><a href="#4-参数Parameters" class="headerlink" title="4.参数Parameters"></a>4.参数Parameters</h3><p>在之前的Hello World程序的main方法里的args就是一个String数组类型的参数. 最重要的一点是, 参数(Parameters)是属于变量(variables)而不是字段(fields).</p>
+<p>在接下来的教程里, 字段fields通常不包括局部变量Local Variables和参数Parameters, 如果谈到”上述所有”则代表变量. 成员member则代表类型的字段fields, 方法methods和嵌套类型nested types的集合.</p>
+<h2 id="命名规则"><a href="#命名规则" class="headerlink" title="命名规则:"></a>命名规则:</h2><p>不建议使用美元符号$和下划线_开头, 尽量使用有意义的命名, 避免使用<a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/java/nutsandbolts/_keywords.html">Java的关键词和保留字</a>,<br>如果名字为单个单词则用小写, 多个单词用驼峰命名法, 如果声明为常量则每个字母大写并用<br>下划线隔开. </p>
+<h2 id="原始数据类型"><a href="#原始数据类型" class="headerlink" title="原始数据类型:"></a>原始数据类型:</h2><p>Java语言支持8种原始数据类型:</p>
+<h3 id="1-byte"><a href="#1-byte" class="headerlink" title="1.byte"></a>1.byte</h3><p>8位带符号的二进制补码整数, 范围[-128到127], 可以用在大数组中节约内存, 可以替换int. </p>
+<h3 id="2-short"><a href="#2-short" class="headerlink" title="2.short"></a>2.short</h3><p>16位带符号的二进制补码整数, 范围[-32,768到32,767], 像byte一样可以用来节约内存. </p>
+<h3 id="3-int"><a href="#3-int" class="headerlink" title="3.int"></a>3.int</h3><p>32位带符号的二进制补码整数, 范围[-2^31到(-2^31)-1], 在Java SE8以后你也可以用int<br>来代表32位无符号整数,  具体查看Number类. 一些无符号运算方法已经添加到Integer类里了. </p>
+<h3 id="4-long"><a href="#4-long" class="headerlink" title="4.long"></a>4.long</h3><p>64位带符号的二进制补码整数, 范围[-2^63到(-2^63)-1], 和int差不多. </p>
+<h3 id="5-float"><a href="#5-float" class="headerlink" title="5.float"></a>5.float</h3><p>单精度32位浮点型, 在<a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/specs/jls/se7/html/jls-4.html#jls-4.2.3">Floating-Point Types, Formats, and Values</a><br>中指定了该类型, 如果学过计算机组成原理的话你会很容易理解浮点型的存储方式. 对double<br>来说float可以用来节约内存, 但永远不要用float和double来用于精确值, 比如货币. 如果<br>需要你可以使用java.math.BigDecimal类来代替, 在<a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/java/data/index.html">Numbers and Strings章节</a>有具体的介绍. </p>
+<h3 id="6-double"><a href="#6-double" class="headerlink" title="6.double"></a>6.double</h3><p>双精度64位浮点型, 默认的小数类型, 和float一样不能用于精确值, 比如货币. </p>
+<h3 id="7-boolean"><a href="#7-boolean" class="headerlink" title="7.boolean"></a>7.boolean</h3><p>它只有true或者false值, 虽然能用一位就能表示它, 但它的大小不是精确定义的. </p>
+<h3 id="8-char"><a href="#8-char" class="headerlink" title="8.char"></a>8.char</h3><p>char数据类型是单个16位Unicode字符, 它的范围’/u0000’或者说是(0), 最大值’/uffff’<br>或者说是(65,535).</p>
+<p>Java对字符串String类型通过java.lang.String提供特殊支持, String不是Java的原始数据类型, Java会默认以用两个引号包括起来的字符串来创建一个Stirng对象, 但这种对象是一成不变的. 详情可以参照<a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/java/data/index.html">Numbers and Strings章节</a>. </p>
+<h2 id="默认值"><a href="#默认值" class="headerlink" title="默认值:"></a>默认值:</h2><p>声明但未被初始化的字段Fields会被编译器compiler设置一个合理的数值, 通常是0或者null, 通常认为依赖于默认值是一种不好的编程风格.<br>但是局部变量编译器compiler并不会对它设置合理数值, 访问未初始化的局部变量会导致编译时错误. </p>
+<h2 id="字面量Literals"><a href="#字面量Literals" class="headerlink" title="字面量Literals:"></a>字面量Literals:</h2><p>原始类型是特殊的类型, 因此你会发现不需要new一个对象来给它赋值, 一个字面量用源代码直接表示为一个固定值. 像true, false, ‘A’, 100等. </p>
+<h3 id="整型字面量Integer-Literals"><a href="#整型字面量Integer-Literals" class="headerlink" title="整型字面量Integer Literals"></a>整型字面量Integer Literals</h3><p>一个以L或者l结尾的整型字面量类型为long, 通常用L而不是l因为l和数字1很像. byte, short, int和long都可以用int字面量来创建, 超出int部分的long可以用L结尾形式创建, 整型字面量还可以表达二进制, 十六进制, 十进制等. </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 用十进制表示数字26</span><br><span class="line">int decVal &#x3D; 26;</span><br><span class="line">&#x2F;&#x2F;  用十六进制表示数字26</span><br><span class="line">int hexVal &#x3D; 0x1a;</span><br><span class="line">&#x2F;&#x2F; 用二进制表示数字26</span><br><span class="line">int binVal &#x3D; 0b11010;</span><br></pre></td></tr></table></figure>
+<h3 id="浮点型字面量Floating-Point-Literals"><a href="#浮点型字面量Floating-Point-Literals" class="headerlink" title="浮点型字面量Floating-Point Literals"></a>浮点型字面量Floating-Point Literals</h3><p>一个以F或者f结尾的浮点型字面量类型为float, 否则就是double, double的结尾D或者d是可选的.<br>一个浮点型类型可以使用E或者e结尾, 它表示科学计数法. </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">double d1 &#x3D; 123.4;</span><br><span class="line">&#x2F;&#x2F; 用科学计数法表示和d1一样的值</span><br><span class="line">double d2 &#x3D; 1.234e2;</span><br><span class="line">float f1  &#x3D; 123.4f;</span><br></pre></td></tr></table></figure>
+<h3 id="字符和字符串字面量Character-and-String-Literals"><a href="#字符和字符串字面量Character-and-String-Literals" class="headerlink" title="字符和字符串字面量Character and String Literals"></a>字符和字符串字面量Character and String Literals</h3><p>Java支持一些特殊字符的转译, Java中的null一般用来测试值是否存在和对象是否可以使用. </p>
+<p>最后还有一类叫类字面量的特殊字面量类型, 一般在类后面加上.class就是了, 例如String.class就代表这个对象它自己的类型. </p>
+<h3 id="在数字字面量中使用下划线字符"><a href="#在数字字面量中使用下划线字符" class="headerlink" title="在数字字面量中使用下划线字符"></a>在数字字面量中使用下划线字符</h3><p>当一个二进制或者十六进制非常长的时候, 可以使用下划线让它们隔开以增加可读性, 比如<br>官方给出的例子: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">long creditCardNumber &#x3D; 1234_5678_9012_3456L;</span><br><span class="line">long socialSecurityNumber &#x3D; 999_99_9999L;</span><br><span class="line">float pi &#x3D;  3.14_15F;</span><br><span class="line">long hexBytes &#x3D; 0xFF_EC_DE_5E;</span><br><span class="line">long hexWords &#x3D; 0xCAFE_BABE;</span><br><span class="line">long maxLong &#x3D; 0x7fff_ffff_ffff_ffffL;</span><br><span class="line">byte nybbles &#x3D; 0b0010_0101;</span><br><span class="line">long bytes &#x3D; 0b11010010_01101001_10010100_10010010;</span><br></pre></td></tr></table></figure>
+<p>规则是你只能把下划线放在数字之间. <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/java/nutsandbolts/datatypes.html">参阅Using Underscore Characters in Numeric Literals</a></p>
+<h2 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h2><p>数组是一个保存固定长度值的单个类型的容器对象, 数组里的每一项叫做元素element, 元素可以通过数组下标访问numerical index, 下标通常是0开始的. </p>
+<h3 id="定义一个数组变量"><a href="#定义一个数组变量" class="headerlink" title="定义一个数组变量"></a>定义一个数组变量</h3><p>和其他变量类型一样, 定义一个数组变量也要两部分, 数组类型和数组名字. 数组类型写成类型加两个方括号type[]; 数组名字就是变量名字. 创建了一个数组变量并不意味着创建了数组, 这只是告诉编译器这个变量将保存指定类型的数组. 建议的命名方式: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">byte[] anArrayOfBytes;</span><br><span class="line">short[] anArrayOfShorts;</span><br><span class="line">long[] anArrayOfLongs;</span><br><span class="line">float[] anArrayOfFloats;</span><br><span class="line">double[] anArrayOfDoubles;</span><br><span class="line">boolean[] anArrayOfBooleans;</span><br><span class="line">char[] anArrayOfChars;</span><br><span class="line">String[] anArrayOfStrings;</span><br></pre></td></tr></table></figure>
+<p>括号也可以放在变量后面, 但是不鼓励这种形式. 括号作为数组类型的标识应该定义在类型里. </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">float anArrayOfFloats[];</span><br></pre></td></tr></table></figure>
+<h3 id="创建-初始化-和访问数组"><a href="#创建-初始化-和访问数组" class="headerlink" title="创建, 初始化, 和访问数组"></a>创建, 初始化, 和访问数组</h3><p>一种方式去真正创建一个数组是使用new关键字, 如果没有这个声明, 编译器会抛出数组变量没有被初始化的错误. </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">anArray &#x3D; new int[10]; &#x2F;&#x2F; 创建</span><br><span class="line">anArray[0] &#x3D; 100; &#x2F;&#x2F; 初始化第一个元素</span><br></pre></td></tr></table></figure>
+<h3 id="多维数组"><a href="#多维数组" class="headerlink" title="多维数组"></a>多维数组</h3><p>Java中的多维数组和C语言Fortran语言不一样, 多维数组通过一维数组组装产生, 可以通过数组内置的length属性查看数组的大小. </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">anArray.length &#x2F;&#x2F; 一维数组长度</span><br><span class="line">anArray[0].length &#x2F;&#x2F; 二维数组第一个数组长度</span><br></pre></td></tr></table></figure>
+<h3 id="复制数组"><a href="#复制数组" class="headerlink" title="复制数组"></a>复制数组</h3><p>System类提供了一个arraycopy方法来高效率复制一个数组. 也可以使用java.util.Arrays类里的copyOfRange方法, 后者会返回一个数组. </p>
+<p>java.util.Arrays类里一些有用的方法:<br>1.搜索特定值获取索引(binarySearch方法)<br>2.比较两个数组是否相等(equals方法)<br>3.用特定值填充数组(fill方法)<br>4.排序(使用sort方法, 在多处理器排序大数组时parallelSort方法比顺序排序更有优势)</p>
+<h2 id="变量总结"><a href="#变量总结" class="headerlink" title="变量总结"></a>变量总结</h2><p>Java使用字段fields和变量variables两种术语, 实例变量Instance variables是每个实例类都可以不一样的, 而类变量Class variables是每个实例的类共有的.<br>8种数据类型是:byte, short, int, long, float, double, boolean, and char. 而java.lang.String类代表字符串. 编译器会自动分配合理的默认值给上面的类型. 编译器不会给本地变量赋值, 字面量literal是固定值的源代码表示. 数组是存储单一类型的固定长度容器. 数组在创建后大小是固定的. </p>
+<p>参考: <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/java/nutsandbolts/variables.html">Variables</a></p>
+<h1 id="运算符"><a href="#运算符" class="headerlink" title="运算符"></a>运算符</h1><p>在联合使用运算符时需要注意运算符优先级问题. </p>
+<h2 id="赋值-运算-一元运算符"><a href="#赋值-运算-一元运算符" class="headerlink" title="赋值, 运算, 一元运算符"></a>赋值, 运算, 一元运算符</h2><h3 id="赋值"><a href="#赋值" class="headerlink" title="赋值"></a>赋值</h3><p>除了简单的赋值, 还能用来赋值对象的引用. </p>
+<h3 id="运算符-1"><a href="#运算符-1" class="headerlink" title="运算符"></a>运算符</h3><p>加, 减, 乘, 除, 取余<br>加还能用来连接字符串. </p>
+<h3 id="一元运算符"><a href="#一元运算符" class="headerlink" title="一元运算符"></a>一元运算符</h3><p>正负标识符, 自增自减, 取反.<br>区分前缀自增自减和后缀自增自减区别. </p>
+<h2 id="等于-关系和条件运算符"><a href="#等于-关系和条件运算符" class="headerlink" title="等于, 关系和条件运算符"></a>等于, 关系和条件运算符</h2><h3 id="等于和关系运算符"><a href="#等于和关系运算符" class="headerlink" title="等于和关系运算符"></a>等于和关系运算符</h3><p>等于, 不等于, 大于, 大于等于, 小于, 小于等于</p>
+<h3 id="条件运算符"><a href="#条件运算符" class="headerlink" title="条件运算符"></a>条件运算符</h3><p>与, 或<br>还有一个常用条件运算符是 condition ? value1 : value2 , 这个是一个三元运算符. </p>
+<h3 id="类型比较运算符"><a href="#类型比较运算符" class="headerlink" title="类型比较运算符"></a>类型比较运算符</h3><p>instanceof 运算符将对象与指定类型进行比较, 你可以用它来测试对象是否是类的实例, 是否是子类的实例, 或者一个类的实例是否实现特定的接口. 注意null不是实例. </p>
+<h2 id="按位和移位操作"><a href="#按位和移位操作" class="headerlink" title="按位和移位操作"></a>按位和移位操作</h2><p>补数运算符, 左移或者右移运算符第二个值为移动的位数, 无符号左移是左边补0, 否则补符号.<br>按位与, 按位或, 异或</p>
+<h2 id="表达式-语句和块-Expressions-Statements-and-Blocks"><a href="#表达式-语句和块-Expressions-Statements-and-Blocks" class="headerlink" title="表达式, 语句和块 Expressions, Statements, and Blocks"></a>表达式, 语句和块 Expressions, Statements, and Blocks</h2><h3 id="表达式Expressions"><a href="#表达式Expressions" class="headerlink" title="表达式Expressions"></a>表达式Expressions</h3><p>一条表达式由变量, 运算符, 或者说带回返回值的方法组成.<br>主要是避免歧义, 例子:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">x + y &#x2F; 100    &#x2F;&#x2F; 含糊的</span><br><span class="line">(x + y) &#x2F; 100  &#x2F;&#x2F; 不含糊</span><br><span class="line">x + (y &#x2F; 100) &#x2F;&#x2F; 不含糊</span><br></pre></td></tr></table></figure>
+<h3 id="语句Statements"><a href="#语句Statements" class="headerlink" title="语句Statements"></a>语句Statements</h3><p>有些表达式通过结尾加分号变成语句叫做表达语句expression statements,<br>语句分为声明语句(declaration statements)和控制流语句(control flow statements).<br>声明语句:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; declaration statement</span><br><span class="line">double aValue &#x3D; 8933.234;</span><br></pre></td></tr></table></figure>
+<h3 id="块Blocks"><a href="#块Blocks" class="headerlink" title="块Blocks"></a>块Blocks</h3><p>一个语句块是指由0或者多个语句组成的代码块.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">class BlockDemo &#123;</span><br><span class="line">     public static void main(String[] args) &#123;</span><br><span class="line">          boolean condition &#x3D; true;</span><br><span class="line">          if (condition) &#123; &#x2F;&#x2F; begin block 1 </span><br><span class="line">               System.out.println(&quot;Condition is true.&quot;);</span><br><span class="line">          &#125; &#x2F;&#x2F; end block one</span><br><span class="line">          else &#123; &#x2F;&#x2F; begin block 2</span><br><span class="line">               System.out.println(&quot;Condition is false.&quot;);</span><br><span class="line">          &#125; &#x2F;&#x2F; end block 2</span><br><span class="line">     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="控制流语句Control-flow-statement"><a href="#控制流语句Control-flow-statement" class="headerlink" title="控制流语句Control flow statement"></a>控制流语句Control flow statement</h2><p>简单来说就是控制代码块的执行顺序, 使他们不仅仅是从上到下执行.<br>if/switch/while/do-while/for</p>
+<p>用switch写日数判断:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">class SwitchDemo2 &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line">        int month &#x3D; 2;</span><br><span class="line">        int year &#x3D; 2000;</span><br><span class="line">        int numDays &#x3D; 0;</span><br><span class="line">        switch (month) &#123;</span><br><span class="line">            case 1: case 3: case 5:</span><br><span class="line">            case 7: case 8: case 10:</span><br><span class="line">            case 12:</span><br><span class="line">                numDays &#x3D; 31;</span><br><span class="line">                break;</span><br><span class="line">            case 4: case 6:</span><br><span class="line">            case 9: case 11:</span><br><span class="line">                numDays &#x3D; 30;</span><br><span class="line">                break;</span><br><span class="line">            case 2:</span><br><span class="line">                if (((year % 4 &#x3D;&#x3D; 0) &amp;&amp; </span><br><span class="line">                     !(year % 100 &#x3D;&#x3D; 0))</span><br><span class="line">                     || (year % 400 &#x3D;&#x3D; 0))</span><br><span class="line">                    numDays &#x3D; 29;</span><br><span class="line">                else</span><br><span class="line">                    numDays &#x3D; 28;</span><br><span class="line">                break;</span><br><span class="line">            default:</span><br><span class="line">                System.out.println(&quot;Invalid month.&quot;);</span><br><span class="line">                break;</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println(&quot;Number of Days &#x3D; &quot;</span><br><span class="line">                           + numDays);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>for可以迭代集合(Collections)和数组(arrays)</p>
+<p>没有标签的break会结束最内层的switch, for, while, or do-while语句. 给break加上标签可以中断指定的语句. continue同理.<br>例如: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">class BreakWithLabelDemo &#123;</span><br><span class="line">    public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">        int[][] arrayOfInts &#x3D; &#123; </span><br><span class="line">            &#123; 32, 87, 3, 589 &#125;,</span><br><span class="line">            &#123; 12, 1076, 2000, 8 &#125;,</span><br><span class="line">            &#123; 622, 127, 77, 955 &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        int searchfor &#x3D; 12;</span><br><span class="line"></span><br><span class="line">        int i;</span><br><span class="line">        int j &#x3D; 0;</span><br><span class="line">        boolean foundIt &#x3D; false;</span><br><span class="line"></span><br><span class="line">    search:</span><br><span class="line">        for (i &#x3D; 0; i &lt; arrayOfInts.length; i++) &#123;</span><br><span class="line">            for (j &#x3D; 0; j &lt; arrayOfInts[i].length;</span><br><span class="line">                 j++) &#123;</span><br><span class="line">                if (arrayOfInts[i][j] &#x3D;&#x3D; searchfor) &#123;</span><br><span class="line">                    foundIt &#x3D; true;</span><br><span class="line">                    break search;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        if (foundIt) &#123;</span><br><span class="line">            System.out.println(&quot;Found &quot; + searchfor + &quot; at &quot; + i + &quot;, &quot; + j);</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            System.out.println(searchfor + &quot; not in the array&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>来源: <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/java/nutsandbolts/index.html">Lesson: Language Basics</a></p>
+
+            
+        </div>
+        
+            
+
+            <footer>
+                
+  
+  <div class="tags">
+    <a href="/tags/Java/">Java</a>
+  </div>
+
+            </footer>
+        
+    </div>
+</article>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  
+<div class="widget tag">
+  <ul class="entry">
+  
+    <li><a href="/tags/Blog/">Blog</a><small>1</small></li>
+  
+    <li><a href="/tags/Docker/">Docker</a><small>1</small></li>
+  
+    <li><a href="/tags/Essay/">Essay</a><small>9</small></li>
+  
+    <li><a href="/tags/Game/">Game</a><small>1</small></li>
+  
+    <li><a href="/tags/Git/">Git</a><small>1</small></li>
+  
+    <li><a href="/tags/Gulp/">Gulp</a><small>1</small></li>
+  
+    <li><a href="/tags/Hexo/">Hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/Java/">Java</a><small>14</small></li>
+  
+    <li><a href="/tags/Java-Web/">Java Web</a><small>1</small></li>
+  
+    <li><a href="/tags/JavaScript/">JavaScript</a><small>1</small></li>
+  
+    <li><a href="/tags/Lifestyle/">Lifestyle</a><small>3</small></li>
+  
+    <li><a href="/tags/Maven/">Maven</a><small>1</small></li>
+  
+    <li><a href="/tags/Network/">Network</a><small>1</small></li>
+  
+    <li><a href="/tags/Nginx/">Nginx</a><small>1</small></li>
+  
+    <li><a href="/tags/Node-js/">Node.js</a><small>1</small></li>
+  
+    <li><a href="/tags/Note/">Note</a><small>10</small></li>
+  
+    <li><a href="/tags/Phaser/">Phaser</a><small>1</small></li>
+  
+    <li><a href="/tags/Phone/">Phone</a><small>1</small></li>
+  
+    <li><a href="/tags/RFID/">RFID</a><small>2</small></li>
+  
+    <li><a href="/tags/Spring/">Spring</a><small>2</small></li>
+  
+    <li><a href="/tags/Virtual-Machine/">Virtual Machine</a><small>2</small></li>
+  
+    <li><a href="/tags/Win10/">Win10</a><small>6</small></li>
+  
+  </ul>
+</div>
+
+
+  <div class="widget footer">
+  
+  <span>&copy;2017-2021 someexp</span>
+  
+  </br>
+  <span>Powered by <a target="_blank" rel="noopener" href="http://hexo.io" >Hexo</a></span>
+  </br>
+    <span>Theme by <a target="_blank" rel="noopener" href="https://github.com/thesomeexp/hexo-theme-light-simple" >hexo-theme-light-simple</a></span>
+</div>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+</body>
+</html>

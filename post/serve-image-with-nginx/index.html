@@ -1,0 +1,193 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>使用nginx搭建图片服务器 | SomeExp</title>
+  <meta name="author" content="someexp">
+  
+  <meta name="description" content="示例">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="使用nginx搭建图片服务器"/>
+  <meta property="og:site_name" content="SomeExp"/>
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">SomeExp</a></h1>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+      <li><a href="/links">Links</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+    <div class="post-content">
+        <header>
+            
+  
+    <h1 class="title">使用nginx搭建图片服务器</h1>
+  
+
+            
+                <time itemprop="datePublished"
+                      datetime="2020-06-12T16:00:00.000Z">2020-06-13</time>
+                To
+                <time itemprop="dateModified"
+                      updated="2020-06-12T16:00:00.000Z">2020-06-13</time>
+            
+        </header>
+        <div class="entry">
+            
+                <p>示例</p>
+<a id="more"></a>
+
+<p>// docker挂载</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p &#x2F;home&#x2F;nginx&#x2F;www &#x2F;home&#x2F;nginx&#x2F;logs &#x2F;home&#x2F;nginx&#x2F;conf &#x2F;home&#x2F;nginx&#x2F;www&#x2F;image &#x2F;home&#x2F;nginx&#x2F;www&#x2F;image&#x2F; &#x2F;home&#x2F;nginx&#x2F;www&#x2F;image&#x2F;info_detail</span><br><span class="line">touch &#x2F;home&#x2F;nginx&#x2F;conf&#x2F;nginx.conf</span><br></pre></td></tr></table></figure>
+<p>修改配置文件nginx.conf: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">user  root root;</span><br><span class="line">worker_processes  1;</span><br><span class="line"> </span><br><span class="line">error_log  &#x2F;var&#x2F;log&#x2F;nginx&#x2F;error.log warn;</span><br><span class="line">pid        &#x2F;var&#x2F;run&#x2F;nginx.pid;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">events &#123;</span><br><span class="line">    worker_connections  1024;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">http &#123;</span><br><span class="line">    include       &#x2F;etc&#x2F;nginx&#x2F;mime.types;</span><br><span class="line">    default_type  application&#x2F;octet-stream;</span><br><span class="line"> </span><br><span class="line">    log_format  main  &#39;$remote_addr - $remote_user [$time_local] &quot;$request&quot; &#39;</span><br><span class="line">                      &#39;$status $body_bytes_sent &quot;$http_referer&quot; &#39;</span><br><span class="line">                      &#39;&quot;$http_user_agent&quot; &quot;$http_x_forwarded_for&quot;&#39;;</span><br><span class="line"> </span><br><span class="line">    access_log  &#x2F;var&#x2F;log&#x2F;nginx&#x2F;access.log  main;</span><br><span class="line"> </span><br><span class="line">    sendfile        on;</span><br><span class="line">    #tcp_nopush     on;</span><br><span class="line"> </span><br><span class="line">    keepalive_timeout  65;</span><br><span class="line"> </span><br><span class="line">    #gzip  on;</span><br><span class="line"> </span><br><span class="line">    include &#x2F;etc&#x2F;nginx&#x2F;conf.d&#x2F;*.conf;</span><br><span class="line"> </span><br><span class="line">    server &#123;</span><br><span class="line">        listen 80;</span><br><span class="line">        server_name localhost;</span><br><span class="line">        </span><br><span class="line">        location &#x2F; &#123;</span><br><span class="line">            root   &#x2F;usr&#x2F;share&#x2F;nginx&#x2F;html;</span><br><span class="line">            index  index.html index.htm;</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        location &#x2F;images&#x2F; &#123;</span><br><span class="line">            root   &#x2F;usr&#x2F;share&#x2F;nginx&#x2F;html&#x2F;;</span><br><span class="line">            autoindex on;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;        </span><br></pre></td></tr></table></figure>
+<p>创建并运行Nginx容器, 443为https端口. 但这里没有用到https </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">docker run -d -p 80:80 --name nginx-image-server \</span><br><span class="line">-v &#x2F;home&#x2F;nginx&#x2F;conf&#x2F;nginx.conf:&#x2F;etc&#x2F;nginx&#x2F;nginx.conf \</span><br><span class="line">-v &#x2F;home&#x2F;nginx&#x2F;www:&#x2F;usr&#x2F;share&#x2F;nginx&#x2F;html \</span><br><span class="line">-v &#x2F;home&#x2F;nginx&#x2F;logs:&#x2F;var&#x2F;log&#x2F;nginx \</span><br><span class="line">nginx</span><br></pre></td></tr></table></figure>
+<p>这时候nginx服务器就已经搭建好了, 可以在/home/nginx/www下创建index.html, 然后通过ip可以直接访问这时候就成功了. </p>
+<p>安装vsftpd</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">yum -y install vsftpd</span><br></pre></td></tr></table></figure>
+<p>添加用户</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">useradd infoimage &#x2F;&#x2F; 创建用户</span><br><span class="line">passwd infoimage &#x2F;&#x2F; 设置用户密码为下面这段</span><br><span class="line">45g2rVaZ8R9GGka8</span><br></pre></td></tr></table></figure>
+<p>修改配置文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi &#x2F;etc&#x2F;vsftpd&#x2F;vsftpd.conf</span><br></pre></td></tr></table></figure>
+<h1 id="配置文件默认为YES，即支持匿名访问，设置为不支持"><a href="#配置文件默认为YES，即支持匿名访问，设置为不支持" class="headerlink" title="配置文件默认为YES，即支持匿名访问，设置为不支持"></a>配置文件默认为YES，即支持匿名访问，设置为不支持</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">anonymous_enable&#x3D;NO</span><br></pre></td></tr></table></figure>
+<h1 id="在最后添加这3行"><a href="#在最后添加这3行" class="headerlink" title="在最后添加这3行"></a>在最后添加这3行</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pasv_enable&#x3D;YES</span><br><span class="line">pasv_min_port&#x3D;30000</span><br><span class="line">pasv_max_port&#x3D;30009</span><br></pre></td></tr></table></figure>
+<p>保存退出后设置用户访问权限</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chown infoimage &#x2F;home&#x2F;nginx&#x2F;www&#x2F;image</span><br><span class="line">chmod 777 -R &#x2F;home&#x2F;nginx&#x2F;www&#x2F;image</span><br></pre></td></tr></table></figure>
+<p>启动vsftp服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start vsftpd.service</span><br></pre></td></tr></table></figure>
+<p>然后关闭防火墙或者开启一些端口(开启的话要开挺多的…测试就关闭防火墙来测试了)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl status vsftpd.service</span><br><span class="line">systemctl stop vsftpd.service</span><br></pre></td></tr></table></figure>
+<p>关闭用户鉴权</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi &#x2F;etc&#x2F;pam.d&#x2F;vsftpd</span><br></pre></td></tr></table></figure>
+<p>注释掉/etc/pam.d/vsftpd文件里这一行：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">#auth required pam_shells.so</span><br></pre></td></tr></table></figure>
+<p>重启</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl restart vsftpd.service</span><br></pre></td></tr></table></figure>
+<p>头像路径</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">chown infoimage &#x2F;home&#x2F;nginx&#x2F;www&#x2F;head</span><br><span class="line">chmod 777 -R &#x2F;home&#x2F;nginx&#x2F;www&#x2F;head</span><br></pre></td></tr></table></figure>
+<p>ftp连接(账户密码)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">192.168.76.56:21</span><br><span class="line">infoimage</span><br><span class="line">45g2rVaZ8R9GGka8</span><br></pre></td></tr></table></figure>
+<p>如果连接上后不显示文件夹<br>解决办法：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">1、vi &#x2F;etc&#x2F;selinux&#x2F;config</span><br><span class="line">2、 将SELINUX&#x3D;enforcing 改为 SELINUX&#x3D;disable</span><br><span class="line">3、使改变的内容生效  sudo setenforce 0</span><br><span class="line">4、重启vsftpd</span><br></pre></td></tr></table></figure>
+<p>上传图片到image后, 图片示例地址(虚拟机ip):<br>http://虚拟机ip/image/20200505_14-36-29.jpg</p>
+<h1 id="服务出问题的终极解决办法"><a href="#服务出问题的终极解决办法" class="headerlink" title="服务出问题的终极解决办法"></a>服务出问题的终极解决办法</h1><p>1.查看防火墙状态并关闭: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 查看防火墙状态</span><br><span class="line">systemctl status firewalld.service</span><br><span class="line">&#x2F;&#x2F; 查看已开放的端口(默认不开放任何端口)</span><br><span class="line">firewall-cmd --list-ports</span><br><span class="line">&#x2F;&#x2F; 关闭防火墙</span><br><span class="line">systemctl stop firewalld.service</span><br></pre></td></tr></table></figure>
+<p>2.查看docker里的nginx容器运行状态, 重启nginx容器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 查看运行中的容器</span><br><span class="line">docker ps</span><br><span class="line">&#x2F;&#x2F; 停止运行中的容器</span><br><span class="line">docker stop containner_id</span><br><span class="line">&#x2F;&#x2F; 启动停止的容器</span><br><span class="line">docker start containner_id</span><br><span class="line">&#x2F;&#x2F; 或者一条命令重新启动容器</span><br><span class="line">docker restart containner_id</span><br></pre></td></tr></table></figure>
+<p>3.重启整个docker进程, 再继续运行相应容器</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 重启docker进程</span><br><span class="line">systemctl restart docker</span><br><span class="line">&#x2F;&#x2F; 查看所有容器(包括未运行)</span><br><span class="line">docker ps -a</span><br><span class="line">&#x2F;&#x2F; 启动相应容器</span><br><span class="line">docker start containner_id</span><br></pre></td></tr></table></figure>
+<p>4.删除创建的容器, 重新从镜像生成一个容器并运行</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 删除之前停止的容器</span><br><span class="line">docker rm containner_id</span><br><span class="line">&#x2F;&#x2F; 重新从镜像生成一个容器并运行</span><br><span class="line">docker run -d -p 80:80 --name nginx-image-server \</span><br><span class="line">-v &#x2F;home&#x2F;nginx&#x2F;conf&#x2F;nginx.conf:&#x2F;etc&#x2F;nginx&#x2F;nginx.conf \</span><br><span class="line">-v &#x2F;home&#x2F;nginx&#x2F;www:&#x2F;usr&#x2F;share&#x2F;nginx&#x2F;html \</span><br><span class="line">-v &#x2F;home&#x2F;nginx&#x2F;logs:&#x2F;var&#x2F;log&#x2F;nginx \</span><br><span class="line">nginx</span><br></pre></td></tr></table></figure>
+<p>有时候上面的配置都没问题, 就是ping不通, 可以禁用对应的网卡再启用试试. </p>
+<p>参考:<br><a target="_blank" rel="noopener" href="https://www.cnblogs.com/lyuzt/p/12575390.html">https://www.cnblogs.com/lyuzt/p/12575390.html</a></p>
+
+            
+        </div>
+        
+            
+
+            <footer>
+                
+  
+  <div class="tags">
+    <a href="/tags/Note/">Note</a>, <a href="/tags/Nginx/">Nginx</a>, <a href="/tags/Docker/">Docker</a>
+  </div>
+
+            </footer>
+        
+    </div>
+</article>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  
+<div class="widget tag">
+  <ul class="entry">
+  
+    <li><a href="/tags/Blog/">Blog</a><small>1</small></li>
+  
+    <li><a href="/tags/Docker/">Docker</a><small>1</small></li>
+  
+    <li><a href="/tags/Essay/">Essay</a><small>9</small></li>
+  
+    <li><a href="/tags/Game/">Game</a><small>1</small></li>
+  
+    <li><a href="/tags/Git/">Git</a><small>1</small></li>
+  
+    <li><a href="/tags/Gulp/">Gulp</a><small>1</small></li>
+  
+    <li><a href="/tags/Hexo/">Hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/Java/">Java</a><small>14</small></li>
+  
+    <li><a href="/tags/Java-Web/">Java Web</a><small>1</small></li>
+  
+    <li><a href="/tags/JavaScript/">JavaScript</a><small>1</small></li>
+  
+    <li><a href="/tags/Lifestyle/">Lifestyle</a><small>3</small></li>
+  
+    <li><a href="/tags/Maven/">Maven</a><small>1</small></li>
+  
+    <li><a href="/tags/Network/">Network</a><small>1</small></li>
+  
+    <li><a href="/tags/Nginx/">Nginx</a><small>1</small></li>
+  
+    <li><a href="/tags/Node-js/">Node.js</a><small>1</small></li>
+  
+    <li><a href="/tags/Note/">Note</a><small>10</small></li>
+  
+    <li><a href="/tags/Phaser/">Phaser</a><small>1</small></li>
+  
+    <li><a href="/tags/Phone/">Phone</a><small>1</small></li>
+  
+    <li><a href="/tags/RFID/">RFID</a><small>2</small></li>
+  
+    <li><a href="/tags/Spring/">Spring</a><small>2</small></li>
+  
+    <li><a href="/tags/Virtual-Machine/">Virtual Machine</a><small>2</small></li>
+  
+    <li><a href="/tags/Win10/">Win10</a><small>6</small></li>
+  
+  </ul>
+</div>
+
+
+  <div class="widget footer">
+  
+  <span>&copy;2017-2021 someexp</span>
+  
+  </br>
+  <span>Powered by <a target="_blank" rel="noopener" href="http://hexo.io" >Hexo</a></span>
+  </br>
+    <span>Theme by <a target="_blank" rel="noopener" href="https://github.com/thesomeexp/hexo-theme-light-simple" >hexo-theme-light-simple</a></span>
+</div>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+</body>
+</html>

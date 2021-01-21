@@ -1,0 +1,182 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>JavaWeb笔记 | SomeExp</title>
+  <meta name="author" content="someexp">
+  
+  <meta name="description" content="老旧的javaweb笔记">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="JavaWeb笔记"/>
+  <meta property="og:site_name" content="SomeExp"/>
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">SomeExp</a></h1>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+      <li><a href="/links">Links</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+    <div class="post-content">
+        <header>
+            
+  
+    <h1 class="title">JavaWeb笔记</h1>
+  
+
+            
+                <time itemprop="datePublished"
+                      datetime="2019-03-23T16:00:00.000Z">2019-03-24</time>
+                To
+                <time itemprop="dateModified"
+                      updated="2021-01-20T16:00:00.000Z">2021-01-21</time>
+            
+        </header>
+        <div class="entry">
+            
+                <p>老旧的javaweb笔记</p>
+<a id="more"></a>
+
+<h1 id="Cues"><a href="#Cues" class="headerlink" title="Cues"></a>Cues</h1><p>包名规范, PreparedStatement, JDBC结果集操作, BLOB, CLOB, jsp注释, GET和POST</p>
+<h1 id="Notes"><a href="#Notes" class="headerlink" title="Notes"></a>Notes</h1><h2 id="包名的规范"><a href="#包名的规范" class="headerlink" title="包名的规范:"></a>包名的规范:</h2><p>工具类:cn.edu.school.dao<br>一般放对数据的操作类,数据库增删改查.<br>数据传输类:cn.edu.school.dto<br>定义一些数据类,生成get,set方法供外部使用.<br>测试类:cn.edu.school.test<br>测试都在这里做,主函数入口了.<br>常用的独立出一个类:cn.edu.school.util<br>比如:连接数据库的操作可以独立出来.直接丢:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DataAccess</span></span>&#123;</span><br><span class="line">	<span class="keyword">static</span> Connection conn = <span class="keyword">null</span>;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Connection <span class="title">getConnection</span><span class="params">()</span></span>&#123;</span><br><span class="line">		<span class="keyword">try</span> &#123;</span><br><span class="line">			Class.forName(<span class="string">&quot;com.mysql.jdbc.Driver&quot;</span>);</span><br><span class="line">			conn = DriverManager.getConnection</span><br><span class="line">					(<span class="string">&quot;jdbc:mysql://localhost:3306/school&quot;</span>, <span class="string">&quot;root&quot;</span>, <span class="string">&quot;root&quot;</span>);</span><br><span class="line">		&#125; <span class="keyword">catch</span> (ClassNotFoundException e) &#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;数据库链接获取失败,连接用的jar包找不到&quot;</span>);</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;<span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">			System.out.println(<span class="string">&quot;请检查数据库连接参数设置&quot;</span>);</span><br><span class="line">			e.printStackTrace();</span><br><span class="line">		&#125;</span><br><span class="line">		<span class="keyword">return</span> conn;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>每次DAO类里需要连接的时候,try-with-resource里直接调用:Connection conn = DataAccess.getConnection();</p>
+<h2 id="PreparedStatement使用"><a href="#PreparedStatement使用" class="headerlink" title="PreparedStatement使用"></a>PreparedStatement使用</h2><p>和Statement比缺点就是只能提交一次.</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">PreparedStatement prep1 = conn.prepareStatement</span><br><span class="line">		(<span class="string">&quot;select * from student where sName = ? and sPassword = ?&quot;</span>);</span><br><span class="line">	prep1.setString(<span class="number">1</span>, _name);</span><br><span class="line">	prep1.setString(<span class="number">2</span>, _password);</span><br><span class="line">	rs = prep1.executeQuery();<span class="comment">//执行查询返回结果</span></span><br><span class="line">	</span><br><span class="line">PreparedStatement prep2 = conn.prepareStatement</span><br><span class="line">		(<span class="string">&quot;update Course set cName = ? where cId = ?&quot;</span>);</span><br><span class="line">	prep2.setString(<span class="number">1</span>, cName);</span><br><span class="line">	prep2.setString(<span class="number">2</span>, cId);</span><br><span class="line">	prep2.executeUpdate();<span class="comment">//执行更新</span></span><br><span class="line">	</span><br><span class="line">---<span class="comment">//使用批处理---</span></span><br><span class="line">PreparedStatement prep3 = conn.prepareStatement</span><br><span class="line">		(<span class="string">&quot;update student set sName=? where sId=?&quot;</span>);</span><br><span class="line">	<span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;<span class="number">10000</span>; i++)&#123;</span><br><span class="line">        prep3.setString(<span class="number">1</span>, <span class="string">&quot;Name&quot;</span>+i);</span><br><span class="line">        prep3.setInt(<span class="number">2</span>, i);</span><br><span class="line">        prep3.addBatch();<span class="comment">//添加到同一个批处理中</span></span><br><span class="line">        &#125;</span><br><span class="line">	prep3.executeBatch();<span class="comment">//执行批处理</span></span><br></pre></td></tr></table></figure>
+<h2 id="JDBC结果集-ResultSet接口-的移动和更新"><a href="#JDBC结果集-ResultSet接口-的移动和更新" class="headerlink" title="JDBC结果集(ResultSet接口)的移动和更新"></a>JDBC结果集(ResultSet接口)的移动和更新</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">Statement stat = conn.createStatement</span><br><span class="line">		(ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_UPDATABLE);<span class="comment">//允许结果集动</span></span><br><span class="line">ResultSet rs = stat.executeQuery</span><br><span class="line">		(<span class="string">&quot;select * from student&quot;</span>);</span><br><span class="line"><span class="comment">//---常用结果集命令---</span></span><br><span class="line">rs.beforeFirst();</span><br><span class="line">rs.first();</span><br><span class="line">rs.last();</span><br><span class="line">rs.absolute(<span class="number">4</span>);<span class="comment">//定位到第四个元素</span></span><br><span class="line">rs.getRow();<span class="comment">//获取当前行号</span></span><br><span class="line"><span class="comment">//---更改---</span></span><br><span class="line">rs.updateString (<span class="string">&quot;sId&quot;</span>,<span class="string">&quot;s04&quot;</span>);<span class="comment">//更改当前结果集sId列值</span></span><br><span class="line"><span class="comment">//---插入---</span></span><br><span class="line">rs.moveToInsertRow();<span class="comment">//移动到待插入的行</span></span><br><span class="line">rs.updateString(<span class="string">&quot;sId&quot;</span>,<span class="string">&quot;s04&quot;</span>);</span><br><span class="line">rs.insertRow();<span class="comment">//执行插入</span></span><br></pre></td></tr></table></figure>
+<h2 id="BLOB数据的存取"><a href="#BLOB数据的存取" class="headerlink" title="BLOB数据的存取"></a>BLOB数据的存取</h2><p>先在mysql创建含有id列和列名为binaryfile的blob类型(最大存储限制65k)数据的blobtable表<br>简单存取图片的示例:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//---BLOB存入图片p1.jpg---</span></span><br><span class="line">File f = <span class="keyword">new</span> File(<span class="string">&quot;c:\\p1.jpg&quot;</span>);</span><br><span class="line">FileInputStream fis = <span class="keyword">new</span> FileInputStream(f);</span><br><span class="line">prep = conn.prepareStatement(<span class="string">&quot;insert into blobtable values(?,?)&quot;</span>);</span><br><span class="line">prep.setInt(<span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line">prep.setBinaryStream(<span class="number">2</span>, fis, (<span class="keyword">int</span>)f.length());</span><br><span class="line">prep.executeUpdate();</span><br><span class="line"><span class="comment">//---BLOB取出图片p1.jpg---</span></span><br><span class="line">prep1 = conn.prepareStatement(<span class="string">&quot;select * from blobtable where id = 1&quot;</span>);</span><br><span class="line">rs = prep1.executeQuery();</span><br><span class="line">rs.next();</span><br><span class="line">InputStream is = rs.getBinaryStream(<span class="string">&quot;binaryfile&quot;</span>);</span><br><span class="line">File f = <span class="keyword">new</span> File(System.getProperty(<span class="string">&quot;user.home&quot;</span>)+System.getProperty(<span class="string">&quot;file.separator&quot;</span>)+<span class="string">&quot;p1.jpg&quot;</span>);</span><br><span class="line">FileOutputStream fos = <span class="keyword">new</span> FileOutputStream(f);</span><br><span class="line"><span class="keyword">int</span> i;</span><br><span class="line"><span class="keyword">while</span>((i = is.read())!=-<span class="number">1</span>)&#123;</span><br><span class="line">	fos.write(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="CLOB数据的存取"><a href="#CLOB数据的存取" class="headerlink" title="CLOB数据的存取"></a>CLOB数据的存取</h2><p>先在mysql创建含有id列和列名为clobfile的text类型(最大存储限制65k)数据的clobtable表<br>简单存取文件的示例:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//---CLOB存---</span></span><br><span class="line">File f = <span class="keyword">new</span> File(System.getProperty(<span class="string">&quot;user.home&quot;</span>)+System.getProperty(<span class="string">&quot;file.separator&quot;</span>)+<span class="string">&quot;a.txt&quot;</span>);</span><br><span class="line">FileInputStream fis = <span class="keyword">new</span> FileInputStream(f);</span><br><span class="line">prep = conn.prepareStatement(<span class="string">&quot;insert into clobtable values(?,?)&quot;</span>);</span><br><span class="line">prep.setInt(<span class="number">1</span>, <span class="number">1</span>);</span><br><span class="line">prep.setAsciiStream(<span class="number">2</span>, fis, (<span class="keyword">int</span>)f.length());</span><br><span class="line">prep.executeUpdate();</span><br><span class="line"><span class="comment">//---CLOB取---</span></span><br><span class="line">stat = conn.createStatement();</span><br><span class="line">rs = stat.executeQuery(<span class="string">&quot;select * from clobtable where id = 1&quot;</span>);</span><br><span class="line">rs.next();</span><br><span class="line">InputStream is = rs.getAsciiStream(<span class="string">&quot;clobfile&quot;</span>);</span><br><span class="line">File f = <span class="keyword">new</span> File(System.getProperty(<span class="string">&quot;user.home&quot;</span>)+System.getProperty(<span class="string">&quot;file.separator&quot;</span>)+<span class="string">&quot;a2.txt&quot;</span>);</span><br><span class="line">FileOutputStream fos = <span class="keyword">new</span> FileOutputStream(f);</span><br><span class="line"><span class="keyword">int</span> i = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">while</span>((i = is.read())!=-<span class="number">1</span>)&#123;</span><br><span class="line">	fos.write(i);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="jsp里6种注释"><a href="#jsp里6种注释" class="headerlink" title="jsp里6种注释"></a>jsp里6种注释</h2><p>客户端可见</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- html注释 --&gt;</span><br></pre></td></tr></table></figure>
+<p>客户端不可见, 服务端可见</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;%-- jsp注释 --%&gt;</span><br></pre></td></tr></table></figure>
+<p>嵌入代码的注释</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;!-- &lt;%&#x3D; 输出new Data() %&gt; --&gt;</span><br></pre></td></tr></table></figure>
+<p>java中的三种注释</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#x2F;&#x2F; 单行注释</span><br><span class="line">&#x2F;* 多行注释 *&#x2F;</span><br><span class="line">&#x2F;** 文档注释 *&#x2F;</span><br></pre></td></tr></table></figure>
+<h2 id="get和post区别"><a href="#get和post区别" class="headerlink" title="get和post区别"></a>get和post区别</h2><h3 id="get"><a href="#get" class="headerlink" title="get"></a>get</h3><p>是form默认的提交方式<br>如果通过一个超链访问某个地址, 是get方式<br>如果在地址栏直接输入某个地址, 是get方式<br>提交数据会在浏览器显示出来<br>不可以用于提交二进制数据, 比如上传文件</p>
+<h3 id="post"><a href="#post" class="headerlink" title="post"></a>post</h3><p>必须在form上通过 method=”post” 显示指定<br>提交数据不会在浏览器显示出来<br>可以用于提交二进制数据，比如上传文件</p>
+<h1 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h1><p>没有总结哈哈哈</p>
+
+            
+        </div>
+        
+            
+                <footer>
+                    <div class="copyright">
+    <p>本作品为原创作品,原创作品采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/">知识共享署名-非商业性使用-相同方式共享 3.0
+            中国大陆许可协议</a>进行许可. </p>
+    <div>
+        转载需标明出处, 本文链接: <a
+                href="/post/javaweb_notes/">https://someexp.com/post/javaweb_notes/</a>
+    </div>
+</div>
+                </footer>
+            
+
+            <footer>
+                
+  
+  <div class="tags">
+    <a href="/tags/Note/">Note</a>, <a href="/tags/Java/">Java</a>, <a href="/tags/Java-Web/">Java Web</a>
+  </div>
+
+            </footer>
+        
+    </div>
+</article>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  
+<div class="widget tag">
+  <ul class="entry">
+  
+    <li><a href="/tags/Blog/">Blog</a><small>1</small></li>
+  
+    <li><a href="/tags/Docker/">Docker</a><small>1</small></li>
+  
+    <li><a href="/tags/Essay/">Essay</a><small>9</small></li>
+  
+    <li><a href="/tags/Game/">Game</a><small>1</small></li>
+  
+    <li><a href="/tags/Git/">Git</a><small>1</small></li>
+  
+    <li><a href="/tags/Gulp/">Gulp</a><small>1</small></li>
+  
+    <li><a href="/tags/Hexo/">Hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/Java/">Java</a><small>14</small></li>
+  
+    <li><a href="/tags/Java-Web/">Java Web</a><small>1</small></li>
+  
+    <li><a href="/tags/JavaScript/">JavaScript</a><small>1</small></li>
+  
+    <li><a href="/tags/Lifestyle/">Lifestyle</a><small>3</small></li>
+  
+    <li><a href="/tags/Maven/">Maven</a><small>1</small></li>
+  
+    <li><a href="/tags/Network/">Network</a><small>1</small></li>
+  
+    <li><a href="/tags/Nginx/">Nginx</a><small>1</small></li>
+  
+    <li><a href="/tags/Node-js/">Node.js</a><small>1</small></li>
+  
+    <li><a href="/tags/Note/">Note</a><small>10</small></li>
+  
+    <li><a href="/tags/Phaser/">Phaser</a><small>1</small></li>
+  
+    <li><a href="/tags/Phone/">Phone</a><small>1</small></li>
+  
+    <li><a href="/tags/RFID/">RFID</a><small>2</small></li>
+  
+    <li><a href="/tags/Spring/">Spring</a><small>2</small></li>
+  
+    <li><a href="/tags/Virtual-Machine/">Virtual Machine</a><small>2</small></li>
+  
+    <li><a href="/tags/Win10/">Win10</a><small>6</small></li>
+  
+  </ul>
+</div>
+
+
+  <div class="widget footer">
+  
+  <span>&copy;2017-2021 someexp</span>
+  
+  </br>
+  <span>Powered by <a target="_blank" rel="noopener" href="http://hexo.io" >Hexo</a></span>
+  </br>
+    <span>Theme by <a target="_blank" rel="noopener" href="https://github.com/thesomeexp/hexo-theme-light-simple" >hexo-theme-light-simple</a></span>
+</div>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+</body>
+</html>

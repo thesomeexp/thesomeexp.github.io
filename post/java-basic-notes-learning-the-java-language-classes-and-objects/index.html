@@ -1,0 +1,254 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Java基础笔记--学习Java语言--类和对象 | SomeExp</title>
+  <meta name="author" content="someexp">
+  
+  <meta name="description" content="2.3类, 对象, 初始化块, 嵌套类, Lambda表达式">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Java基础笔记--学习Java语言--类和对象"/>
+  <meta property="og:site_name" content="SomeExp"/>
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">SomeExp</a></h1>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+      <li><a href="/links">Links</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+    <div class="post-content">
+        <header>
+            
+  
+    <h1 class="title">Java基础笔记--学习Java语言--类和对象</h1>
+  
+
+            
+                <time itemprop="datePublished"
+                      datetime="2020-03-05T16:00:00.000Z">2020-03-06</time>
+                To
+                <time itemprop="dateModified"
+                      updated="2020-04-29T16:00:00.000Z">2020-04-30</time>
+            
+        </header>
+        <div class="entry">
+            
+                <p>2.3类, 对象, 初始化块, 嵌套类, Lambda表达式</p>
+<a id="more"></a>
+<h1 id="类Classes"><a href="#类Classes" class="headerlink" title="类Classes"></a>类Classes</h1><h2 id="声明一个类"><a href="#声明一个类" class="headerlink" title="声明一个类"></a>声明一个类</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">class MyClass extends MySuperClass implements YourInterface &#123;</span><br><span class="line">    &#x2F;&#x2F; field, constructor, and</span><br><span class="line">    &#x2F;&#x2F; method declarations</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>类前面还能加public或private之类的修饰符来决定哪些类能访问它. </p>
+<h2 id="声明成员变量"><a href="#声明成员变量" class="headerlink" title="声明成员变量"></a>声明成员变量</h2><p>在类中的变量叫成员变量(fields).<br>在方法或块中的变量叫本地变量(local variables).<br>在方法定义时的变量叫参数(parameters).<br>public修饰符意味着其他对象可以可以访问这个类.<br>private修饰符意味着该field只能在该类中访问.<br>每个变量都需要声明类类型, 变量的命名也是有一套规则的. </p>
+<h2 id="定义一个方法"><a href="#定义一个方法" class="headerlink" title="定义一个方法"></a>定义一个方法</h2><p>根据约定, 方法名应该是一个以小写开头的动词或多个单词的驼峰命名方式.<br>通常方法在类中有独一无二的名字, 除非方法重载(method overloading同名但不同参数).<br>Java通过不同的方法签名(method signatures)来区分不同的方法, 它是根据参数数量和类型来区分的. </p>
+<h2 id="为类提供构造方法-Constructors"><a href="#为类提供构造方法-Constructors" class="headerlink" title="为类提供构造方法(Constructors)"></a>为类提供构造方法(Constructors)</h2><p>构造方法可以看成是没有返回值的和类同名的方法.<br>编译器会自动给没有构造方法的类添加一个无参构造方法, 如果其父类无参, 编译器也会提供, 这里还得重点了解一下super关键字. 子类构造函数第一行必须使用super来调用父类构造方法. </p>
+<h2 id="参数传递"><a href="#参数传递" class="headerlink" title="参数传递"></a>参数传递</h2><p>可以传递任何类型的参数. 除非写构造方法和set方法, 参数名不应该和成员变量名(field)重名, 成员变量名尽量不使用类似x, y这种命名. 区分和成员变量重名的参数需要了解一下this关键字. </p>
+<h3 id="任意数量参数传递"><a href="#任意数量参数传递" class="headerlink" title="任意数量参数传递"></a>任意数量参数传递</h3><p>当你不知道传递参数的个数, 可以使用可变参数(varargs), 可变参数可以像数组一样被使用, 你可能经常看到printf函数就使用了可变参数. 可变参数一般放在参数list的最后. 它可以是0个. </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">public PrintStream printf(String format, Object... args)</span><br></pre></td></tr></table></figure>
+<h3 id="传递基础数据类型"><a href="#传递基础数据类型" class="headerlink" title="传递基础数据类型"></a>传递基础数据类型</h3><p>传递基础数据类型是值传递, 在方法内修改该参数不会对原参数造成影响. 例如修改传过来的int, double类型. </p>
+<h3 id="传递引用数据类型"><a href="#传递引用数据类型" class="headerlink" title="传递引用数据类型"></a>传递引用数据类型</h3><p>传入的引用仍然引用之前的同一个对象, 如果有合适的访问权限它能改变成员变量的值. </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">public void moveCircle(Circle circle, int deltaX, int deltaY) &#123;</span><br><span class="line">    &#x2F;&#x2F; code to move origin of circle to x+deltaX, y+deltaY</span><br><span class="line">    circle.setX(circle.getX() + deltaX);</span><br><span class="line">    circle.setY(circle.getY() + deltaY);</span><br><span class="line">        </span><br><span class="line">    &#x2F;&#x2F; code to assign a new reference to circle</span><br><span class="line">    circle &#x3D; new Circle(0, 0);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>例如上面的第7行代码, 只是代表circle指向了新的对象, 而不是传入的那个对象原来的引用发生了改变. </p>
+<h1 id="对象Objects"><a href="#对象Objects" class="headerlink" title="对象Objects"></a>对象Objects</h1><h2 id="创建对象"><a href="#创建对象" class="headerlink" title="创建对象"></a>创建对象</h2><p>这里有一句语句:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Point originOne &#x3D; new Point(23, 94);</span><br></pre></td></tr></table></figure>
+<p>它由三部分组成, 一是声明, 声明变量名; 二是实例化对象, 上面的new关键词便是创建一个对象; 三是初始化, new之后会调用构造方法, 用来初始化一个新的对象. new运算符返回对象的引用(reference), 有时候使用new不一定必须分配给指定变量, 例如: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">int height &#x3D; new Rectangle().height;</span><br></pre></td></tr></table></figure>
+<p>上面那种情况是new关键词创建了一个对象, 然后返回该对象的引用, 然后调用该对象的height()方法. 上面的代码在调用了方法后, 新的对象引用并没有变量存储它, 所以最后会被JVM回收. 变量超出范围时, 通常会删除变量包含的引用. JVM会回收没有被引用的对象, 你可以用null使一些对象不被引用. </p>
+<h2 id="关于类"><a href="#关于类" class="headerlink" title="关于类"></a>关于类</h2><h3 id="协变返回类型covariant-return-type"><a href="#协变返回类型covariant-return-type" class="headerlink" title="协变返回类型covariant return type"></a>协变返回类型covariant return type</h3><p>简单来说, 协变返回值类型就是在重写父类方法时, 正常情况下返回值是不允许你改变的, 而JavaSE1.5开始支持的协变返回类型技术允许你在方法重载时, 改变方法返回值, 但前提是改变的返回值必须是被重载方法返回值的子类. 你也可以使用接口名作为返回值, 但必须实现该接口. </p>
+<p>修饰符决定各成员变量访问级别</p>
+<table border="1" summary="This table defines levels of access conferred by a modifier">
+<caption style="font-weight: bold" id="accesscontrol-levels">Access Levels</caption>
+<tbody><tr>
+    <th>Modifier</th>
+    <th>Class</th>
+    <th>Package</th>
+    <th>Subclass</th>
+    <th>World</th>
+</tr>
+<tr>
+    <td>public</td>
+    <td>Y</td>
+    <td>Y</td>
+    <td>Y</td>
+    <td>Y</td>
+</tr>
+<tr>
+    <td>protected</td>
+    <td>Y</td>
+    <td>Y</td>
+    <td>Y</td>
+    <td>N</td>
+</tr>
+<tr>
+    <td style="font-style: italic">no modifier</td>
+    <td>Y</td>
+    <td>Y</td>
+    <td>N</td>
+    <td>N</td>
+</tr>
+<tr>
+    <td>private</td>
+    <td>Y</td>
+    <td>N</td>
+    <td>N</td>
+    <td>N</td>
+</tr>
+</tbody></table>
+为了避免别人引错包, 访问级别的使用建议: 
+
+<ul>
+<li>对成员变量使用严格而有意义的访问级别, 应该使用private除非你有充分合理的缘由. </li>
+<li>除了常量外, 应避免使用public. </li>
+</ul>
+<h3 id="static修饰符"><a href="#static修饰符" class="headerlink" title="static修饰符"></a>static修饰符</h3><p>在使用static修饰符修饰的变量和方法时, 建议使用类名来调用而不是对象名, 容易引起歧义. 静态方法经常用来访问静态成员变量. </p>
+<h3 id="常量Constants"><a href="#常量Constants" class="headerlink" title="常量Constants"></a>常量Constants</h3><p>使用final和static组合通常定义为常量, 通常以大写和用下划线分隔多个单词来命名. </p>
+<h3 id="编译时常量compile-time-constant"><a href="#编译时常量compile-time-constant" class="headerlink" title="编译时常量compile-time constant"></a>编译时常量compile-time constant</h3><p>如果常量是一个基本类型或者String, 那么编译时编译器会直接把常量替换为该值. </p>
+<h3 id="初始化块Initializing-Fields"><a href="#初始化块Initializing-Fields" class="headerlink" title="初始化块Initializing Fields"></a>初始化块Initializing Fields</h3><p>我们可以给成员变量赋值的方法来初始化成员变量, 但是这种办法不能给复杂的数组赋值和异常处理, 所以初始化的工作最好在构造器里做, 这样一些复杂的初始化和错误处理就能解决了. 初始化块里的代码相当于在执行构造函数前执行的代码, 设计的本意好像是为了解决构造器代码重复的问题. 在new对象时该代码块执行一次. 它长这样: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">class Example&#123;</span><br><span class="line"> &#123;</span><br><span class="line">    &#x2F;&#x2F; 对, 在类里就两个括号, 啥也没有</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="静态初始化块Static-Initialization-Blocks"><a href="#静态初始化块Static-Initialization-Blocks" class="headerlink" title="静态初始化块Static Initialization Blocks"></a>静态初始化块Static Initialization Blocks</h3><p>为了提供和初始化块(Initializing Fields)一样的功能, 静态初始化块就是给静态变量初始化的, 一般只执行一次, 在new对象时静态代码块都优先执行: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">class Example&#123;</span><br><span class="line">static &#123;</span><br><span class="line">    &#x2F;&#x2F; 静态代码块</span><br><span class="line"> &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>你可以写一个给静态变量赋值的private方法: </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">class Whatever &#123;</span><br><span class="line">    public static varType myVar &#x3D; initializeClassVariable();</span><br><span class="line">        </span><br><span class="line">    private static varType initializeClassVariable() &#123;</span><br><span class="line"></span><br><span class="line">        &#x2F;&#x2F; initialization code goes here</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样做的好处是你之后可以在以后重用该初始化方法. 方法被定义为final是因为在初始化时调用非final方法可能会导致问题. </p>
+<h2 id="嵌套类Nested-Classes"><a href="#嵌套类Nested-Classes" class="headerlink" title="嵌套类Nested Classes"></a>嵌套类Nested Classes</h2><p>嵌套类分为: 静态内部类(static nested classes), 内部类(inner classes)</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">class OuterClass &#123;</span><br><span class="line">    ...</span><br><span class="line">    static class StaticNestedClass &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">    class InnerClass &#123;</span><br><span class="line">        ...</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>内部类可以访问OuterClass里的其他成员变量, 尽管被声明称private. 但静态内部类不行. 内部类可以被private, public, protected修饰, 但是最外部的类不能被private修饰. </p>
+<h3 id="为什么使用嵌套类"><a href="#为什么使用嵌套类" class="headerlink" title="为什么使用嵌套类"></a>为什么使用嵌套类</h3><ul>
+<li>对一些只对一个类有用的类做逻辑分组, 精简项目代码<br>  上面的代码中, InnerClass里可以访问OuterClass里的private成员. </li>
+<li>封装性, 隐藏不让别人知道的操作</li>
+<li>使代码更可读和易于维护<h3 id="静态内部类Static-Nested-Classes"><a href="#静态内部类Static-Nested-Classes" class="headerlink" title="静态内部类Static Nested Classes"></a>静态内部类Static Nested Classes</h3>声明在类里面的静态类.<br>静态内部类StaticNestedClass不能直接访问和使用外部类OuterClass的变量和方法.<br>静态内部类通过以下方式访问和创建: <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">OuterClass.StaticNestedClass</span><br><span class="line"></span><br><span class="line">OuterClass.StaticNestedClass nestedObject &#x3D; new OuterClass.StaticNestedClass();</span><br></pre></td></tr></table></figure>
+<h3 id="内部类Inner-Classes"><a href="#内部类Inner-Classes" class="headerlink" title="内部类Inner Classes"></a>内部类Inner Classes</h3>声明在类里面的类.<br>内部类可以直接访问该类外部类的变量和方法, 但自己不能创建static成员.<br>内部类的实例只能存在于外部类的实例中, 并且可以直接访问封闭实例的方法和字段.<br>实例化内部类的前提是外部类已经被实例化, 应该这样实例化内部类: <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">OuterClass.InnerClass innerObject &#x3D; outerObject.new InnerClass();</span><br></pre></td></tr></table></figure>
+还有两种特殊的内部类: 本地类(local classes)和匿名类(anonymous classes). <h3 id="变量重名Shadowing"><a href="#变量重名Shadowing" class="headerlink" title="变量重名Shadowing"></a>变量重名Shadowing</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">public class ShadowTest &#123;</span><br><span class="line"></span><br><span class="line">    public int x &#x3D; 0;</span><br><span class="line"></span><br><span class="line">    class FirstLevel &#123;</span><br><span class="line"></span><br><span class="line">        public int x &#x3D; 1;</span><br><span class="line"></span><br><span class="line">        void methodInFirstLevel(int x) &#123;</span><br><span class="line">            System.out.println(&quot;x &#x3D; &quot; + x); &#x2F;&#x2F; x &#x3D; 23</span><br><span class="line">            System.out.println(&quot;this.x &#x3D; &quot; + this.x); &#x2F;&#x2F; this.x &#x3D; 1 使用this代表该封闭范围</span><br><span class="line">            System.out.println(&quot;ShadowTest.this.x &#x3D; &quot; + ShadowTest.this.x); &#x2F;&#x2F; ShadowTest.this.x &#x3D; 0</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String... args) &#123;</span><br><span class="line">        ShadowTest st &#x3D; new ShadowTest();</span><br><span class="line">        ShadowTest.FirstLevel fl &#x3D; st.new FirstLevel();</span><br><span class="line">        fl.methodInFirstLevel(23);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+在上面的例子中有三个变量重名了, FirstLevel的methodInFirstLevel方法的参数, 和内部类的成员变量, 和内部类的外部类成员变量. 看完例子就知道应该怎么区分三个变量了. <h3 id="序列化"><a href="#序列化" class="headerlink" title="序列化"></a>序列化</h3>序列化内部类是不建议的, 它可能产生一些问题. <h3 id="内部类例子"><a href="#内部类例子" class="headerlink" title="内部类例子"></a>内部类例子</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">public class DataStructure &#123;</span><br><span class="line">    </span><br><span class="line">    &#x2F;&#x2F; Create an array</span><br><span class="line">    private final static int SIZE &#x3D; 15;</span><br><span class="line">    private int[] arrayOfInts &#x3D; new int[SIZE];</span><br><span class="line">    </span><br><span class="line">    public DataStructure() &#123;</span><br><span class="line">        &#x2F;&#x2F; fill the array with ascending integer values</span><br><span class="line">        for (int i &#x3D; 0; i &lt; SIZE; i++) &#123;</span><br><span class="line">            arrayOfInts[i] &#x3D; i;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public void printEven() &#123;</span><br><span class="line">        </span><br><span class="line">        &#x2F;&#x2F; Print out values of even indices of the array</span><br><span class="line">        DataStructureIterator iterator &#x3D; this.new EvenIterator();</span><br><span class="line">        while (iterator.hasNext()) &#123;</span><br><span class="line">            System.out.print(iterator.next() + &quot; &quot;);</span><br><span class="line">        &#125;</span><br><span class="line">        System.out.println();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    interface DataStructureIterator extends java.util.Iterator&lt;Integer&gt; &#123; &#125; </span><br><span class="line"></span><br><span class="line">    &#x2F;&#x2F; Inner class implements the DataStructureIterator interface,</span><br><span class="line">    &#x2F;&#x2F; which extends the Iterator&lt;Integer&gt; interface</span><br><span class="line">    </span><br><span class="line">    private class EvenIterator implements DataStructureIterator &#123;</span><br><span class="line">        </span><br><span class="line">        &#x2F;&#x2F; Start stepping through the array from the beginning</span><br><span class="line">        private int nextIndex &#x3D; 0;</span><br><span class="line">        </span><br><span class="line">        public boolean hasNext() &#123;</span><br><span class="line">            </span><br><span class="line">            &#x2F;&#x2F; Check if the current element is the last in the array</span><br><span class="line">            return (nextIndex &lt;&#x3D; SIZE - 1);</span><br><span class="line">        &#125;        </span><br><span class="line">        </span><br><span class="line">        public Integer next() &#123;</span><br><span class="line">            </span><br><span class="line">            &#x2F;&#x2F; Record a value of an even index of the array</span><br><span class="line">            Integer retValue &#x3D; Integer.valueOf(arrayOfInts[nextIndex]);</span><br><span class="line">            </span><br><span class="line">            &#x2F;&#x2F; Get the next even element</span><br><span class="line">            nextIndex +&#x3D; 2;</span><br><span class="line">            return retValue;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    public static void main(String s[]) &#123;</span><br><span class="line">        </span><br><span class="line">        &#x2F;&#x2F; Fill the array with integer values and print out only</span><br><span class="line">        &#x2F;&#x2F; values of even indices</span><br><span class="line">        DataStructure ds &#x3D; new DataStructure();</span><br><span class="line">        ds.printEven();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+输出内容是: <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">0 2 4 6 8 10 12 14 </span><br></pre></td></tr></table></figure>
+上面的例子中EvenIterator类直接引用DataStructure对象的arrayOfInts实例变量.<br>你可以像例子一样使用内部类去实现一些帮助类. 一般用内部类处理用户界面的事务处理. <h3 id="声明本地类Declaring-Local-Classes"><a href="#声明本地类Declaring-Local-Classes" class="headerlink" title="声明本地类Declaring Local Classes"></a>声明本地类Declaring Local Classes</h3>声明在方法里的类. 这里有一个验证手机号码的例子: <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line">public class LocalClassExample &#123;</span><br><span class="line">  </span><br><span class="line">    static String regularExpression &#x3D; &quot;[^0-9]&quot;;</span><br><span class="line">  </span><br><span class="line">    public static void validatePhoneNumber(</span><br><span class="line">        String phoneNumber1, String phoneNumber2) &#123;</span><br><span class="line">      </span><br><span class="line">        final int numberLength &#x3D; 10;</span><br><span class="line">        </span><br><span class="line">        &#x2F;&#x2F; Valid in JDK 8 and later:</span><br><span class="line">       </span><br><span class="line">        &#x2F;&#x2F; int numberLength &#x3D; 10;</span><br><span class="line">       </span><br><span class="line">        class PhoneNumber &#123;</span><br><span class="line">            </span><br><span class="line">            String formattedPhoneNumber &#x3D; null;</span><br><span class="line"></span><br><span class="line">            PhoneNumber(String phoneNumber)&#123;</span><br><span class="line">                &#x2F;&#x2F; numberLength &#x3D; 7;</span><br><span class="line">                String currentNumber &#x3D; phoneNumber.replaceAll(</span><br><span class="line">                  regularExpression, &quot;&quot;);</span><br><span class="line">                if (currentNumber.length() &#x3D;&#x3D; numberLength)</span><br><span class="line">                    formattedPhoneNumber &#x3D; currentNumber;</span><br><span class="line">                else</span><br><span class="line">                    formattedPhoneNumber &#x3D; null;</span><br><span class="line">            &#125;</span><br><span class="line"></span><br><span class="line">            public String getNumber() &#123;</span><br><span class="line">                return formattedPhoneNumber;</span><br><span class="line">            &#125;</span><br><span class="line">            </span><br><span class="line">            &#x2F;&#x2F; Valid in JDK 8 and later:</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;            public void printOriginalNumbers() &#123;</span><br><span class="line">&#x2F;&#x2F;                System.out.println(&quot;Original numbers are &quot; + phoneNumber1 +</span><br><span class="line">&#x2F;&#x2F;                    &quot; and &quot; + phoneNumber2);</span><br><span class="line">&#x2F;&#x2F;            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        PhoneNumber myNumber1 &#x3D; new PhoneNumber(phoneNumber1);</span><br><span class="line">        PhoneNumber myNumber2 &#x3D; new PhoneNumber(phoneNumber2);</span><br><span class="line">        </span><br><span class="line">        &#x2F;&#x2F; Valid in JDK 8 and later:</span><br><span class="line"></span><br><span class="line">&#x2F;&#x2F;        myNumber1.printOriginalNumbers();</span><br><span class="line"></span><br><span class="line">        if (myNumber1.getNumber() &#x3D;&#x3D; null) </span><br><span class="line">            System.out.println(&quot;First number is invalid&quot;);</span><br><span class="line">        else</span><br><span class="line">            System.out.println(&quot;First number is &quot; + myNumber1.getNumber());</span><br><span class="line">        if (myNumber2.getNumber() &#x3D;&#x3D; null)</span><br><span class="line">            System.out.println(&quot;Second number is invalid&quot;);</span><br><span class="line">        else</span><br><span class="line">            System.out.println(&quot;Second number is &quot; + myNumber2.getNumber());</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String... args) &#123;</span><br><span class="line">        validatePhoneNumber(&quot;123-456-7890&quot;, &quot;456-7890&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+本地类可以访问该类外类的成员变量, 比如例子中本地类构造方法使用了LocalClassExample.regularExpression.<br>本地类仅能访问定义为final的外部类变量. 如果本地类访问一个本地变量和代码块的参数, 它能捕获这个本地变量和参数, 例如在例子中的本地类可以捕获numberLength. 在Java SE8之后, 本地类能访问定义为final或者是定义后没有改变的(effectively final)外部类变量和参数, 例如上面例子中, 把final去掉程序依然可以运作, 但把修改numberLength的语句取消注释, 编译器就会提醒你该变量不数据定义后没有改变(effectively final). 在本地类中你还可以访问phoneNumber1和phoneNumber2的值. 本地类和内部类相似, 他们都不能定义静态成员. 在静态方法里面的本地类只能引用外部同是静态成员. 例如例子里的regularExpression是静态的. 但它可以声明常量(constant variables). <h3 id="匿名类Anonymous-Classes"><a href="#匿名类Anonymous-Classes" class="headerlink" title="匿名类Anonymous Classes"></a>匿名类Anonymous Classes</h3>匿名类例子: <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br></pre></td><td class="code"><pre><span class="line">public class HelloWorldAnonymousClasses &#123;</span><br><span class="line">    </span><br><span class="line">    interface HelloWorld &#123;</span><br><span class="line">        public void greet();</span><br><span class="line">        public void greetSomeone(String someone);</span><br><span class="line">    &#125;</span><br><span class="line">  </span><br><span class="line">    public void sayHello() &#123;</span><br><span class="line">        HelloWorld frenchGreeting &#x3D; new HelloWorld() &#123;</span><br><span class="line">            String name &#x3D; &quot;tout le monde&quot;;</span><br><span class="line">            public void greet() &#123;</span><br><span class="line">                greetSomeone(&quot;tout le monde&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">            public void greetSomeone(String someone) &#123;</span><br><span class="line">                name &#x3D; someone;</span><br><span class="line">                System.out.println(&quot;Salut &quot; + name);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;;</span><br><span class="line">        frenchGreeting.greet();</span><br><span class="line">        frenchGreeting.greetSomeone(&quot;Fred&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    public static void main(String... args) &#123;</span><br><span class="line">        HelloWorldAnonymousClasses myApp &#x3D;</span><br><span class="line">            new HelloWorldAnonymousClasses();</span><br><span class="line">        myApp.sayHello();</span><br><span class="line">    &#125;            </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+一个匿名类声明包括: </li>
+<li>一个new操作符</li>
+<li>实现的接口名或者继承的类名</li>
+<li>括号中包含构造函数的参数, 但在上面的例子中由于是实现接口所以没有构造函数参数. </li>
+<li>一个主体(body大括号), 在主体中允许方法声明但不允许使用语句. </li>
+</ul>
+<p>和本地类一样, 匿名类也能捕获在它外部类括号内的成员, 但该成员必须也是final或者是定义后未被改变的变量. 在匿名类中的变量名如果重名就参照之前写的变量重名.<br>匿名类里的成员和本地类一样有声明约束: </p>
+<ul>
+<li>你不能定义静态初始化器(static initializers)或成员接口(member interfaces)</li>
+<li>静态类可以使用常量. </li>
+</ul>
+<p>你可以定义以下内容在匿名类中: </p>
+<ul>
+<li>字段(Fields)</li>
+<li>额外的方法(Extra methods)</li>
+<li>实例初始化器(Instance initializers不是构造器(constructors), 就是那个只有括号的代码块)</li>
+<li>本地类(Local classes)</li>
+</ul>
+<h2 id="Lambda表达式-Lambda-Expressions"><a href="#Lambda表达式-Lambda-Expressions" class="headerlink" title="Lambda表达式(Lambda Expressions)"></a>Lambda表达式(Lambda Expressions)</h2><p>当接口只有一个方法时, Lambda表达式可以简化代码, 它可以把函数当作一个方法参数, 或者把代码当作数据. 使得表达单方法的实例类代码更紧凑. 用的不多, <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/java/javaOO/lambdaexpressions.html">点这里查看官方指南.</a></p>
+<p>参考: <a target="_blank" rel="noopener" href="https://docs.oracle.com/javase/tutorial/java/javaOO/index.html">Classes and Objects</a></p>
+
+            
+        </div>
+        
+            
+
+            <footer>
+                
+  
+  <div class="tags">
+    <a href="/tags/Java/">Java</a>
+  </div>
+
+            </footer>
+        
+    </div>
+</article>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  
+<div class="widget tag">
+  <ul class="entry">
+  
+    <li><a href="/tags/Blog/">Blog</a><small>1</small></li>
+  
+    <li><a href="/tags/Docker/">Docker</a><small>1</small></li>
+  
+    <li><a href="/tags/Essay/">Essay</a><small>9</small></li>
+  
+    <li><a href="/tags/Game/">Game</a><small>1</small></li>
+  
+    <li><a href="/tags/Git/">Git</a><small>1</small></li>
+  
+    <li><a href="/tags/Gulp/">Gulp</a><small>1</small></li>
+  
+    <li><a href="/tags/Hexo/">Hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/Java/">Java</a><small>14</small></li>
+  
+    <li><a href="/tags/Java-Web/">Java Web</a><small>1</small></li>
+  
+    <li><a href="/tags/JavaScript/">JavaScript</a><small>1</small></li>
+  
+    <li><a href="/tags/Lifestyle/">Lifestyle</a><small>3</small></li>
+  
+    <li><a href="/tags/Maven/">Maven</a><small>1</small></li>
+  
+    <li><a href="/tags/Network/">Network</a><small>1</small></li>
+  
+    <li><a href="/tags/Nginx/">Nginx</a><small>1</small></li>
+  
+    <li><a href="/tags/Node-js/">Node.js</a><small>1</small></li>
+  
+    <li><a href="/tags/Note/">Note</a><small>10</small></li>
+  
+    <li><a href="/tags/Phaser/">Phaser</a><small>1</small></li>
+  
+    <li><a href="/tags/Phone/">Phone</a><small>1</small></li>
+  
+    <li><a href="/tags/RFID/">RFID</a><small>2</small></li>
+  
+    <li><a href="/tags/Spring/">Spring</a><small>2</small></li>
+  
+    <li><a href="/tags/Virtual-Machine/">Virtual Machine</a><small>2</small></li>
+  
+    <li><a href="/tags/Win10/">Win10</a><small>6</small></li>
+  
+  </ul>
+</div>
+
+
+  <div class="widget footer">
+  
+  <span>&copy;2017-2021 someexp</span>
+  
+  </br>
+  <span>Powered by <a target="_blank" rel="noopener" href="http://hexo.io" >Hexo</a></span>
+  </br>
+    <span>Theme by <a target="_blank" rel="noopener" href="https://github.com/thesomeexp/hexo-theme-light-simple" >hexo-theme-light-simple</a></span>
+</div>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+</body>
+</html>
