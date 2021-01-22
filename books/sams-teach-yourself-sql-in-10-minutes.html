@@ -89,7 +89,49 @@
 <h2 id="13-2-自然联结-natural-join"><a href="#13-2-自然联结-natural-join" class="headerlink" title="13.2 自然联结(natural join)"></a>13.2 自然联结(natural join)</h2><p>做为两个表联结的列(联结后不应返回两个一样的列), 应该只出现一次, 所以一般对一个表使用通配符(SELECT *), 然后对其他表的列使用明确的子集来完成. </p>
 <h2 id="13-3-外联结-outer-join"><a href="#13-3-外联结-outer-join" class="headerlink" title="13.3 外联结(outer join)"></a>13.3 外联结(outer join)</h2><p>联结会包含那些在相关表中没有关联行的行. 左外联结LEFT OUTER JOIN和右外联结RIGHT OUTER JOIN区别在于需要包括哪边表的所有行, 有的DBMS支持全外联结FULL OUTER JOIN. </p>
 <h1 id="14-组合查询"><a href="#14-组合查询" class="headerlink" title="14. 组合查询"></a>14. 组合查询</h1><p>UNION几乎总是完成WHERE条件相同的工作, 所以它默认取消重复的行, 如果不想取消可以用UNION ALL. </p>
-<h1 id="15-插入数据"><a href="#15-插入数据" class="headerlink" title="15. 插入数据"></a>15. 插入数据</h1><p>不要使用没有明确给出列的INSERT语句, 给出列能使SQL代码继续发挥作用, 即使表结构发生了变化. </p>
+<h1 id="15-插入数据"><a href="#15-插入数据" class="headerlink" title="15. 插入数据"></a>15. 插入数据</h1><p>插入有几种方式: </p>
+<ul>
+<li>插入完整的行</li>
+<li>插入行的一部分</li>
+<li>插入某些查询的结果(INSERT SELECT或SELECT INTO)</li>
+</ul>
+<p>为了DBMS之间的可移植性, 不要忘记使用INTO关键字. 不要使用没有明确给出列的INSERT语句, 给出列能使SQL代码继续发挥作用, 即使表结构发生了变化. </p>
+<p>INSERT SELECT可以插入多行, INSERT通常直插入一行.<br>SELECT INTO用来将数据复制到一个新表. </p>
+<h1 id="16-更新和删除数据"><a href="#16-更新和删除数据" class="headerlink" title="16. 更新和删除数据"></a>16. 更新和删除数据</h1><ul>
+<li>操作表中的特定行</li>
+<li>操作表中的所有行</li>
+</ul>
+<p>无论更新还是删除其实都比较简单, 需要注意的是操作前最好先用SELECT测试一下是否是需要操作的行, 就是注意一下过滤的条件. 还有注意外键. 为了可以执行DELETE注意保留FROM关键字. </p>
+<p>DELETE删除整行, UPDATE可以删除整列, 如果想更快的删除表中所有行, 可以使用TRUNCATE TABLE语句. </p>
+<h1 id="17-创建和操纵表"><a href="#17-创建和操纵表" class="headerlink" title="17. 创建和操纵表"></a>17. 创建和操纵表</h1><p>创建表需要参阅具体的DBMS文档.<br>注: 最好指定NULL / NOT NULL. </p>
+<p>对于用于计算或数据分组的列建议用DEFAULT值而不是NULL列. </p>
+<blockquote>
+<p>复杂的表结构更改一般需要手动删除过程，它涉及以下步骤：<br>(1) 用新的列布局创建一个新表；<br>(2) 使用 INSERT SELECT 语句（关于这条语句的详细介绍，请参阅第 15<br>课）从旧表复制数据到新表。有必要的话，可以使用转换函数和计算<br>字段；<br>(3) 检验包含所需数据的新表；<br>(4) 重命名旧表（如果确定，可以删除它）；<br>(5) 用旧表原来的名字重命名新表；<br>(6) 根据需要，重新创建触发器、存储过程、索引和外键。</p>
+</blockquote>
+<p>注: 小心使用ALTER TABLE, 应该在改动前做完整的备份(表结构和数据的备份). </p>
+<h1 id="18-使用视图"><a href="#18-使用视图" class="headerlink" title="18. 使用视图"></a>18. 使用视图</h1><p>有点像是Java中的工具类, 封装一下一些可能被用于固定的, 多次的, 格式化的, 而且变量比较少的SELECT语句, 例如隐藏复杂的SQL联结, 或者减少SQL格式化拼接. 不同的DBMS对视图的限制都可能不大同. </p>
+<h1 id="19-使用存储过程"><a href="#19-使用存储过程" class="headerlink" title="19. 使用存储过程"></a>19. 使用存储过程</h1><p>有点像是开发架构中的Service层, 存储过程可以完成一些需要多条语句才能完成的复杂功能, 它简单, 安全, 高性能. </p>
+<p>说明: SQL和其他语言一样也可以写注释, 一般都是推荐写注释的. 所有DBMS都支持的注释是这么写的(两个连接符):</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">-- 注释balabala...</span></span><br></pre></td></tr></table></figure>
+<h1 id="20-管理事务处理"><a href="#20-管理事务处理" class="headerlink" title="20. 管理事务处理"></a>20. 管理事务处理</h1><ul>
+<li>事务(transaction)指一组SQL语句</li>
+<li>回退(rollback)指撤销指定SQL语句的过程</li>
+<li>提交(commit)指将未存储的SQL语句结果写入数据库表</li>
+<li>保留点(savepoint)指事务处理中设置的临时占位符(placeholder), 可以对它发布回退(与回退整个事务处理不同)</li>
+</ul>
+<p>提示: 事务处理用来管理INSERT, UPDATE, DELETE语句, 不能回退SELECT, CREATE, DROP操作.</p>
+<h1 id="21-使用游标"><a href="#21-使用游标" class="headerlink" title="21. 使用游标"></a>21. 使用游标</h1><p>有时候需要在检索出来的行中前进或后退一行或多行, 这就是游标的用途. 通常会经历: 声明, 打开(检索), 关闭.</p>
+<h1 id="22-高级SQL特性"><a href="#22-高级SQL特性" class="headerlink" title="22. 高级SQL特性"></a>22. 高级SQL特性</h1><ul>
+<li>约束<ul>
+<li>外键约束</li>
+<li>唯一约束</li>
+<li>检查约束</li>
+</ul>
+</li>
+<li>主键</li>
+<li>索引(没有严格的规则要求什么应该索引, 何时索引. 大多数DBMS都提供可以用来确定索引效率的实用程序, 应该经常使用这些实用程序. 定期检查索引. )</li>
+<li>触发器(特殊的存储过程. 约束比触发器更快, 尽可能使用约束)</li>
+</ul>
 
             
         </div>
