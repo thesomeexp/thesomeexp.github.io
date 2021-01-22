@@ -1,0 +1,178 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>MySQL必知必会 | SomeExp</title>
+  <meta name="author" content="someexp">
+  
+  <meta name="description" content="1.了解SQL参见 SQL必知必会 第1章. 
+2.MySQL简介DBMS可以分为两类:
+
+基于共享文件系统的DBMS(如: Microsoft Access和FileMaker)
+基于客户机-服务器(如: MySQL)
+
+MySQL相关的3个工具: 
+
+mysql命令行程序
+MySQL Admin">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="MySQL必知必会"/>
+  <meta property="og:site_name" content="SomeExp"/>
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">SomeExp</a></h1>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+      <li><a href="/links">Links</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="page">
+    <div class="post-content">
+        <header>
+            
+  
+    <h1 class="title">MySQL必知必会</h1>
+  
+
+            
+        </header>
+        <div class="entry">
+            
+                <h1 id="1-了解SQL"><a href="#1-了解SQL" class="headerlink" title="1.了解SQL"></a>1.了解SQL</h1><p>参见 SQL必知必会 第1章. </p>
+<h1 id="2-MySQL简介"><a href="#2-MySQL简介" class="headerlink" title="2.MySQL简介"></a>2.MySQL简介</h1><p>DBMS可以分为两类:</p>
+<ul>
+<li>基于共享文件系统的DBMS(如: Microsoft Access和FileMaker)</li>
+<li>基于客户机-服务器(如: MySQL)</li>
+</ul>
+<p>MySQL相关的3个工具: </p>
+<ul>
+<li>mysql命令行程序</li>
+<li>MySQL Administrator(MySQL管理器)是图形交互客户机, 用来简化MySQL服务器的管理.</li>
+<li>MySQL Query Browser是图形交互客户机, 用来编写和执行MySQL命令.</li>
+</ul>
+<h1 id="3-使用MySQL"><a href="#3-使用MySQL" class="headerlink" title="3.使用MySQL"></a>3.使用MySQL</h1><p>连接上数据库后, 必须使用USE打开数据库, 才能读取其中的数据.<br>SHOW DATABASES;返回可用数据库的列表.<br>SHOW TABLES;返回当前选择数据库内的表的列表.<br>SHOW COLUMNS FROM table;返回table表的列的列表. (DESCRIBE table;语句起到同样的效果)</p>
+<p>支持的其他SHOW语句:</p>
+<ul>
+<li>SHOW STATUS;显示广泛的服务器状态信息.</li>
+<li>SHOW CREATE DATABASE database;和SHOW CREATE TABLE table;分别用来显示创建特定数据库或表的MySQL语句.</li>
+<li>SHOW GRANTS;用来显示授予用户(所有/特定用户)的安全权限.</li>
+<li>SHOW ERRORS;和SHOW WARNINGS;用来显示服务器错误或警告消息.</li>
+</ul>
+<h1 id="4-检索数据"><a href="#4-检索数据" class="headerlink" title="4.检索数据"></a>4.检索数据</h1><p>MySQL中多条SQL语句必须以分号(;)分隔. 而单条SQL语句后和多数DBMS一样不需要语句后加分号.</p>
+<p>注: 不能部分使用DISTINCT. DISTINCT关键字应用于所有列而不仅是前置它的列. </p>
+<p>LIMIT 5,6指示MySQL返回从第5行开始的6行. 第一个数字为开始位置(从第0行开始), 第二个数为要检索的行数.<br>由于上面的容易搞糊涂, 所以MySQL5支持另一种替代语法:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">LIMIT <span class="number">4</span> <span class="keyword">OFFSET</span> <span class="number">3</span> <span class="comment">-- 从行3开始取4行 也就是LIMIT 3, 4</span></span><br></pre></td></tr></table></figure>
+<h1 id="5-排序检索数据"><a href="#5-排序检索数据" class="headerlink" title="5.排序检索数据"></a>5.排序检索数据</h1><p>使用ORDER BY和LIMIT的组合, 能够找出一个列中最高或最低的值.</p>
+<p>注意: ORDER BY子句应该保证它位于FROM子句之后, 如果使用LIMIT, 它必须位于ORDER BY之后. 使用子句次序不对将产生错误信息.</p>
+<h1 id="6-过滤数据"><a href="#6-过滤数据" class="headerlink" title="6.过滤数据"></a>6.过滤数据</h1><p>MySQL在匹配字符串时默认不区分大小写.</p>
+<h1 id="7-数据过滤"><a href="#7-数据过滤" class="headerlink" title="7.数据过滤"></a>7.数据过滤</h1><p>参见 SQL必知必会 第5章.</p>
+<h1 id="8-用通配符进行过滤"><a href="#8-用通配符进行过滤" class="headerlink" title="8.用通配符进行过滤"></a>8.用通配符进行过滤</h1><p>参见 SQL必知必会 第6章.</p>
+<h1 id="9-用正则表达式进行搜索"><a href="#9-用正则表达式进行搜索" class="headerlink" title="9.用正则表达式进行搜索"></a>9.用正则表达式进行搜索</h1><p>REGEXP关键字, MySQL用WHERE子句对正则表达式提供了初步的支持.<br>MySQL中的正则表达式匹配(自版本3.23.4后)不区分大小写. 为区分小写可以使用BINARY关键字. 如WHERE prod_name REGEXP BINARY ‘JetPack .000’.</p>
+<p>注: MySQL中使用正则表达式. 多数正则表达式实现使用单个反斜杠转义特殊字符, 以便能使用这些字符本身. 但MySQL要求两个反斜杠, 因为MySQL自己解释一个, 正则表达式库解释另一个.</p>
+<p>这一章主要说正则表达式, 还是以后用到再看看吧.</p>
+<h1 id="10-创建计算字段"><a href="#10-创建计算字段" class="headerlink" title="10.创建计算字段"></a>10.创建计算字段</h1>
+            
+        </div>
+        
+            
+
+            <footer>
+                
+            </footer>
+        
+    </div>
+</article>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  
+<div class="widget tag">
+  <ul class="entry">
+  
+    <li><a href="/tags/Blog/">Blog</a><small>1</small></li>
+  
+    <li><a href="/tags/Book/">Book</a><small>2</small></li>
+  
+    <li><a href="/tags/Docker/">Docker</a><small>1</small></li>
+  
+    <li><a href="/tags/Essay/">Essay</a><small>9</small></li>
+  
+    <li><a href="/tags/Game/">Game</a><small>1</small></li>
+  
+    <li><a href="/tags/Git/">Git</a><small>1</small></li>
+  
+    <li><a href="/tags/Gulp/">Gulp</a><small>1</small></li>
+  
+    <li><a href="/tags/Hexo/">Hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/Java/">Java</a><small>14</small></li>
+  
+    <li><a href="/tags/Java-Web/">Java Web</a><small>1</small></li>
+  
+    <li><a href="/tags/JavaScript/">JavaScript</a><small>1</small></li>
+  
+    <li><a href="/tags/Lifestyle/">Lifestyle</a><small>3</small></li>
+  
+    <li><a href="/tags/Maven/">Maven</a><small>1</small></li>
+  
+    <li><a href="/tags/Network/">Network</a><small>1</small></li>
+  
+    <li><a href="/tags/Nginx/">Nginx</a><small>1</small></li>
+  
+    <li><a href="/tags/Node-js/">Node.js</a><small>1</small></li>
+  
+    <li><a href="/tags/Note/">Note</a><small>10</small></li>
+  
+    <li><a href="/tags/Phaser/">Phaser</a><small>1</small></li>
+  
+    <li><a href="/tags/Phone/">Phone</a><small>1</small></li>
+  
+    <li><a href="/tags/RFID/">RFID</a><small>2</small></li>
+  
+    <li><a href="/tags/Spring/">Spring</a><small>2</small></li>
+  
+    <li><a href="/tags/Virtual-Machine/">Virtual Machine</a><small>2</small></li>
+  
+    <li><a href="/tags/Win10/">Win10</a><small>6</small></li>
+  
+  </ul>
+</div>
+
+
+  <div class="widget footer">
+  
+  <span>&copy;2017-2021 someexp</span>
+  
+  </br>
+  <span>Powered by <a target="_blank" rel="noopener" href="http://hexo.io" >Hexo</a></span>
+  </br>
+    <span>Theme by <a target="_blank" rel="noopener" href="https://github.com/thesomeexp/hexo-theme-light-simple" >hexo-theme-light-simple</a></span>
+</div>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+</body>
+</html>

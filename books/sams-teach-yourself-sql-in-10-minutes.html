@@ -65,22 +65,24 @@
 <p>WHERE子句中使用NOT来否定其后条件的关键字. </p>
 <h1 id="6-用通配符进行过滤"><a href="#6-用通配符进行过滤" class="headerlink" title="6. 用通配符进行过滤"></a>6. 用通配符进行过滤</h1><p>通配符wildcard是用来匹配值的一部分的特殊字符.<br>从技术上说LIKE是谓词predicate而不是操作符.<br>通配符也能放在搜索模式search pattern中间, 比如根据邮件地址一部分查找: ‘b%forta.com’</p>
 <p>不要过度使用通配符, 如果其它操作符能达到相同目的, 就使用其它操作符.<br>把通配符置于开始处搜索起来是最慢的. </p>
+<p>注意尾空格: 尾空格可能会干扰通配符匹配. 比如保存词anvil时, 如果它后面有一个或多个空格, 那么子句WHERE prod_name LIKE ‘%anvil’将不会匹配他们. 建议使用函数去掉首尾空格.</p>
+<p>注意: %通配符不能匹配NULL.</p>
 <h1 id="7-创建计算字段"><a href="#7-创建计算字段" class="headerlink" title="7. 创建计算字段"></a>7. 创建计算字段</h1><p>作者认为在数据库服务器上完成转换和格式化工作比客户端中完成要快得多. (我自己觉得数据库资源还是比较宝贵的… 如果是IO密集型CPU瓶颈不高感觉这样也好)<br>使用别名建议还是加AS关键字. </p>
 <h1 id="8-使用函数处理数据"><a href="#8-使用函数处理数据" class="headerlink" title="8. 使用函数处理数据"></a>8. 使用函数处理数据</h1><p>对文本处理, 日期和时间处理的函数各DBMS都很不一致, 但数值处理函数基本一致. </p>
-<h1 id="9-汇总数据"><a href="#9-汇总数据" class="headerlink" title="9. 汇总数据"></a>9. 汇总数据</h1><p>聚集函数aggregate function): AVG(), COUNT(), MAX(), MIN(), SUM()</p>
+<h1 id="9-汇总数据"><a href="#9-汇总数据" class="headerlink" title="9. 汇总数据"></a>9. 汇总数据</h1><p>聚集函数(aggregate function): AVG(), COUNT(), MAX(), MIN(), SUM()</p>
 <p>COUNT()如果指定列名, 那么会忽略NULL的行, 所以可以使用COUNT(*). </p>
 <h1 id="10-分组数据"><a href="#10-分组数据" class="headerlink" title="10. 分组数据"></a>10. 分组数据</h1><p>目前为止以上的所有计算都是在表的所有数据或匹配待定的WHERE子句的数据上进行的, 如果要返回每个xxx提供的xx数目要怎么办呢? 这时候就可以使用分组了(关键字GROUP BY), 它可以将数据分为多个逻辑组, 对每个组进行聚集计算. </p>
 <p>通过HAVING子句来过滤分组(过滤的是分组聚集值, 而不是特定值), WHERE来过滤行.<br>WHERE在数据分组前进行过滤, HAVING在数据分组后进行过滤. </p>
 <h1 id="11-使用子查询"><a href="#11-使用子查询" class="headerlink" title="11. 使用子查询"></a>11. 使用子查询</h1><p>作为子查询是SELECT语句只能查询单个列. </p>
 <p>例: 列出所有包含物品RGAN01的订单的所有顾客ID(利用子查询进行过滤): </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">SELECT cust_id</span><br><span class="line">FROM Orders</span><br><span class="line">WHERE order_num IN (SELECT order_num</span><br><span class="line">FROM OrderItems</span><br><span class="line">WHERE prod_id &#x3D; &#39;RGAN01&#39;);</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> cust_id</span><br><span class="line"><span class="keyword">FROM</span> Orders</span><br><span class="line"><span class="keyword">WHERE</span> order_num <span class="keyword">IN</span> (<span class="keyword">SELECT</span> order_num</span><br><span class="line"><span class="keyword">FROM</span> OrderItems</span><br><span class="line"><span class="keyword">WHERE</span> prod_id <span class="operator">=</span> <span class="string">&#x27;RGAN01&#x27;</span>);</span><br></pre></td></tr></table></figure>
 <p>例: 显示Custemers表中每个顾客的订单总数(作为计算字段): </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">SELECT cust_name,</span><br><span class="line">cust_state,</span><br><span class="line">(SELECT COUNT(*)</span><br><span class="line">FROM Orders</span><br><span class="line">WHERE Orders.cust_id &#x3D; Customers.cust_id) AS orders</span><br><span class="line">FROM Customers</span><br><span class="line">ORDER BY cust_name;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> cust_name,</span><br><span class="line">cust_state,</span><br><span class="line">(<span class="keyword">SELECT</span> <span class="built_in">COUNT</span>(<span class="operator">*</span>)</span><br><span class="line"><span class="keyword">FROM</span> Orders</span><br><span class="line"><span class="keyword">WHERE</span> Orders.cust_id <span class="operator">=</span> Customers.cust_id) <span class="keyword">AS</span> orders</span><br><span class="line"><span class="keyword">FROM</span> Customers</span><br><span class="line"><span class="keyword">ORDER</span> <span class="keyword">BY</span> cust_name;</span><br></pre></td></tr></table></figure>
 <h1 id="12-联结表"><a href="#12-联结表" class="headerlink" title="12. 联结表"></a>12. 联结表</h1><p>例: 列出供应商与对应的产品(关系表): </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT vend_name, prod_name, prod_price</span><br><span class="line">FROM Vendors, Products</span><br><span class="line">WHERE Vendors.vend_id &#x3D; Products.vend_id;</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> vend_name, prod_name, prod_price</span><br><span class="line"><span class="keyword">FROM</span> Vendors, Products</span><br><span class="line"><span class="keyword">WHERE</span> Vendors.vend_id <span class="operator">=</span> Products.vend_id;</span><br></pre></td></tr></table></figure>
 <p>如果联结表时忘记了WHERE子句, 那么就会返回很多数据(笛卡尔积cartesian product也叫叉连接cross join)</p>
-<p>目前为止使用的联结称为等值联结(equijoin), 基于两个表之间的相等测试, 也叫内联结(inner join). 下面的SELECT语句返回与上面例子完全相同的数据: </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">SELECT vend_name, prod_name, prod_price</span><br><span class="line">FROM Vendors INNER JOIN Products</span><br><span class="line">ON Vendors.vend_id &#x3D; Products.vend_id;</span><br></pre></td></tr></table></figure>
+<p>目前为止使用的联结称为等值联结(equijoin), 基于两个表之间的相等测试, 也叫内联结(inner join). 下面的SELECT语句返回与上面例子完全相同的数据:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SELECT</span> vend_name, prod_name, prod_price</span><br><span class="line"><span class="keyword">FROM</span> Vendors <span class="keyword">INNER</span> <span class="keyword">JOIN</span> Products</span><br><span class="line"><span class="keyword">ON</span> Vendors.vend_id <span class="operator">=</span> Products.vend_id;</span><br></pre></td></tr></table></figure>
 <p>注: ANSI SQL规范首选INNER JOIN语法(因为SQL语言纯正者是使用鄙视的眼光看待简单语法的… 看来写个SQL也能写出优越感, 容我笑两分钟). 所以DBMS两种都支持的, 具体使用就看哪个顺手了. </p>
 <p>出于性能考虑不要联结不必要的表, 同时注意DBMS中联结表的最大数目. </p>
 <p>执行任一给定的SQL操作一般不止一种方法(可以用联结, 可以用子查询等), 不同的方法会受到操作类型, DBMS, 表数据量, 索引或者键等条件的影响, 因此, 有必要试验不同的选择机制, 找出最适合具体情况的方法. </p>
@@ -152,6 +154,8 @@
   <ul class="entry">
   
     <li><a href="/tags/Blog/">Blog</a><small>1</small></li>
+  
+    <li><a href="/tags/Book/">Book</a><small>2</small></li>
   
     <li><a href="/tags/Docker/">Docker</a><small>1</small></li>
   
