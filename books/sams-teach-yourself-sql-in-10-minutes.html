@@ -90,7 +90,7 @@
 <h2 id="13-1-自联结-self-join"><a href="#13-1-自联结-self-join" class="headerlink" title="13.1 自联结(self-join)"></a>13.1 自联结(self-join)</h2><p>使用表别名联结两个相同的表.<br>许多DBMS处理联结远比处理子查询快得多, 所以两种方法都应试试确定哪种性能更好. </p>
 <h2 id="13-2-自然联结-natural-join"><a href="#13-2-自然联结-natural-join" class="headerlink" title="13.2 自然联结(natural join)"></a>13.2 自然联结(natural join)</h2><p>做为两个表联结的列(联结后不应返回两个一样的列), 应该只出现一次, 所以一般对一个表使用通配符(SELECT *), 然后对其他表的列使用明确的子集来完成. </p>
 <h2 id="13-3-外联结-outer-join"><a href="#13-3-外联结-outer-join" class="headerlink" title="13.3 外联结(outer join)"></a>13.3 外联结(outer join)</h2><p>联结会包含那些在相关表中没有关联行的行. 左外联结LEFT OUTER JOIN和右外联结RIGHT OUTER JOIN区别在于需要包括哪边表的所有行, 有的DBMS支持全外联结FULL OUTER JOIN. </p>
-<h1 id="14-组合查询"><a href="#14-组合查询" class="headerlink" title="14. 组合查询"></a>14. 组合查询</h1><p>UNION几乎总是完成WHERE条件相同的工作, 所以它默认取消重复的行, 如果不想取消可以用UNION ALL. </p>
+<h1 id="14-组合查询"><a href="#14-组合查询" class="headerlink" title="14. 组合查询"></a>14. 组合查询</h1><p>也就是查询多个表, 将结果作为单个查询结果集返回. UNION几乎总是完成WHERE条件相同的工作, 所以它默认取消重复的行, 如果不想取消可以用UNION ALL. </p>
 <h1 id="15-插入数据"><a href="#15-插入数据" class="headerlink" title="15. 插入数据"></a>15. 插入数据</h1><p>插入有几种方式: </p>
 <ul>
 <li>插入完整的行</li>
@@ -103,6 +103,7 @@
 <li>操作表中的特定行</li>
 <li>操作表中的所有行</li>
 </ul>
+<p>删除某个列的值, 可以设置它为NULL.</p>
 <p>无论更新还是删除其实都比较简单, 需要注意的是操作前最好先用SELECT测试一下是否是需要操作的行, 就是注意一下过滤的条件. 还有注意外键. 为了可以执行DELETE注意保留FROM关键字. </p>
 <p>DELETE删除整行, UPDATE可以删除整列, 如果想更快的删除表中所有行, 可以使用TRUNCATE TABLE语句. </p>
 <h1 id="17-创建和操纵表"><a href="#17-创建和操纵表" class="headerlink" title="17. 创建和操纵表"></a>17. 创建和操纵表</h1><p>创建表需要参阅具体的DBMS文档.<br>注: 最好指定NULL / NOT NULL. </p>
