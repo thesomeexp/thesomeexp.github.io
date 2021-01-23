@@ -186,7 +186,43 @@ MySQL Admin">
 <h1 id="24-使用游标"><a href="#24-使用游标" class="headerlink" title="24.使用游标"></a>24.使用游标</h1><p>创建游标:</p>
 <figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">PROCEDURE</span> processorders()</span><br><span class="line"><span class="keyword">BEGIN</span></span><br><span class="line">    <span class="keyword">DECLARE</span> ordernumbers <span class="keyword">CURSOR</span></span><br><span class="line">    <span class="keyword">FOR</span></span><br><span class="line">    <span class="keyword">SELECT</span> order_num <span class="keyword">FROM</span> orders;</span><br><span class="line"><span class="keyword">END</span>;</span><br></pre></td></tr></table></figure>
 <p>这个存储过程没有做啥事, 就是定义和命名了游标ordernumbers. 存储过程处理完后游标消失(因为它局限于存储过程, 隐含关闭). 逻辑应该写在OPEN cursor和ENDcursor之间, 作者举了个例子我就不摘了.</p>
-<h1 id="25-使用触发器"><a href="#25-使用触发器" class="headerlink" title="25.使用触发器"></a>25.使用触发器</h1>
+<h1 id="25-使用触发器"><a href="#25-使用触发器" class="headerlink" title="25.使用触发器"></a>25.使用触发器</h1><p>触发器是MySQL响应以下语句而自动执行的一条MySQL语句:</p>
+<ul>
+<li>DELETE</li>
+<li>INSERT</li>
+<li>UPDATE</li>
+</ul>
+<p>注意: 即使MySQL触发器必须在每个表中唯一, 而不是在每个数据库中唯一, 但考虑到以后的版本可能会使命名规则更为严格, 因此最好还是在数据库范围内使用唯一的触发器名.</p>
+<p>创建触发器:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TRIGGER</span> newproduct AFTER <span class="keyword">INSERT</span> <span class="keyword">ON</span> products</span><br><span class="line"><span class="keyword">FOR</span> <span class="keyword">EACH</span> <span class="type">ROW</span> </span><br><span class="line"><span class="keyword">BEGIN</span> </span><br><span class="line">    <span class="keyword">SELECT</span> <span class="string">&#x27;Product added&#x27;</span>;</span><br><span class="line"><span class="keyword">END</span>;</span><br></pre></td></tr></table></figure>
+<p>上面使用CREATE TRIGGER来创建名为newproduct的新触发器. 触发器可以在操作发生前或之后执行, 这里给出了AFTER INSERT, 所以此触发器将在INSERT语句成功执行后执行. FOR EACH ROW表示此代码对每个插入行执行. 在这个例子中是每插入一行后显示一次’Product added’.</p>
+<p>注意: 只有表才支持触发器, 视图和临时表是不支持滴.</p>
+<p>触发器按每个表每个事件每次地定义, 每个表每个事件每次只允许一个触发器, 因此每个表最多支持6个触发器. </p>
+<p>注意: 如果BEFORE触发器失败, 则MySQL将不执行请求的操作. 如果BEFORE触发器或语句本身失败, MySQL将不执行AFTER触发器(如果有).</p>
+<p>删除触发器:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">DROP</span> <span class="keyword">TRIGGER</span> newproduct;</span><br></pre></td></tr></table></figure>
+<p>触发器不能更新或覆盖, 为了修改必须先删除然后重新创建.</p>
+<p>INSERT触发器:</p>
+<ul>
+<li>在INSERT触发器内, 可以引用一个名为NEW的虚拟表访问插入的行</li>
+<li>在BEFORE INSERT触发器中, NEW中的值也可也被更新, 也就是允许修改被插入的值</li>
+<li>对于AUTO_INCREMENT列, NEW在INSERT执行前包含0, 在INSERT执行后包含新的自动生成值</li>
+</ul>
+<p>通常BEFORE用于数据验证和净化, 保证插入表中的数据确实是需要的数据.</p>
+<p>DELETE触发器:</p>
+<ul>
+<li>在DELETE触发器代码内, 可以引用一个名为OLD的虚拟表访问被删除的行.</li>
+<li>OLD中的值全都是只读的, 不能更新</li>
+</ul>
+<p>使用BEFORE DELETE触发器的优点(相对于AFTER DELETE触发器来说)为, 如果由于某种原因, 订单不能存档(就是利用触发器将被删除的数据备份), DELETE本身将被放弃(AFTER出错会回滚).</p>
+<p>UPDATE触发器:</p>
+<ul>
+<li>在UPDATE触发器代码中, 可以使用OLD虚拟表访问UPDATE语句执行前的值, 引用一个名为NEW的虚拟表访问新更新的值</li>
+<li>在BEFORE UPDATE触发器中, NEW中的值可能也被更新, 也就是允许更改将要用于UPDATE语句中的值</li>
+<li>OLD中的值全都是只读的, 不能更新</li>
+</ul>
+<p>触发器的一种非常有意义的使用是创建审计跟踪.</p>
+<h1 id="26-管理事务处理"><a href="#26-管理事务处理" class="headerlink" title="26.管理事务处理"></a>26.管理事务处理</h1>
             
         </div>
         
