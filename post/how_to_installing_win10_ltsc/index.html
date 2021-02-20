@@ -7,7 +7,7 @@
   <title>如何安装纯净的win10LTSC | SomeExp</title>
   <meta name="author" content="someexp">
   
-  <meta name="description" content="安装环境:一台上了固态把光驱换成机械的装了win10 1809版的有点问题的华硕笔记本,然后第一次装LTSC啦.">
+  <meta name="description" content="安装环境:一台装了固态把光驱换成机械的装了win10 1809版的有点问题的华硕笔记本,然后第一次装LTSC啦.">
   
   
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
@@ -53,16 +53,16 @@
                       datetime="2019-03-15T16:00:00.000Z">2019-03-16</time>
                 To
                 <time itemprop="dateModified"
-                      updated="2020-04-29T16:00:00.000Z">2020-04-30</time>
+                      updated="2021-01-24T16:00:00.000Z">2021-01-25</time>
             
         </header>
         <div class="entry">
             
-                <p>安装环境:一台上了固态把光驱换成机械的装了win10 1809版的有点问题的华硕笔记本,然后<br>第一次装LTSC啦.</p>
+                <p>安装环境:一台装了固态把光驱换成机械的装了win10 1809版的有点问题的华硕笔记本,然后<br>第一次装LTSC啦.</p>
 <a id="more"></a>
-<p>当然还是在一些大佬的帮助下才顺利的装好.</p>
+<p>当然还是在一些大佬的帮助下才顺利的装好.因为LTSC版本占用的资源比较低, 所以才考虑安装.</p>
 <h1 id="1-下载win10LTSC镜像文件"><a href="#1-下载win10LTSC镜像文件" class="headerlink" title="1.下载win10LTSC镜像文件"></a>1.下载win10LTSC镜像文件</h1><p>首先需要下载LTSC版本的镜像,在这里建议大家去<a target="_blank" rel="noopener" href="https://msdn.itellyou.cn/">itellyou.cn</a>下载,点开网址,在’操作系统’下<br>就能看到win….LTSC 2019之类的了,选择与自己电脑位数对应的版本,大家可以用迅雷之类<br>支持ed2k链接的下载器就好,我用的是eMule.下载完最好校验一下文件的SHA1之类的值,当然<br>你觉得没问题的话可以略过.</p>
-<h1 id="2-格式化U盘-并将镜像解压到U盘"><a href="#2-格式化U盘-并将镜像解压到U盘" class="headerlink" title="2.格式化U盘,并将镜像解压到U盘."></a>2.格式化U盘,并将镜像解压到U盘.</h1><p>下载完后我们还需要一个U盘,然后把U盘格式化,记住U盘文件格式要选FAT32的,不要选NTFS.<br>最后把下载完的镜像直接解压到U盘,解压完是这个样子:<br><img src="/picture/20190316-0.jpg" alt="U盘里的文件截图"><br>可以看到U盘是FAT32文件格式的.</p>
+<h1 id="2-格式化U盘-并将镜像解压到U盘"><a href="#2-格式化U盘-并将镜像解压到U盘" class="headerlink" title="2.格式化U盘,并将镜像解压到U盘."></a>2.格式化U盘,并将镜像解压到U盘.</h1><p>下载完后我们还需要一个U盘,然后把U盘格式化,记住U盘文件格式要选FAT32的,不要选NTFS.(后续微软发布的iso文件解压后存在单个文件超过4G的情况, 这样FAT32是装不下的, 到时候可能要根据实际情况决定解决方案)<br>最后把下载完的镜像直接解压到U盘,解压完是这个样子:<br><img src="/picture/20190316-0.jpg" alt="U盘里的文件截图"><br>可以看到U盘是FAT32文件格式的.</p>
 <h1 id="3-插入U盘-进BIOS从U盘启动就可以开始安装了"><a href="#3-插入U盘-进BIOS从U盘启动就可以开始安装了" class="headerlink" title="3.插入U盘,进BIOS从U盘启动就可以开始安装了"></a>3.插入U盘,进BIOS从U盘启动就可以开始安装了</h1><p>每台电脑进BIOS的方式都不一样,这里我就不详细写了,网上搜吧.</p>
 <h1 id="4-格式化分区-可选"><a href="#4-格式化分区-可选" class="headerlink" title="4.格式化分区(可选)"></a>4.格式化分区(可选)</h1><p>如果有跟我一样遇到格式化完分区之后选择磁盘还是没办法安装的情况,可以按Shift + F10(旧版是Alt + F10)<br>使用diskpart工具,查看对应的驱动器,比如我的固态硬盘是驱动器0,我想格式化它,然后键入命令</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">diskpart</span><br><span class="line">select disk 0</span><br><span class="line">clean</span><br></pre></td></tr></table></figure>
@@ -119,7 +119,7 @@
   
     <li><a href="/tags/Hexo/">Hexo</a><small>1</small></li>
   
-    <li><a href="/tags/Java/">Java</a><small>14</small></li>
+    <li><a href="/tags/Java/">Java</a><small>15</small></li>
   
     <li><a href="/tags/Java-Web/">Java Web</a><small>1</small></li>
   
@@ -142,6 +142,8 @@
     <li><a href="/tags/Phone/">Phone</a><small>1</small></li>
   
     <li><a href="/tags/RFID/">RFID</a><small>2</small></li>
+  
+    <li><a href="/tags/Servlet/">Servlet</a><small>1</small></li>
   
     <li><a href="/tags/Spring/">Spring</a><small>2</small></li>
   

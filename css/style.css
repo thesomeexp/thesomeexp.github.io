@@ -78,7 +78,7 @@ a:hover {
     margin-right: -300px;
   }
 }
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1150px) {
   #main-col {
     margin-right: 0;
     float: none;
@@ -89,7 +89,7 @@ a:hover {
     margin-right: 300px;
   }
 }
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1150px) {
   #wrapper {
     margin-right: 0;
   }
@@ -562,7 +562,7 @@ article footer .copyright a:hover {
   margin: 0 auto;
   line-height: 1.8em;
 }
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1150px) {
   #sidebar {
     width: 100%;
   }
