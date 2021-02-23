@@ -130,8 +130,31 @@
 <li>1.必须在RR隔离级别下</li>
 <li>2.检索条件必须有索引(全表扫描会锁定整张表)</li>
 </ul>
-<h1 id="存储引擎"><a href="#存储引擎" class="headerlink" title="存储引擎"></a>存储引擎</h1><h2 id="InnoDB"><a href="#InnoDB" class="headerlink" title="InnoDB"></a>InnoDB</h2><p>待写:可预测性读, 自适应哈希, 插入缓冲区…</p>
-<h2 id="MyISAM"><a href="#MyISAM" class="headerlink" title="MyISAM"></a>MyISAM</h2><p>参考:<br>高性能MySQL(第3版)</p>
+<h1 id="索引的类型"><a href="#索引的类型" class="headerlink" title="索引的类型"></a>索引的类型</h1><p>MySQL中索引是在存储引擎层而不是服务器层实现的, 所以相同类型的索引在不同存储引擎下的工作方式可能并不一样. 而InnoDB底层使用的是B+树数据结构来存储数据.</p>
+<h2 id="B-Tree索引"><a href="#B-Tree索引" class="headerlink" title="B-Tree索引"></a>B-Tree索引</h2><p>一般索引没有特殊说明那多半说的就是B-Tree索引了. 但是很多说是用B-Tree数据结构存储数据的实际上用的又是B+Tree, 比如InnoDB, 所以就放在InnoDB说了.</p>
+<h2 id="哈希索引-空间数据索引-全文索引-其他索引类别…"><a href="#哈希索引-空间数据索引-全文索引-其他索引类别…" class="headerlink" title="哈希索引, 空间数据索引, 全文索引, 其他索引类别…"></a>哈希索引, 空间数据索引, 全文索引, 其他索引类别…</h2><p>// TODO</p>
+<h1 id="存储引擎"><a href="#存储引擎" class="headerlink" title="存储引擎"></a>存储引擎</h1><h2 id="InnoDB"><a href="#InnoDB" class="headerlink" title="InnoDB"></a>InnoDB</h2><p>InnoDB使用的是B-Tree索引, 但底层实现使用的是B+Tree数据结构来存储数据.<br>同时InnoDB使用的是聚簇索引的数据存储方式, 具体的底层实现方式是在同一个结构中保存了索引的键(Key)和数据行.</p>
+<h3 id="最小存储单位"><a href="#最小存储单位" class="headerlink" title="最小存储单位"></a>最小存储单位</h3><p>磁盘的基本存储单位是扇区(sector), 一般来说硬盘驱动器(HDD)的一个扇区大小为512字节, 所以基于这种磁盘建立的文件系统或者什么都好, 占用的磁盘空间一定都是512字节的倍数. 比如你在NTFS文件系统中创建一个文件, 打了两个字符进去保存, 然后点开属性你就会发现文件大小是2字节, 但是占用空间确是4K(实际上我自己亲自测试了一下发现并不是这样, 大小是2字节没错可是占用空间是0字节, 这是因为这个文件实在太小了, NTFS直接把数据存在文件元数据中了, 也就是NTFS MFT). 因为这种文件系统的基本存储单位是4K字节, 占用8个扇区. 而InnoDB的最小存储单位叫页(Page), 它默认占用16K字节, 你也可以手动看看:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> VARIABLES <span class="keyword">LIKE</span> <span class="string">&#x27;innodb_page_size&#x27;</span>;</span><br></pre></td></tr></table></figure>
+<p>默认输出的值是16384.</p>
+<h3 id="聚簇索引-clustered-index"><a href="#聚簇索引-clustered-index" class="headerlink" title="聚簇索引(clustered index)"></a>聚簇索引(clustered index)</h3><p>InnoDB的索引底层由树组成, 因此主要有两种节点, 这些节点每个都会占用一页, 一种大概长这样, 是非叶子结点:</p>
+<p><img src="/picture/2021-02-23-11-32-17.png"></p>
+<p>我这画图功夫希望你看得懂… 红色的代表Key, 绿色代表存储指针的地方, 蓝色就代表页了. 一个页除了Key和指针之外还有一些这个页的元数据, 比如页号啊, 用于事务的事务ID, MVCC回滚指针什么的这里没画出来.</p>
+<p>另一种节点是叶子节点, 大概长这样:</p>
+<p><img src="/picture/2021-02-23-11-40-08.png"></p>
+<p>依然是占用一整页, 其中红色代表的是Key, 黄色代表的是数据.</p>
+<p>使用InnoDB创建一张表时, 会默认使用主键创建聚簇索引, 这个通过主键创建的索引树也叫主键索引, 它的叶子节点存储的时是整行数据. 我们创建表:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> people</span><br><span class="line">(</span><br><span class="line">    pel_id           <span class="type">int</span> AUTO_INCREMENT <span class="keyword">PRIMARY</span> <span class="keyword">KEY</span>,</span><br><span class="line">    pel_first_name      <span class="type">char</span>(<span class="number">16</span>),</span><br><span class="line">    pel_last_name     <span class="type">char</span>(<span class="number">16</span>),</span><br><span class="line">    pel_birthday  datetime</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<p>然后插入10行数据, 那么通过主键创建的索引(主键索引)大概是长这个样子的(为了便于理解我们这里一个页中只存放3条记录,实际情况可以存放很多):</p>
+<p><img src="/picture/2021-02-23-11-53-05.png"></p>
+<p>图中红色的代表Key, 黄色是数据字段值, 绿色的正方形小方块代表指针. 可以看到在叶子节点页中, 不仅保存了主键Key, 还保存数据行的所有数据, 术语”聚簇”就是表示数据行和相邻的键值紧凑地存储在一起(并不总是这样). 而非叶子的节点页中只包含了索引列, 这个例子中的索引列是红色的地方, 也就是对应表中的pel_id.</p>
+<h3 id="二级索引-secondary-indexes"><a href="#二级索引-secondary-indexes" class="headerlink" title="二级索引(secondary indexes)"></a>二级索引(secondary indexes)</h3><p>二级索引和聚簇索引差不多, 主要是数据变成了主键, 如果按照上面的例子创建一个由pel_birthday做Key的索引.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> INDEX people_pel_birthday_index <span class="keyword">ON</span> people(pel_birthday);</span><br></pre></td></tr></table></figure>
+<p>那就是这个样子:</p>
+<p><img src="/picture/2021-02-23-12-30-45.png"></p>
+<p>可以看到这个二级索引叶子节点的数据实际上是主键值, 因此如果主键值过大, 那么索引占用的空间就大. 要是想获取行的其它数据还要通过这个主键再回主键索引中查询, 这个步骤称作回表.</p>
+<p>// todo:可预测性读, 自适应哈希, 插入缓冲区…</p>
+<h2 id="MyISAM"><a href="#MyISAM" class="headerlink" title="MyISAM"></a>MyISAM</h2><p>参考:<br>高性能MySQL(第3版)<br><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1443681">面试题：InnoDB中一棵B+树能存多少行数据？</a><br><a target="_blank" rel="noopener" href="https://www.percona.com/blog/2019/05/08/mysql-innodb-sorted-index-builds/">MySQL InnoDB Sorted Index Builds</a></p>
 
             
         </div>
