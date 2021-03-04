@@ -1,0 +1,166 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Java并发编程实战 | SomeExp</title>
+  <meta name="author" content="someexp">
+  
+  <meta name="description" content="1. 简介1.2 线程的优势线程能更好地模拟人类的工作方式和交互方式, 比如烧水时人可以做其他事. 在GUI应用程序中线程可以提高用户界面的响应灵敏度. 在服务器应用程序中线程可以提升资源利用率以及系统吞吐率. 线程还可以简化JVM的实现, 垃圾收集器通常在一个或者多个专门的线程中运行.
+
+发挥多处">
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Java并发编程实战"/>
+  <meta property="og:site_name" content="SomeExp"/>
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 5.3.0"></head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">SomeExp</a></h1>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+      <li><a href="/links">Links</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="page">
+    <div class="post-content">
+        <header>
+            
+  
+    <h1 class="title">Java并发编程实战</h1>
+  
+
+            
+        </header>
+        <div class="entry">
+            
+                <h1 id="1-简介"><a href="#1-简介" class="headerlink" title="1. 简介"></a>1. 简介</h1><h2 id="1-2-线程的优势"><a href="#1-2-线程的优势" class="headerlink" title="1.2 线程的优势"></a>1.2 线程的优势</h2><p>线程能更好地模拟人类的工作方式和交互方式, 比如烧水时人可以做其他事. 在GUI应用程序中线程可以提高用户界面的响应灵敏度. 在服务器应用程序中线程可以提升资源利用率以及系统吞吐率. 线程还可以简化JVM的实现, 垃圾收集器通常在一个或者多个专门的线程中运行.</p>
+<ul>
+<li>发挥多处理器的强大能力</li>
+<li>建模的简单性(通常线程只完成单一的简单任务, 所以逻辑上会简单些)</li>
+<li>异步事件的简化处理(作者认为服务器中使用多线程处理请求以及使用同步I/O会降低应用程序的开发难度. 而单线程服务器应用必须使用非阻塞I/O, 这种I/O的复杂性要远高于同步I/O)</li>
+<li>响应更灵敏的用户界面</li>
+</ul>
+<h2 id="1-3-线程带来的的风险"><a href="#1-3-线程带来的的风险" class="headerlink" title="1.3 线程带来的的风险"></a>1.3 线程带来的的风险</h2><h3 id="安全性问题-永远不发生糟糕的事情"><a href="#安全性问题-永远不发生糟糕的事情" class="headerlink" title="安全性问题(永远不发生糟糕的事情)"></a>安全性问题(永远不发生糟糕的事情)</h3><p>执行顺序不可预测. 容易产生竞态条件(Race Condition). 因为多个线程要共享相同的内存地址空间, 并且是并发运行, 因此它们可能会访问或修改其他线程正在使用的变量. 要使多线程程序的行为可以预测, 必须对共享变量的访问操作进行协同, 而Java提供了各种同步机制来协同这种访问.</p>
+<h3 id="活跃性问题-某件正确的事情最终会发生"><a href="#活跃性问题-某件正确的事情最终会发生" class="headerlink" title="活跃性问题(某件正确的事情最终会发生)"></a>活跃性问题(某件正确的事情最终会发生)</h3><p>当某个操作无法继续执行下去时, 就会发生活跃性问题. 在串行程序中, 活跃性问题的形式之一是无意中造成的无限循环, 使得循环之后的代码无法得到执行. 而线程将带来其他一些活跃性问题, 例如线程A等待线程B释放其持有的资源, 而线程B永远都不释放该资源, 那么A就会永久地等待下去.</p>
+<h3 id="性能问题-某件正确的事情尽快发生"><a href="#性能问题-某件正确的事情尽快发生" class="headerlink" title="性能问题(某件正确的事情尽快发生)"></a>性能问题(某件正确的事情尽快发生)</h3><p>线程会带来某种程度的运行时开销. 当线程调度器临时挂起活跃线程并转而运行另一个线程时, 就会频繁的出现上下文切换(Context Switch)操作. 当线程共享数据时, 必须使用同步机制, 而这些机制往往会抑制某些编译器优化. 所有这些因素都将带来格外的性能开销.</p>
+<h1 id="2-线程安全性-第一部分"><a href="#2-线程安全性-第一部分" class="headerlink" title="2. 线程安全性(第一部分)"></a>2. 线程安全性(第一部分)</h1><h2 id="2-2-原子性"><a href="#2-2-原子性" class="headerlink" title="2.2 原子性"></a>2.2 原子性</h2><p>我们把”先检查后执行”(延迟初始化)和”读取-修改-写入”(递增运算)等操作称为复合操作, Java中提供了加锁机制来使上面的操作以原子方式执行.<br>对于计数器的自增, 作者使用 java.util.concurrent.atomic 包中的AtomicLong来代替原来的long类型, 从而确保了对计数器状态的访问操作是原子的.</p>
+<h2 id="2-3-加锁机制"><a href="#2-3-加锁机制" class="headerlink" title="2.3 加锁机制"></a>2.3 加锁机制</h2><p>Java提供了一种内置的锁机制来支持原子性: 同步代码块(Synchronized Block). 它包括两部分:</p>
+<ul>
+<li>一个作为锁的对象引用(如果是静态方法, 则是Class对象作为锁)</li>
+<li>一个作为由这个锁保护的代码块</li>
+</ul>
+<p>每个Java对象都可以作为一个实现同步的锁, 这些锁被称为<strong>内置锁</strong>(Intrinsic Lock)或<strong>监视器锁</strong>(Monitor Lock). 获得内置锁的唯一途径就是进入由这个锁保护的同步代码块或方法. 线程在进入同步代码块前会自动获得锁, 在退出或者抛出异常时自动释放锁. Java的内置锁相当于一种互斥锁, 线程A尝试获取线程B持有的锁时必须等待或者阻塞, 如果B永远不释放锁, 那么A会永远等下去.</p>
+<p>内置锁是<strong>可重入的</strong>, 如果某个线程试图获得一个已经由它自己持有的锁, 那么这个请求就会成功. “重入”意味着获取锁的操作粒度是”线程”, 而不是”调用”(这和POSIX线程的粒度不同). 重入的一种实现方法是, 为每个锁关联一个<strong>获取计数值</strong>和一个<strong>所有者线程</strong>. 当计数值为0时, 这个锁就被认为是没有任何线程持有. 当线程请求一个未被持有的锁时, JVM将记下锁的持有者, 并将获取计数值置为1, 如果同一个线程再次获取这个锁, 计数值将递增, 而当线程退出同步代码块时, 计数器会相应地递减.<br>重入避免了死锁的发生.</p>
+<h2 id="2-4-用锁来保护状态"><a href="#2-4-用锁来保护状态" class="headerlink" title="2.4 用锁来保护状态"></a>2.4 用锁来保护状态</h2><p>并非所有数据都需要锁的保护, 只有被多个线程同时访问的可变数据才需要通过锁来保护. 而对于每个包含多个变量的不变性条件, 其中涉及的所有变量都需要由同一个锁来保护.</p>
+<p>如果只是每个方法都作为同步方法, 例如Vector, 那么并不足以确保Vector上复合操作都是原子的:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> (!vector.contains(element)) &#123;</span><br><span class="line">    vector.add(element);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>虽然contains和add都是原子方法, 但这上面仍存在竞态条件, 还是需要格外的加锁机制.</p>
+<p>对于同步代码块的合理大小, 需要在各种设计需求之间进行权衡, 包括安全性(这个需求必须得到满足), 简单性和性能. 当执行时间较长的计算或者可能无法快速完成的操作时(例如网络I/O或控制台I/O), 一定不要持有锁.</p>
+<h1 id="3-对象的共享"><a href="#3-对象的共享" class="headerlink" title="3. 对象的共享"></a>3. 对象的共享</h1><h2 id="3-1-可见性"><a href="#3-1-可见性" class="headerlink" title="3.1 可见性"></a>3.1 可见性</h2><h2 id="3-3-线程封闭"><a href="#3-3-线程封闭" class="headerlink" title="3.3 线程封闭"></a>3.3 线程封闭</h2><h2 id="3-4-不变性"><a href="#3-4-不变性" class="headerlink" title="3.4 不变性"></a>3.4 不变性</h2><h2 id="3-5-安全发布"><a href="#3-5-安全发布" class="headerlink" title="3.5 安全发布"></a>3.5 安全发布</h2><h1 id="4-对象的组合"><a href="#4-对象的组合" class="headerlink" title="4. 对象的组合"></a>4. 对象的组合</h1><h2 id="4-1-设计线程安全的类"><a href="#4-1-设计线程安全的类" class="headerlink" title="4.1 设计线程安全的类"></a>4.1 设计线程安全的类</h2><h2 id="4-2-实施封闭"><a href="#4-2-实施封闭" class="headerlink" title="4.2 实施封闭"></a>4.2 实施封闭</h2><h2 id="4-3-线程安全性的委托"><a href="#4-3-线程安全性的委托" class="headerlink" title="4.3 线程安全性的委托"></a>4.3 线程安全性的委托</h2><h1 id="5-基础构建模块"><a href="#5-基础构建模块" class="headerlink" title="5. 基础构建模块"></a>5. 基础构建模块</h1><h2 id="5-1-同步容器类"><a href="#5-1-同步容器类" class="headerlink" title="5.1 同步容器类"></a>5.1 同步容器类</h2><h2 id="5-2-并发容器"><a href="#5-2-并发容器" class="headerlink" title="5.2 并发容器"></a>5.2 并发容器</h2><h2 id="5-3-阻塞队列和生产者-消费者模式"><a href="#5-3-阻塞队列和生产者-消费者模式" class="headerlink" title="5.3 阻塞队列和生产者-消费者模式"></a>5.3 阻塞队列和生产者-消费者模式</h2><h2 id="5-4-阻塞方法与中断方法"><a href="#5-4-阻塞方法与中断方法" class="headerlink" title="5.4 阻塞方法与中断方法"></a>5.4 阻塞方法与中断方法</h2><h2 id="5-5-同步工具类"><a href="#5-5-同步工具类" class="headerlink" title="5.5 同步工具类"></a>5.5 同步工具类</h2>
+            
+        </div>
+        
+            
+
+            <footer>
+                
+            </footer>
+        
+    </div>
+</article>
+
+</div></div>
+    <aside id="sidebar" class="alignright">
+  
+<div class="widget tag">
+  <ul class="entry">
+  
+    <li><a href="/tags/Blog/">Blog</a><small>1</small></li>
+  
+    <li><a href="/tags/Book/">Book</a><small>2</small></li>
+  
+    <li><a href="/tags/Docker/">Docker</a><small>1</small></li>
+  
+    <li><a href="/tags/Essay/">Essay</a><small>9</small></li>
+  
+    <li><a href="/tags/Game/">Game</a><small>1</small></li>
+  
+    <li><a href="/tags/Git/">Git</a><small>1</small></li>
+  
+    <li><a href="/tags/Gulp/">Gulp</a><small>1</small></li>
+  
+    <li><a href="/tags/Hexo/">Hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/Java/">Java</a><small>15</small></li>
+  
+    <li><a href="/tags/Java-Web/">Java Web</a><small>1</small></li>
+  
+    <li><a href="/tags/JavaScript/">JavaScript</a><small>1</small></li>
+  
+    <li><a href="/tags/Lifestyle/">Lifestyle</a><small>3</small></li>
+  
+    <li><a href="/tags/Maven/">Maven</a><small>1</small></li>
+  
+    <li><a href="/tags/MySQL/">MySQL</a><small>1</small></li>
+  
+    <li><a href="/tags/Network/">Network</a><small>1</small></li>
+  
+    <li><a href="/tags/Nginx/">Nginx</a><small>1</small></li>
+  
+    <li><a href="/tags/Node-js/">Node.js</a><small>1</small></li>
+  
+    <li><a href="/tags/Note/">Note</a><small>10</small></li>
+  
+    <li><a href="/tags/Phaser/">Phaser</a><small>1</small></li>
+  
+    <li><a href="/tags/Phone/">Phone</a><small>1</small></li>
+  
+    <li><a href="/tags/RFID/">RFID</a><small>2</small></li>
+  
+    <li><a href="/tags/Servlet/">Servlet</a><small>1</small></li>
+  
+    <li><a href="/tags/Spring/">Spring</a><small>2</small></li>
+  
+    <li><a href="/tags/Virtual-Machine/">Virtual Machine</a><small>2</small></li>
+  
+    <li><a href="/tags/Win10/">Win10</a><small>6</small></li>
+  
+  </ul>
+</div>
+
+
+  <div class="widget footer">
+  
+  <span>&copy;2017-2021 someexp</span>
+  
+  </br>
+  <span>Powered by <a target="_blank" rel="noopener" href="http://hexo.io" >Hexo</a></span>
+  </br>
+    <span>Theme by <a target="_blank" rel="noopener" href="https://github.com/thesomeexp/hexo-theme-light-simple" >hexo-theme-light-simple</a></span>
+</div>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+</body>
+</html>
