@@ -158,7 +158,61 @@
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Holder</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> n;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Holder</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123; <span class="keyword">this</span>.n = n; &#125; <span class="comment">// 不正确发布</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">assertSanity</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (n != n) &#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> AssertionError(<span class="string">&quot;This statement is false.&quot;</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>在assertSanity方法中, 某个线程可能第一次读取的n为失效值(比如Object构造函数会在子类构造函数运行之前先将默认值写入所有的域), 然后第二次读取n是其他线程的更新值, 这样就会抛出上面定义的异常.</p>
 <h3 id="不可变对象与初始化安全性"><a href="#不可变对象与初始化安全性" class="headerlink" title="不可变对象与初始化安全性"></a>不可变对象与初始化安全性</h3><p>由于不可变对象是一种非常重要的对象, 因此Java内存模型为不可变对象的共享提供了一种特殊的初始化安全性保证(可能不会像上面那样受Object对象构造器影响吧). 如果上面的Holder对象是不可变的, 那么即使Holder没有被正确地发布, 在assertSanity中也不会抛出AssertionError.</p>
-<h3 id="安全发布的常用模式"><a href="#安全发布的常用模式" class="headerlink" title="安全发布的常用模式"></a>安全发布的常用模式</h3><h1 id="4-对象的组合"><a href="#4-对象的组合" class="headerlink" title="4. 对象的组合"></a>4. 对象的组合</h1><h2 id="4-1-设计线程安全的类"><a href="#4-1-设计线程安全的类" class="headerlink" title="4.1 设计线程安全的类"></a>4.1 设计线程安全的类</h2><h2 id="4-2-实施封闭"><a href="#4-2-实施封闭" class="headerlink" title="4.2 实施封闭"></a>4.2 实施封闭</h2><h2 id="4-3-线程安全性的委托"><a href="#4-3-线程安全性的委托" class="headerlink" title="4.3 线程安全性的委托"></a>4.3 线程安全性的委托</h2><h1 id="5-基础构建模块"><a href="#5-基础构建模块" class="headerlink" title="5. 基础构建模块"></a>5. 基础构建模块</h1><h2 id="5-1-同步容器类"><a href="#5-1-同步容器类" class="headerlink" title="5.1 同步容器类"></a>5.1 同步容器类</h2><h2 id="5-2-并发容器"><a href="#5-2-并发容器" class="headerlink" title="5.2 并发容器"></a>5.2 并发容器</h2><h2 id="5-3-阻塞队列和生产者-消费者模式"><a href="#5-3-阻塞队列和生产者-消费者模式" class="headerlink" title="5.3 阻塞队列和生产者-消费者模式"></a>5.3 阻塞队列和生产者-消费者模式</h2><h2 id="5-4-阻塞方法与中断方法"><a href="#5-4-阻塞方法与中断方法" class="headerlink" title="5.4 阻塞方法与中断方法"></a>5.4 阻塞方法与中断方法</h2><h2 id="5-5-同步工具类"><a href="#5-5-同步工具类" class="headerlink" title="5.5 同步工具类"></a>5.5 同步工具类</h2>
+<h3 id="安全发布的常用模式"><a href="#安全发布的常用模式" class="headerlink" title="安全发布的常用模式"></a>安全发布的常用模式</h3><p>可变对象必须通过安全的方式来发布, 这通常意味着在发布和使用该对象的线程时都必须使用同步.</p>
+<p>要安全地发布一个对象, 对象的引用以及对象的状态必须同时对其他线程可见. 一个正确构造的对象可以通过以下方式来安全地发布:</p>
+<ul>
+<li>在静态初始化函数中初始化一个对象引用</li>
+<li>将对象的引用保存到volatile类型的域或者AtomicReference对象中</li>
+<li>将对象的引用保存到某个正确构造对象的final类型域中</li>
+<li>将对象的引用保存到一个由锁保护的域中</li>
+</ul>
+<p>线程安全库中的容器类提供了以下的安全发布保证:</p>
+<ul>
+<li>键值<ul>
+<li>放入Hashtable, ConcurrentMap或Collections.synchronizedMap()中, 可以安全地将它发布给任何从这个容器中访问它的线程(无论是直接访问还是通过迭代器访问)</li>
+</ul>
+</li>
+<li>List和Set<ul>
+<li>放入Vector, CopyOnWriteArrayList, CopyOnWriteArraySet, Collections.synchronizedSet()中.</li>
+</ul>
+</li>
+<li>Queue(队列)<ul>
+<li>放入BlockingQueue或者ConcurrentLinkedQueue中.</li>
+</ul>
+</li>
+</ul>
+<p>类库中的其它数据传递机制(例如Future和Exchanger)同样能实现安全发布.</p>
+<p>通常, 要发布一个静态构造的对象, 最简单和最安全的方式是使用静态的初始化器:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">static</span> Holder holder = <span class="keyword">new</span> Holder(<span class="number">42</span>);</span><br></pre></td></tr></table></figure>
+<p>静态初始化器由JVM在类的初始化阶段执行, 由于在JVM内部存在着同步机制, 因此通过这种方式初始化的任何对象都可以被安全地发布.</p>
+<h3 id="事实不可变对象"><a href="#事实不可变对象" class="headerlink" title="事实不可变对象"></a>事实不可变对象</h3><p>如果对象从技术上来看是可变的, 但其状态在发布后不会再改变, 那么把这种对象称之为<strong>事实不可变对象</strong>(Effectively Immutable Object). 在这些对象发布后, 程序只需要将它们视为不可变对象即可. 使用这种对象可以简化开发过程, 同时还能由于减少了同步而提高性能.</p>
+<h3 id="可变对象"><a href="#可变对象" class="headerlink" title="可变对象"></a>可变对象</h3><p>如果对象在构造后可以修改, 那么安全发布只能确保”发布当时”状态的可见性. 对于可变对象, 不仅在发布对象时需要使用同步, 而且在每次对象访问时同样需要使用同步来确保后续修改操作的可见性. </p>
+<ul>
+<li>不可变对象可以通过任意机制来发布</li>
+<li>事实不可变对象必须通过安全方式来发布</li>
+<li>可变对象必须通过安全方式来发布, 并且必须是线程安全的或者由某个锁保护起来</li>
+</ul>
+<h3 id="安全地共享对象"><a href="#安全地共享对象" class="headerlink" title="安全地共享对象"></a>安全地共享对象</h3><p>当发布一个对象时, 必须明确地说明对象的访问方式.<br>在并发编程中使用和共享对象时, 可以使用一些实用的策略:</p>
+<ul>
+<li><strong>线程封闭</strong>: 线程封闭的对象只能由一个线程拥有, 对象被封闭在该线程中, 并且只能由这个线程修改.</li>
+<li><strong>只读共享</strong>: 在没有额外同步的情况下, 共享的只读对象可以由多个线程并发访问, 但任何线程都不能修改它. 共享的只读对象包括不可变对象和事实不可变对象.</li>
+<li><strong>线程安全共享</strong>: 线程安全的对象在其内部实现同步, 因此多个线程可以通过对象的公有接口来进行访问而不需要进一步的同步.</li>
+<li><strong>保护对象</strong>: 被保护的对象只能通过持有特定的锁来访问. 保护对象包括封装在其它线程安全对象中的对象, 以及已发布的并且由某个特定锁保护的对象.</li>
+</ul>
+<h1 id="4-对象的组合"><a href="#4-对象的组合" class="headerlink" title="4. 对象的组合"></a>4. 对象的组合</h1><h2 id="4-1-设计线程安全的类"><a href="#4-1-设计线程安全的类" class="headerlink" title="4.1 设计线程安全的类"></a>4.1 设计线程安全的类</h2><p>不变性条件用于确保对象不会在多线程访问时容易被改变.<br>后验条件用来判断状态迁移是否有效.</p>
+<h2 id="4-2-实例封闭"><a href="#4-2-实例封闭" class="headerlink" title="4.2 实例封闭"></a>4.2 实例封闭</h2><p>对于不是线程安全的对象, 可以使用线程封闭确保只能由单个线程访问, 或者通过一个锁来保护该对象的所有访问.</p>
+<p>下面的程序通过封闭机制来确保线程安全:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PersonSet</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Set&lt;Person&gt; mySet = <span class="keyword">new</span> HashSet&lt;&gt;();</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">void</span> <span class="title">addPerson</span><span class="params">(Person p)</span> </span>&#123;</span><br><span class="line">        mySet.add(p);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">boolean</span> <span class="title">containsPerson</span><span class="params">(Person p)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> mySet.contains(p);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>PersonSet的状态由HashSet来管理, 而HashSet并非线程安全的, 但由于mySet是私有的而且不会逸出, 因此HashSet被封闭在PersonSet中. 唯一能访问的代码路径是addPerson和containsPerson, 在执行它们时都要获得PersonSet上的锁, PersonSet的状态完全由它的内置锁保护, 因而PersonSet是一个线程安全的类.</p>
+<p>但是这个实例并未对Person的线程安全性做任何假设, 如果Person类是可变的, 那么在访问从PersonSet中获得的Person对象时, 还需要额外的同步. 想要安全地使用Person对象, 最可靠的方法就是使Person成为一个线程安全的类, 也可也使用锁来保护Person对象.</p>
+<p>Java平台的有些类唯一用途就是将非线程安全的类转化为线程安全的类. 例如Collections.synchronizedList之类的一些工厂方法, 通过装饰器模式将容器类封装在一个同步的包装器对象中.</p>
+<h3 id="Java监视器模式"><a href="#Java监视器模式" class="headerlink" title="Java监视器模式"></a>Java监视器模式</h3><p>遵循Java监视器模式的对象会把对象的所有可变状态都封装起来, 并由对象自己的内置锁来保护.许多类中都使用了Java监视器模式, 例如Vector和Hashtable.</p>
+<p>Java监视器模式仅仅是一种编写代码的规定, 对于任何一种锁对象, 只要自始至终都是用该锁对象, 都可以用来保护对象的状态. 下面的程序给出了如何使用私有锁来保护状态:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PrivateLock</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Object myLock = <span class="keyword">new</span> Object();</span><br><span class="line">    <span class="keyword">int</span> myInt;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">someMethod</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">synchronized</span> (myLock) &#123;</span><br><span class="line">            <span class="comment">// 访问或修改myInt的状态</span></span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用私有的锁对象而不是对象的内置锁(或任何其它可通过公有方式访问的锁), 有许多优点. 私有的锁对象可以将锁封装起来, 使客户代码无法得到锁, 但客户代码可以通过公有方法来访问锁, 以便(正确或者不正确地)参与到它的同步策略中. 如果客户代码错误地获得了另一个对象的锁, 那么可能会产生活跃性问题. 此外, 要想验证某个公有访问的锁在程序中是否被正确地使用, 则需要检查整个程序而不是单个的类.</p>
+<p>// 作者给出了一个车辆追踪的示例</p>
+<h2 id="4-3-线程安全性的委托"><a href="#4-3-线程安全性的委托" class="headerlink" title="4.3 线程安全性的委托"></a>4.3 线程安全性的委托</h2><p>作者利用一些线程安全的类来重新构造车辆追踪器.<br>相互独立的状态变量可以使用委托, 但是状态变量之间有关联这样就会使委托失效了, 必须使用加锁或者其他机制来确保了.</p>
+<h1 id="5-基础构建模块"><a href="#5-基础构建模块" class="headerlink" title="5. 基础构建模块"></a>5. 基础构建模块</h1><h2 id="5-1-同步容器类"><a href="#5-1-同步容器类" class="headerlink" title="5.1 同步容器类"></a>5.1 同步容器类</h2><h2 id="5-2-并发容器"><a href="#5-2-并发容器" class="headerlink" title="5.2 并发容器"></a>5.2 并发容器</h2><h2 id="5-3-阻塞队列和生产者-消费者模式"><a href="#5-3-阻塞队列和生产者-消费者模式" class="headerlink" title="5.3 阻塞队列和生产者-消费者模式"></a>5.3 阻塞队列和生产者-消费者模式</h2><h2 id="5-4-阻塞方法与中断方法"><a href="#5-4-阻塞方法与中断方法" class="headerlink" title="5.4 阻塞方法与中断方法"></a>5.4 阻塞方法与中断方法</h2><h2 id="5-5-同步工具类"><a href="#5-5-同步工具类" class="headerlink" title="5.5 同步工具类"></a>5.5 同步工具类</h2>
             
         </div>
         
