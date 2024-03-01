@@ -1,0 +1,177 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Maven 笔记 | thesomeexp</title>
+  <meta name="author" content="thesomeexp">
+  
+  <meta name="description" content="Maven 笔记.">
+  
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Maven 笔记"/>
+  <meta property="og:site_name" content="thesomeexp"/>
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">thesomeexp</a></h1>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+      <li><a href="/links">Links</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+    <div class="post-content">
+        <header>
+            
+  
+    <h1 class="title">Maven 笔记</h1>
+  
+
+            
+                <time itemprop="datePublished"
+                      datetime="2020-11-29T16:00:00.000Z">2020-11-30</time>
+                <span style="color: rgb(153, 153, 153);">-</span>
+                <time itemprop="dateModified"
+                      updated="2022-05-29T16:00:00.000Z">2022-05-30</time>
+            
+        </header>
+        <div class="entry">
+            
+                <p>Maven 笔记. </p>
+<span id="more"></span>
+<h1 id="Maven"><a href="#Maven" class="headerlink" title="Maven"></a>Maven</h1><h2 id="1-核心概念"><a href="#1-核心概念" class="headerlink" title="1. 核心概念"></a>1. 核心概念</h2><h3 id="1-1-约定"><a href="#1-1-约定" class="headerlink" title="1.1 约定"></a>1.1 约定</h3><p>Maven其实就是约定了项目的一些结构: </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">├─src</span><br><span class="line">│  ├─main</span><br><span class="line">│  │  ├─java  主程序的java文件</span><br><span class="line">│  │  └─resources  配置文件</span><br><span class="line">│  ├─test</span><br><span class="line">│  │  ├─java  测试程序代码</span><br><span class="line">│  │  └─resources  测试使用的配置</span><br><span class="line">└─pom.xml</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-2-坐标-gav"><a href="#1-2-坐标-gav" class="headerlink" title="1.2 坐标(gav)"></a>1.2 坐标(gav)</h3><p>用于唯一定义一个Maven项目的, 主要由: </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;groupId&gt;&lt;/groupId&gt;  组织名, 通常是公司或组织域名倒序+项目名</span><br><span class="line">&lt;artifactId&gt;&lt;/artifactId&gt;  模块名, 通常是工程名</span><br><span class="line">&lt;version&gt;&lt;/version&gt;  版本号</span><br></pre></td></tr></table></figure>
+
+<p>三部分组成. </p>
+<h3 id="1-3-依赖-dependency"><a href="#1-3-依赖-dependency" class="headerlink" title="1.3 依赖(dependency)"></a>1.3 依赖(dependency)</h3><p>想要导入相关的依赖包, 在pom.xml添加对应依赖的坐标:<br>比如导入gson的依赖: </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;com.google.code.gson&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;gson&lt;/artifactId&gt;</span><br><span class="line">  &lt;version&gt;2.8.6&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-4-仓库-Repository"><a href="#1-4-仓库-Repository" class="headerlink" title="1.4 仓库(Repository)"></a>1.4 仓库(Repository)</h3><p>存放jar包, Maven插件(其实也就是jar包)等的地方. 有本地仓库, 中央仓库, 私服等区分. </p>
+<h3 id="1-5-命令"><a href="#1-5-命令" class="headerlink" title="1.5 命令"></a>1.5 命令</h3><p>通过命令完成项目的构建. </p>
+<ul>
+<li>mvn clean: 清理target目录</li>
+<li>mvn compile: 编译程序后放到target目录中</li>
+<li>mvn test: 单元测试, 使用junit测试src&#x2F;main&#x2F;java目录中的程序是否符合要求</li>
+<li>mvn package: 打包, 一般打包成jar或者war</li>
+<li>mvn install: 把jar, war安装到本机仓库中</li>
+</ul>
+<h3 id="1-6-生命周期"><a href="#1-6-生命周期" class="headerlink" title="1.6 生命周期"></a>1.6 生命周期</h3><p>一个典型的Maven构建(build)生命周期的阶段:<br>validate -&gt; compile -&gt; test -&gt; package -&gt; verify -&gt; install -&gt; deploy<br>一般直接执行后面的插件, 前面的生命周期也会被执行. </p>
+<h3 id="1-7-依赖范围"><a href="#1-7-依赖范围" class="headerlink" title="1.7 依赖范围"></a>1.7 依赖范围</h3><p>dependency可以设置scope标签, 为其依赖范围: </p>
+<ul>
+<li>compile: 默认范围, 也就是程序每个生命周期都需要. </li>
+<li>test: 只在测试过程(test)中起作用的依赖. </li>
+<li>provided: 提供者, 在编译测试时需要, 但是打包(package)安装(install)时不需要(比如说我要部署到tomcat, 这时servlet相关依赖可以不用, 因为环境提供了).</li>
+</ul>
+<h3 id="1-8-常用属性"><a href="#1-8-常用属性" class="headerlink" title="1.8 常用属性"></a>1.8 常用属性</h3><p>当一些依赖版本号类似时, 可以提取出来作为全局的属性. </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;properties&gt;</span><br><span class="line">  &lt;spring.version&gt;5.2.0&lt;/spring.version&gt;</span><br><span class="line">&lt;/properties&gt;</span><br><span class="line"></span><br><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;org.springframework&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;spring-core&lt;/artifactId&gt;</span><br><span class="line">  &lt;version&gt;$&#123;spring.version&#125;&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<h3 id="1-9-资源插件"><a href="#1-9-资源插件" class="headerlink" title="1.9 资源插件"></a>1.9 资源插件</h3><p>默认情况下mvn compile命令会把src&#x2F;main&#x2F;resources下的文件拷贝到target&#x2F;classes目录中, 对于src&#x2F;main&#x2F;java目录下的非.java文件不做处理. 如果需要处理就需要使用相关的插件. </p>
+
+            
+        </div>
+        
+            
+
+            <footer>
+                
+  
+  <div class="tags">
+    <a href="/tags/Java/">Java</a>, <a href="/tags/Maven/">Maven</a>
+  </div>
+
+            </footer>
+        
+    </div>
+</article>
+
+<!-- 代码块复制功能 -->
+<script type="text/javascript" src="/js/clipboard.min.js"></script>  
+<script type="text/javascript" src="/js/clipboard-use.js"></script></div></div>
+    <aside id="sidebar" class="alignright">
+  
+<div class="widget tag">
+  <ul class="entry">
+  
+    <li><a href="/tags/Android/">Android</a><small>1</small></li>
+  
+    <li><a href="/tags/Blog/">Blog</a><small>2</small></li>
+  
+    <li><a href="/tags/Book/">Book</a><small>2</small></li>
+  
+    <li><a href="/tags/Docker/">Docker</a><small>1</small></li>
+  
+    <li><a href="/tags/Essay/">Essay</a><small>7</small></li>
+  
+    <li><a href="/tags/Game/">Game</a><small>1</small></li>
+  
+    <li><a href="/tags/Git/">Git</a><small>1</small></li>
+  
+    <li><a href="/tags/Hexo/">Hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/Java/">Java</a><small>5</small></li>
+  
+    <li><a href="/tags/Lifestyle/">Lifestyle</a><small>1</small></li>
+  
+    <li><a href="/tags/Maven/">Maven</a><small>1</small></li>
+  
+    <li><a href="/tags/MySQL/">MySQL</a><small>1</small></li>
+  
+    <li><a href="/tags/Network/">Network</a><small>2</small></li>
+  
+    <li><a href="/tags/Nginx/">Nginx</a><small>1</small></li>
+  
+    <li><a href="/tags/Note/">Note</a><small>7</small></li>
+  
+    <li><a href="/tags/Phone/">Phone</a><small>2</small></li>
+  
+    <li><a href="/tags/RFID/">RFID</a><small>2</small></li>
+  
+    <li><a href="/tags/Spring/">Spring</a><small>1</small></li>
+  
+    <li><a href="/tags/Virtual-Machine/">Virtual Machine</a><small>1</small></li>
+  
+    <li><a href="/tags/Win10/">Win10</a><small>5</small></li>
+  
+  </ul>
+</div>
+
+
+  <div class="widget footer">
+  
+  <span>&copy;2017-2024 thesomeexp</span>
+  
+  </br>
+  <span>Powered by <a target="_blank" rel="noopener" href="http://hexo.io" >Hexo</a></span>
+  </br>
+    <span>Theme by <a target="_blank" rel="noopener" href="https://github.com/thesomeexp/hexo-theme-light-simple" >hexo-theme-light-simple</a></span>
+</div>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+</body>
+</html>

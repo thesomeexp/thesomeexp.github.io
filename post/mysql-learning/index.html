@@ -1,0 +1,280 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>MySQL 的学习 | thesomeexp</title>
+  <meta name="author" content="thesomeexp">
+  
+  <meta name="description" content="关于 MySQL 基础, 架构, 事物, 并发, 索引的笔记.">
+  
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="MySQL 的学习"/>
+  <meta property="og:site_name" content="thesomeexp"/>
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">thesomeexp</a></h1>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+      <li><a href="/links">Links</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+    <div class="post-content">
+        <header>
+            
+  
+    <h1 class="title">MySQL 的学习</h1>
+  
+
+            
+                <time itemprop="datePublished"
+                      datetime="2021-02-21T16:00:00.000Z">2021-02-22</time>
+                <span style="color: rgb(153, 153, 153);">-</span>
+                <time itemprop="dateModified"
+                      updated="2022-05-29T16:00:00.000Z">2022-05-30</time>
+            
+        </header>
+        <div class="entry">
+            
+                <p>关于 MySQL 基础, 架构, 事物, 并发, 索引的笔记.</p>
+<span id="more"></span>
+<p>内容主要来自于&lt;高性能 MySQL&gt;. </p>
+<h1 id="MySQL架构和基础"><a href="#MySQL架构和基础" class="headerlink" title="MySQL架构和基础"></a>MySQL架构和基础</h1><h2 id="MySQL逻辑架构图"><a href="#MySQL逻辑架构图" class="headerlink" title="MySQL逻辑架构图"></a>MySQL逻辑架构图</h2><p><img src="/picture/2021-02-22-15-09-11.png"></p>
+<p>大致可分为三层</p>
+<ul>
+<li><strong>连接层</strong>: 不是MySQL独有的, 大部分C&#x2F;S架构都有类似的.</li>
+<li><strong>缓存&#x2F;解析器&#x2F;优化器层</strong>: 大多数核心功能服务在这里, 所有跨存储引擎的存储过程, 触发器, 视图等也在这层.</li>
+<li><strong>存储引擎层</strong>: 服务器层(上面两层)通过API与存储引擎层通信, 这一层不会去解析SQL, 不同存储引擎间也不会相互通信, 只是简单的响应上层服务器的请求.</li>
+</ul>
+<h2 id="缓存-解析-优化与执行"><a href="#缓存-解析-优化与执行" class="headerlink" title="缓存&#x2F;解析&#x2F;优化与执行"></a>缓存&#x2F;解析&#x2F;优化与执行</h2><h3 id="缓存"><a href="#缓存" class="headerlink" title="缓存"></a>缓存</h3><p>对于SELECT语句在解析之前会先检查查询缓存(Query Cache), 如果能命中缓存服务器就不再执行查询解析, 优化和执行的整个过程.</p>
+<h3 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h3><p>MySQL会解析查询, 创建内部数据结构(解析树), 并对其进行优化(重写查询, 决定表的读写顺序), 选择合适的索引等. </p>
+<h3 id="优化器"><a href="#优化器" class="headerlink" title="优化器"></a>优化器</h3><p>用户可以通过关键字影响优化器的决策进程, 也可以请求优化器解释(explain)它是如何做优化决策的. 优化器通过请求存储引擎提供的信息来做优化. 优化器是存储引擎无关的, 但不同的存储引擎会影响优化器的决策. </p>
+<h2 id="并发控制"><a href="#并发控制" class="headerlink" title="并发控制"></a>并发控制</h2><p>可以通过两种类型的锁系统来实现并发控制, 分别是<strong>共享锁</strong>(shared lock)和<strong>排他锁</strong>(exclusive lock), 也叫读锁(read lock)和写锁(write lock). 读锁是共享的, 不会相互阻塞, 在同一时刻可以同时读取同一个资源. 而写锁是排他的, 一个写锁会阻塞其他的读锁和写锁.</p>
+<h3 id="锁粒度与锁策略"><a href="#锁粒度与锁策略" class="headerlink" title="锁粒度与锁策略"></a>锁粒度与锁策略</h3><p>一般锁定的资源数据量越少(锁粒度越小), 那么系统的并发程度就越高. 但是锁的各种操作(获得锁, 检查锁, 释放锁)会消耗时间和资源从而影响系统性能. 锁策略就是在锁的开销和数据的安全性之间寻求平衡. MySQL中两种重要的锁策略:</p>
+<ul>
+<li><strong>表锁</strong>(table lock): MySQL中最基本的开销最小的策略, 写锁能插入到锁队列中的读锁前.</li>
+<li><strong>行级锁</strong>(row lock): 行级锁可以最大程度地支持并发处理(同时也带来了最大的锁开销). 行级锁只在存储引擎层实现.</li>
+</ul>
+<h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><p>事务并非专属MySQL, 它是构成单一逻辑操作的操作集合.<br>一个良好的事务处理系统必须具备ACID特性.</p>
+<ul>
+<li><strong>原子性</strong>(atomicity): 一个事务必须被视为一个不可分割的最小工作单位.</li>
+<li><strong>一致性</strong>(consistency): 数据库总是从一个一致性(有效正确)的状态转换到另外一个一致性(有效正确)的状态.</li>
+<li><strong>隔离性</strong>(isolation): 并发访问时, 事务之间相互影响的程度.(可以通过修改隔离级别来控制)</li>
+<li><strong>持久性</strong>(durability): 事务提交后修改会永久保存到数据库中.(持久性也分很多种不同级别)</li>
+</ul>
+<p>MySQL中可以根据业务来选择是否需要支持事务的存储引擎.</p>
+<h3 id="隔离级别"><a href="#隔离级别" class="headerlink" title="隔离级别"></a>隔离级别</h3><p>较低级别的隔离通常可以执行更高的并发, 系统的开销也更低.<br>在并发执行事务时通常会遇到下列问题:</p>
+<ul>
+<li><strong>脏读</strong>(dirty read): 事务A读取了事务B修改了但未提交的数据.</li>
+<li><strong>不可重复读</strong>(nonrepeatable read): 事务A读取了数据后, 事务B修改了该数据并提交, 未提交的事务A再次读取同样的数据发现和之前读的时候不一致.</li>
+<li><strong>幻读</strong>(phantom read): 事务A读取了某个范围内的记录, 事务B在该范围内新增了记录并提交, 事务A再次读取该范围记录时就会产生幻行(phantom row).</li>
+</ul>
+<p>为解决上述问题, 就有了隔离级别的概念:</p>
+<ul>
+<li><strong>READ UNCOMMITTED</strong>(未提交读): 事务中的修改即使没有提交对其他事务也是可见的, 因此会导致脏读, 不可重复读, 幻读.</li>
+<li><strong>READ COMMITTED</strong>(提交读): 解决了脏读问题, 但是还会有不可重复读, 幻读的问题. 因此这个级别也叫不可重复读.</li>
+<li><strong>REPEATABLE READ</strong>(可重复读): 解决了脏读和不可重复读的问题, 但是还会有幻读的问题.</li>
+<li><strong>SERIALIZABLE</strong>(可串行化): 最高的隔离级别, 通过强制事务串行化执行, 避免了上述的问题.</li>
+</ul>
+<p>和大多数数据库的默认隔离级别(READ COMMITTED)不一样, MySQL的默认隔离级别是REPEATABLE READ.</p>
+<h3 id="多版本并发控制-MVCC-multiversion-concurrency-control"><a href="#多版本并发控制-MVCC-multiversion-concurrency-control" class="headerlink" title="多版本并发控制(MVCC, multiversion concurrency control)"></a>多版本并发控制(MVCC, multiversion concurrency control)</h3><p>MySQL中不同存储引擎的MVCC实现是不同的, 它可以使大多数读操作不用加锁, 因此开销更低. InnoDB的MVCC是通过在每行记录后面保存两个隐藏的列来实现的. 一个保存了行的创建版本号, 一个保存行的删除版本号. 而这个版本号是系统自动递增的事务版本号. 在InnoDB可重复读隔离级别下, MVCC是如何操作的:</p>
+<ul>
+<li>SELECT<ul>
+<li>a.只查找创建标识早于当前事务版本号的行.</li>
+<li>b.行的删除标识未定义, 或者大于当前事务版本号.</li>
+</ul>
+</li>
+<li>INSERT<ul>
+<li>保存当前系统版本号作为创建标识.</li>
+</ul>
+</li>
+<li>DELETE<ul>
+<li>保存当前系统版本号作为删除标识.</li>
+</ul>
+</li>
+<li>UPDATE<ul>
+<li>同时保存当前版本号为创建标识和删除标识.</li>
+</ul>
+</li>
+</ul>
+<p>MVCC只工作在READ COMMITTED和REPEATABLE READ隔离级别下, 因为READ UNCOMMITTED总是读取最新数据, 不符合当前事务版本的数据行. SERIALIZABLE则会对所有行加锁.</p>
+<h3 id="Next-Key-Lock"><a href="#Next-Key-Lock" class="headerlink" title="Next-Key Lock"></a>Next-Key Lock</h3><p>MySQL InnoDB支持三种锁定方式, 默认加锁方式是next-key lock锁.</p>
+<ul>
+<li><strong>行锁</strong>(Record Lock): 锁直接加在索引记录上, 锁住key.</li>
+<li><strong>间隙锁</strong>(Gap Lock): 锁定索引记录间隙, 确保索引记录的间隙不变.</li>
+<li><strong>Next-Key Lock</strong>: 行锁和间隙锁的组合.</li>
+</ul>
+<p>间隙锁在InnoDB的作用就是防止其他事务的插入操作, 以此来防止幻读的发生. 使用间隙锁的条件:</p>
+<ul>
+<li>1.必须在RR隔离级别下</li>
+<li>2.检索条件必须有索引(全表扫描会锁定整张表)</li>
+</ul>
+<h1 id="索引的类型"><a href="#索引的类型" class="headerlink" title="索引的类型"></a>索引的类型</h1><p>MySQL中索引是在存储引擎层而不是服务器层实现的, 所以相同类型的索引在不同存储引擎下的工作方式可能并不一样. 而InnoDB底层使用的是B+树数据结构来存储数据.</p>
+<h2 id="B-Tree索引"><a href="#B-Tree索引" class="headerlink" title="B-Tree索引"></a>B-Tree索引</h2><p>一般索引没有特殊说明那多半说的就是B-Tree索引了. 但是很多说是用B-Tree数据结构存储数据的实际上用的又是B+Tree, 比如InnoDB, 所以就放在InnoDB说了.</p>
+<h2 id="哈希索引-空间数据索引-全文索引-其他索引类别…"><a href="#哈希索引-空间数据索引-全文索引-其他索引类别…" class="headerlink" title="哈希索引, 空间数据索引, 全文索引, 其他索引类别…"></a>哈希索引, 空间数据索引, 全文索引, 其他索引类别…</h2><p>&#x2F;&#x2F; TODO</p>
+<h1 id="存储引擎"><a href="#存储引擎" class="headerlink" title="存储引擎"></a>存储引擎</h1><h2 id="InnoDB"><a href="#InnoDB" class="headerlink" title="InnoDB"></a>InnoDB</h2><p>InnoDB使用的是B-Tree索引, 但底层实现使用的是B+Tree数据结构来存储数据.<br>同时InnoDB使用的是聚簇索引的数据存储方式, 具体的底层实现方式是在同一个结构中保存了索引的键(Key)和数据行.</p>
+<h3 id="最小存储单位"><a href="#最小存储单位" class="headerlink" title="最小存储单位"></a>最小存储单位</h3><p>磁盘的基本存储单位是扇区(sector), 一般来说硬盘驱动器(HDD)的一个扇区大小为512字节, 所以基于这种磁盘建立的文件系统或者什么都好, 占用的磁盘空间一定都是512字节的倍数. 比如你在NTFS文件系统中创建一个文件, 打了两个字符进去保存, 然后点开属性你就会发现文件大小是2字节, 但是占用空间确是4K(实际上我自己亲自测试了一下发现并不是这样, 大小是2字节没错可是占用空间是0字节, 这是因为这个文件实在太小了, NTFS直接把数据存在文件元数据中了, 也就是NTFS MFT). 因为这种文件系统的基本存储单位是4K字节, 占用8个扇区. 而InnoDB的最小存储单位叫页(Page), 它默认占用16K字节, 你也可以手动看看:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">SHOW</span> VARIABLES <span class="keyword">LIKE</span> <span class="string">&#x27;innodb_page_size&#x27;</span>;</span><br></pre></td></tr></table></figure>
+
+<p>默认输出的值是16384, 是这么多个字节的意思, 16384&#x2F;1024&#x3D;16K.</p>
+<h3 id="主键索引"><a href="#主键索引" class="headerlink" title="主键索引"></a>主键索引</h3><p>InnoDB的索引底层由树组成, 因此主要有两种节点, 这些节点每个都会占用一页, 一种大概长这样, 是非叶子结点:</p>
+<p><img src="/picture/2021-02-23-11-32-17.png"></p>
+<p>我这画图功夫希望你看得懂… 红色的代表Key, 绿色代表存储指针的地方, 蓝色就代表页了. 一个页除了Key和指针之外还有一些这个页的元数据, 比如页号啊, 用于事务的事务ID, MVCC回滚指针什么的这里没画出来.</p>
+<p>另一种节点是叶子节点, 大概长这样:</p>
+<p><img src="/picture/2021-02-23-11-40-08.png"></p>
+<p>依然是占用一整页, 其中红色代表的是Key, 黄色代表的是数据.</p>
+<p>使用InnoDB创建一张表时, 会默认使用主键创建聚簇索引, 这个通过主键创建的索引树也叫主键索引, 它的叶子节点存储的是整行数据. 我们创建表:</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> people</span><br><span class="line">(</span><br><span class="line">    pel_id           <span class="type">int</span> AUTO_INCREMENT <span class="keyword">PRIMARY</span> KEY,</span><br><span class="line">    pel_first_name      <span class="type">char</span>(<span class="number">16</span>),</span><br><span class="line">    pel_last_name     <span class="type">char</span>(<span class="number">16</span>),</span><br><span class="line">    pel_birthday  datetime</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+
+<p>然后插入10行数据, 那么通过主键创建的索引(主键索引)大概是长这个样子的(为了便于理解我们这里一个页中只存放3条记录,实际情况可以存放很多):</p>
+<p><img src="/picture/2021-02-23-11-53-05.png"></p>
+<p>(图中的一处错误:叶子节点的指针应该是双向的) 图中红色的代表Key, 黄色是数据字段值, 绿色的正方形小方块代表指针. 可以看到在叶子节点页中, 不仅保存了主键Key, 还保存数据行的所有数据, 术语”聚簇”就是表示数据行和相邻的键值紧凑地存储在一起(并不总是这样). 因此InnoDB的主键索引也可以叫聚簇索引(clustered index). 而非叶子的节点页中只包含了索引列, 这个例子中的索引列是红色的地方, 也就是对应表中的pel_id.</p>
+<h3 id="二级索引-secondary-indexes"><a href="#二级索引-secondary-indexes" class="headerlink" title="二级索引(secondary indexes)"></a>二级索引(secondary indexes)</h3><p>二级索引和聚簇索引差不多, 主要是叶子节点的数据变成了Key+主键, 如果按照上面的例子创建一个由pel_birthday做Key的索引.</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> INDEX people_pel_birthday_index <span class="keyword">ON</span> people(pel_birthday);</span><br></pre></td></tr></table></figure>
+
+<p>那么树大概长这个样子:</p>
+<p><img src="/picture/2021-02-23-12-30-45.png"></p>
+<p>(图中的一处错误:叶子节点的指针应该是双向的) 可以看到这个二级索引叶子节点的数据实际上是主键值, 因此如果主键值过大, 那么索引占用的空间就大. 要是想获取行的其它数据还要通过这个主键再回主键索引中查询, 这个步骤称作回表.</p>
+<h3 id="覆盖索引"><a href="#覆盖索引" class="headerlink" title="覆盖索引"></a>覆盖索引</h3><p>这个不是InnoDB特有的, 这是满足某种情况我们就说索引覆盖. 如果一个索引包含了所有需要查询字段的值, 那么就无需回表, 这就是覆盖索引. 如果WHERE条件中的列是有索引可以覆盖, 那么可以使用延迟关联的策略来尽可能利用索引.(延迟覆盖简单来说就是利用WHERE条件中能被索引覆盖的条件查出对应的主键, 再使用这些主键从主键索引做连接查询过滤等, 提高效率)</p>
+<p>&#x2F;&#x2F; todo:可预测性读, 自适应哈希, 插入缓冲区…</p>
+<h2 id="MyISAM"><a href="#MyISAM" class="headerlink" title="MyISAM"></a>MyISAM</h2><p>和InnoDB不同, MyISAM的主键索引和二级索引数据分布则要简单得多.</p>
+<h3 id="数据分布"><a href="#数据分布" class="headerlink" title="数据分布"></a>数据分布</h3><p>MyISAM是按照数据插入的顺序存储在磁盘上, 同样以上面的表为例子, 假设我把上面InnoDB的数据dump出来然后随机插入到MyISAM引擎的表, 那么插进去的数据在MyISAM的分布方式是这样的:</p>
+<p><img src="/picture/2021-02-23-17-35-42.png"></p>
+<p>在行的旁边显示了行号(或者说是地址), 从0开始递增. 它会根据数据定长还是变长的行使用不同的策略来跳过行号.</p>
+<h3 id="主键索引-1"><a href="#主键索引-1" class="headerlink" title="主键索引"></a>主键索引</h3><p>MyISAM索引的叶子节点存放的是数据的行号(或者说是地址). 在索引找到行号(或者说是地址)后, 就会到数据分布中取出对应的记录.</p>
+<p><img src="/picture/2021-02-23-17-50-17.png"></p>
+<p>(图中的一处错误:叶子节点的指针应该是双向的) </p>
+<h3 id="二级索引"><a href="#二级索引" class="headerlink" title="二级索引"></a>二级索引</h3><p>MyISAM的其它索引和主键索引大同小异. 比如使用pel_birthday做索引:</p>
+<p><img src="/picture/2021-02-23-17-55-18.png"></p>
+<p>(图中的一处错误:叶子节点的指针应该是双向的) </p>
+<p>可以看到和主键索引一样, 叶子节点保存的也是数据的行号.</p>
+<h2 id="InnoDB和MyISAM数据和索引区别"><a href="#InnoDB和MyISAM数据和索引区别" class="headerlink" title="InnoDB和MyISAM数据和索引区别"></a>InnoDB和MyISAM数据和索引区别</h2><p>高性能MySQL(第3版)中作者画了一张抽象图来描述.</p>
+<p><img src="/picture/2021-02-23-18-01-16.png"></p>
+<p>图就比较直观了.</p>
+<p>上面只用了单键值的索引做例子, 而多键值的索引大概是这样子的:</p>
+<p><img src="/picture/2021-02-23-18-21-32.png"></p>
+<p>index (a,b)的联合索引结构如上图(出自《MySQL技术内幕-InnoDB存储引擎》), 观察到每个节点中均同时包含a,b两个字段信息, 且字段a全局有序, 字段b局部有序(仅在字段a值相同时, 字段b是有序的).</p>
+<h1 id="MySQL执行计划Extra"><a href="#MySQL执行计划Extra" class="headerlink" title="MySQL执行计划Extra"></a>MySQL执行计划Extra</h1><ul>
+<li><strong>Using index</strong>: 查询的列被索引覆盖, 并且WHERE筛选条件是索引的前导列.</li>
+<li><strong>Using where Using index</strong>: 查询的列被索引覆盖, 并且WHERE筛选条件是索引列之一, 可能不是索引的前导列. 这里的Using where代表使用了过滤，跟是否回表没有关系. 索引列的范围搜索也会出现它.</li>
+<li><strong>Using index condition</strong>: 查询的列不全在索引中, 查询条件可以用到索引.(这个需要开启索引条件下推(ICP, Index-Condition-Pushdown)功能才有)</li>
+</ul>
+<p>参考:<br>高性能MySQL(第3版)<br><a target="_blank" rel="noopener" href="https://cloud.tencent.com/developer/article/1443681">面试题：InnoDB中一棵B+树能存多少行数据？</a><br><a target="_blank" rel="noopener" href="https://www.percona.com/blog/2019/05/08/mysql-innodb-sorted-index-builds/">MySQL InnoDB Sorted Index Builds</a><br><a target="_blank" rel="noopener" href="https://fivezh.github.io/2020/01/19/mysql-icp/?utm_source=tuicool&utm_medium=referral">MySQL索引下推</a></p>
+
+            
+        </div>
+        
+            
+                <footer>
+                    <div class="copyright">
+    <p>本作品为原创作品,原创作品采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/">知识共享署名-非商业性使用-相同方式共享 3.0
+            中国大陆许可协议</a>进行许可. </p>
+    <div>
+        转载需标明出处, 本文链接: <a
+                href="/post/mysql-learning/">https://thesomeexp.github.io/post/mysql-learning/</a>
+    </div>
+</div>
+                </footer>
+            
+
+            <footer>
+                
+  
+  <div class="tags">
+    <a href="/tags/MySQL/">MySQL</a>
+  </div>
+
+            </footer>
+        
+    </div>
+</article>
+
+<!-- 代码块复制功能 -->
+<script type="text/javascript" src="/js/clipboard.min.js"></script>  
+<script type="text/javascript" src="/js/clipboard-use.js"></script></div></div>
+    <aside id="sidebar" class="alignright">
+  
+<div class="widget tag">
+  <ul class="entry">
+  
+    <li><a href="/tags/Android/">Android</a><small>1</small></li>
+  
+    <li><a href="/tags/Blog/">Blog</a><small>2</small></li>
+  
+    <li><a href="/tags/Book/">Book</a><small>2</small></li>
+  
+    <li><a href="/tags/Docker/">Docker</a><small>1</small></li>
+  
+    <li><a href="/tags/Essay/">Essay</a><small>7</small></li>
+  
+    <li><a href="/tags/Game/">Game</a><small>1</small></li>
+  
+    <li><a href="/tags/Git/">Git</a><small>1</small></li>
+  
+    <li><a href="/tags/Hexo/">Hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/Java/">Java</a><small>5</small></li>
+  
+    <li><a href="/tags/Lifestyle/">Lifestyle</a><small>1</small></li>
+  
+    <li><a href="/tags/Maven/">Maven</a><small>1</small></li>
+  
+    <li><a href="/tags/MySQL/">MySQL</a><small>1</small></li>
+  
+    <li><a href="/tags/Network/">Network</a><small>2</small></li>
+  
+    <li><a href="/tags/Nginx/">Nginx</a><small>1</small></li>
+  
+    <li><a href="/tags/Note/">Note</a><small>7</small></li>
+  
+    <li><a href="/tags/Phone/">Phone</a><small>2</small></li>
+  
+    <li><a href="/tags/RFID/">RFID</a><small>2</small></li>
+  
+    <li><a href="/tags/Spring/">Spring</a><small>1</small></li>
+  
+    <li><a href="/tags/Virtual-Machine/">Virtual Machine</a><small>1</small></li>
+  
+    <li><a href="/tags/Win10/">Win10</a><small>5</small></li>
+  
+  </ul>
+</div>
+
+
+  <div class="widget footer">
+  
+  <span>&copy;2017-2024 thesomeexp</span>
+  
+  </br>
+  <span>Powered by <a target="_blank" rel="noopener" href="http://hexo.io" >Hexo</a></span>
+  </br>
+    <span>Theme by <a target="_blank" rel="noopener" href="https://github.com/thesomeexp/hexo-theme-light-simple" >hexo-theme-light-simple</a></span>
+</div>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+</body>
+</html>

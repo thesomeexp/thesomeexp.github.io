@@ -1,0 +1,223 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Git 笔记 | thesomeexp</title>
+  <meta name="author" content="thesomeexp">
+  
+  <meta name="description" content="一些常用的 Git 命令笔记.">
+  
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Git 笔记"/>
+  <meta property="og:site_name" content="thesomeexp"/>
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">thesomeexp</a></h1>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+      <li><a href="/links">Links</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+    <div class="post-content">
+        <header>
+            
+  
+    <h1 class="title">Git 笔记</h1>
+  
+
+            
+                <time itemprop="datePublished"
+                      datetime="2019-02-17T16:00:00.000Z">2019-02-18</time>
+                <span style="color: rgb(153, 153, 153);">-</span>
+                <time itemprop="dateModified"
+                      updated="2022-05-29T16:00:00.000Z">2022-05-30</time>
+            
+        </header>
+        <div class="entry">
+            
+                <p>一些常用的 Git 命令笔记.</p>
+<span id="more"></span>
+
+<p>请以官网为主.</p>
+<h1 id="Cues"><a href="#Cues" class="headerlink" title="Cues"></a>Cues</h1><p>自报家门(<a target="_blank" rel="noopener" href="https://gitimmersion.com/lab_01.html">git教程与配置</a>), 生成ssh(<a target="_blank" rel="noopener" href="https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh">SSH配置</a>), 关联远程(<a target="_blank" rel="noopener" href="https://docs.github.com/cn/github/authenticating-to-github/testing-your-ssh-connection">测试SSH连接</a>)<br>add, commit, push</p>
+<h1 id="Notes"><a href="#Notes" class="headerlink" title="Notes"></a>Notes</h1><h2 id="1-初始化配置"><a href="#1-初始化配置" class="headerlink" title="1.初始化配置"></a>1.初始化配置</h2><p><strong>注: 以下都是陈年文章了, 这边建议直接看Cues里面的超链接.</strong></p>
+<p>安装完Git自报家门:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git config --global user.name &quot;Your Name&quot;</span><br><span class="line">git config --global user.email &quot;email@example.com&quot;</span><br></pre></td></tr></table></figure>
+<p>win下~目录生成ssh密钥:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh-keygen -t rsa -b 4096 -C &quot;your_email@example.com&quot;</span><br></pre></td></tr></table></figure>
+<p><strong>如果你是团队协作开发, 请不要忘记配置Line Ending相关参数.</strong><br>关联远程仓库(git默认远程名字叫origin):</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add origin SSH仓库地址</span><br></pre></td></tr></table></figure>
+<p>测试SSH连接: </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ssh -T git@github.com</span><br></pre></td></tr></table></figure>
+<h2 id="2-开始使用"><a href="#2-开始使用" class="headerlink" title="2.开始使用"></a>2.开始使用</h2><p>初始化Git仓库:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git init</span><br></pre></td></tr></table></figure>
+<h2 id="3-添加与提交"><a href="#3-添加与提交" class="headerlink" title="3.添加与提交"></a>3.添加与提交</h2><p>添加到缓存区(Stage):</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git add &lt;file&gt;</span><br></pre></td></tr></table></figure>
+<p>撤销(回到最近一次add&#x2F;commit):</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout &lt;file&gt;</span><br></pre></td></tr></table></figure>
+<p>提交到仓库:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git commit -m &quot;提交说明&quot;</span><br></pre></td></tr></table></figure>
+<p>暂存区概念图:<br><img src="/picture/20190218-0.jpg" alt="0"></p>
+<h2 id="4-推送改动"><a href="#4-推送改动" class="headerlink" title="4.推送改动"></a>4.推送改动</h2><p>推送到远程:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin master</span><br></pre></td></tr></table></figure>
+<p>推送失败(远程分支比本地新),试图合并,解决冲突后再push:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git pull</span><br></pre></td></tr></table></figure>
+<h2 id="5-版本回退"><a href="#5-版本回退" class="headerlink" title="5.版本回退"></a>5.版本回退</h2><p>回退上个版本&#x2F;回退上上个版本&#x2F;回退上100个版本</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard HEAD^ </span><br><span class="line">git reset --hard HEAD^^ </span><br><span class="line">git reset --hard HEAD~100 </span><br></pre></td></tr></table></figure>
+<p>通过commit id回退</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reset --hard commit_id</span><br></pre></td></tr></table></figure>
+<h2 id="6-查看版本log"><a href="#6-查看版本log" class="headerlink" title="6.查看版本log"></a>6.查看版本log</h2><p>参数为简化信息,commit id由SHA1计算出来</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --pretty=oneline</span><br></pre></td></tr></table></figure>
+<p>后悔药,记录了你每一次git操作</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git reflog</span><br></pre></td></tr></table></figure>
+<h2 id="7-分支操作"><a href="#7-分支操作" class="headerlink" title="7.分支操作"></a>7.分支操作</h2><p>查看当前分支</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch</span><br></pre></td></tr></table></figure>
+<p>创建dev分支</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch dev</span><br></pre></td></tr></table></figure>
+<p>切换到dev分支:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout dev</span><br></pre></td></tr></table></figure>
+<p>创建并切换分支:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b dev</span><br></pre></td></tr></table></figure>
+<p>删除本地dev分支:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git branch -d dev</span><br></pre></td></tr></table></figure>
+<p>删除远程dev分支(分之前冒号代表删除):</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin :dev </span><br></pre></td></tr></table></figure>
+<p>合并分支(当前为master,合并dev分支到master)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge dev</span><br></pre></td></tr></table></figure>
+<p>禁用fast forward的合并:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git merge --no-ff -m &quot;merge with no-ff&quot; dev</span><br></pre></td></tr></table></figure>
+<p>分支合并情况:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git log --graph --pretty=oneline --abbrev-commit</span><br></pre></td></tr></table></figure>
+<p>推送分支:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin &lt;branch&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="8-标签操作"><a href="#8-标签操作" class="headerlink" title="8.标签操作"></a>8.标签操作</h2><p>查看所有标签:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag</span><br></pre></td></tr></table></figure>
+<p>查看标签信息:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git show &lt;tag name&gt;</span><br></pre></td></tr></table></figure>
+<p>打标签</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag &lt;name&gt;</span><br></pre></td></tr></table></figure>
+<p>指定commit id打标签:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag &lt;tag name&gt; &lt;commit id&gt;</span><br></pre></td></tr></table></figure>
+<p>删除标签</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git tag -d &lt;name&gt;</span><br></pre></td></tr></table></figure>
+<p>推送标签到远程:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin &lt;tag name&gt;</span><br></pre></td></tr></table></figure>
+<p>删除一个远程标签:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git push origin :refs/tags/&lt;tag name&gt;</span><br></pre></td></tr></table></figure>
+<h2 id="9-其他操作"><a href="#9-其他操作" class="headerlink" title="9.其他操作"></a>9.其他操作</h2><p>关联多个远程:<br>关联github远程库:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add github git@github.com:michaelliao/learngit.git</span><br></pre></td></tr></table></figure>
+<p>关联码云远程库:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote add gitee git@gitee.com:liaoxuefeng/learngit.git</span><br></pre></td></tr></table></figure>
+<p>移除关联: </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git remote remove &#123;REMOVE_NAME&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>git上手难度还是比较高的, 只有理解和多练习了, 才能熟练掌握git.</p>
+<p>参考资料:<br><a target="_blank" rel="noopener" href="https://www.liaoxuefeng.com/wiki/0013739516305929606dd18361248578c67b8067c8c017b000">Git教程-廖雪峰的官方网站</a><br><a target="_blank" rel="noopener" href="http://www.bootcss.com/p/git-guide/">git使用简易指南</a><br><a target="_blank" rel="noopener" href="https://gitimmersion.com/lab_01.html">https://gitimmersion.com/lab_01.html</a><br><a target="_blank" rel="noopener" href="https://docs.github.com/en/github/authenticating-to-github/connecting-to-github-with-ssh">Connecting to GitHub with SSH</a><br><a target="_blank" rel="noopener" href="https://docs.github.com/cn/github/authenticating-to-github/testing-your-ssh-connection">测试SSH连接</a></p>
+
+            
+        </div>
+        
+            
+
+            <footer>
+                
+  
+  <div class="tags">
+    <a href="/tags/Git/">Git</a>, <a href="/tags/Note/">Note</a>
+  </div>
+
+            </footer>
+        
+    </div>
+</article>
+
+<!-- 代码块复制功能 -->
+<script type="text/javascript" src="/js/clipboard.min.js"></script>  
+<script type="text/javascript" src="/js/clipboard-use.js"></script></div></div>
+    <aside id="sidebar" class="alignright">
+  
+<div class="widget tag">
+  <ul class="entry">
+  
+    <li><a href="/tags/Android/">Android</a><small>1</small></li>
+  
+    <li><a href="/tags/Blog/">Blog</a><small>2</small></li>
+  
+    <li><a href="/tags/Book/">Book</a><small>2</small></li>
+  
+    <li><a href="/tags/Docker/">Docker</a><small>1</small></li>
+  
+    <li><a href="/tags/Essay/">Essay</a><small>7</small></li>
+  
+    <li><a href="/tags/Game/">Game</a><small>1</small></li>
+  
+    <li><a href="/tags/Git/">Git</a><small>1</small></li>
+  
+    <li><a href="/tags/Hexo/">Hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/Java/">Java</a><small>5</small></li>
+  
+    <li><a href="/tags/Lifestyle/">Lifestyle</a><small>1</small></li>
+  
+    <li><a href="/tags/Maven/">Maven</a><small>1</small></li>
+  
+    <li><a href="/tags/MySQL/">MySQL</a><small>1</small></li>
+  
+    <li><a href="/tags/Network/">Network</a><small>2</small></li>
+  
+    <li><a href="/tags/Nginx/">Nginx</a><small>1</small></li>
+  
+    <li><a href="/tags/Note/">Note</a><small>7</small></li>
+  
+    <li><a href="/tags/Phone/">Phone</a><small>2</small></li>
+  
+    <li><a href="/tags/RFID/">RFID</a><small>2</small></li>
+  
+    <li><a href="/tags/Spring/">Spring</a><small>1</small></li>
+  
+    <li><a href="/tags/Virtual-Machine/">Virtual Machine</a><small>1</small></li>
+  
+    <li><a href="/tags/Win10/">Win10</a><small>5</small></li>
+  
+  </ul>
+</div>
+
+
+  <div class="widget footer">
+  
+  <span>&copy;2017-2024 thesomeexp</span>
+  
+  </br>
+  <span>Powered by <a target="_blank" rel="noopener" href="http://hexo.io" >Hexo</a></span>
+  </br>
+    <span>Theme by <a target="_blank" rel="noopener" href="https://github.com/thesomeexp/hexo-theme-light-simple" >hexo-theme-light-simple</a></span>
+</div>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+</body>
+</html>

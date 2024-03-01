@@ -1,0 +1,164 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>打开电脑的时候你电脑发生了什么 | thesomeexp</title>
+  <meta name="author" content="thesomeexp">
+  
+  <meta name="description" content="记录一下电脑的大致启动过程.">
+  
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="打开电脑的时候你电脑发生了什么"/>
+  <meta property="og:site_name" content="thesomeexp"/>
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">thesomeexp</a></h1>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+      <li><a href="/links">Links</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="page">
+    <div class="post-content">
+        <header>
+            
+  
+    <h1 class="title">打开电脑的时候你电脑发生了什么</h1>
+  
+
+            
+        </header>
+        <div class="entry">
+            
+                <p>记录一下电脑的大致启动过程.</p>
+<span id="more"></span>
+<h1 id="Cues"><a href="#Cues" class="headerlink" title="Cues"></a>Cues</h1><p>BIOS&#x2F;UEFI, MBR扇区, EFI系统分区, bootloader</p>
+<h1 id="Notes"><a href="#Notes" class="headerlink" title="Notes"></a>Notes</h1><h2 id="1-按下电源"><a href="#1-按下电源" class="headerlink" title="1.按下电源"></a>1.按下电源</h2><p>按下你的电源按钮,你的计算机电源(也就是你接通交流电的那个小电源箱子)就会给你电脑的其他组件供电. CPU初始化自己,然后加载BIOS,如果是现代的电脑会加载UEFI,你可以把UEFI当做BIOS的升级版本.</p>
+<h2 id="2-加载BIOS-UEFI"><a href="#2-加载BIOS-UEFI" class="headerlink" title="2.加载BIOS&#x2F;UEFI"></a>2.加载BIOS&#x2F;UEFI</h2><p>然后BIOS&#x2F;UEFI一般从主板上加载配置文件(这些一般存在CMOS里,内容一般是BIOS&#x2F;UEFI的配置和时间,台式机里默认有纽扣电池给它供电,笔记本很多用nvram,台式机还保留传统,听说是为了翻车初始化方便.),然后BIOS&#x2F;UEFI检查和初始化你的硬件(硬件自检Power On Self Test,如果硬件自检出现问题,主板就会发出不同含义的的蜂鸣声或是显示错误代码),然后显示品牌LOGO,在这里你可以按按键进入BIOS&#x2F;UEFI的设置页面.</p>
+<h2 id="3-选择可引导设备"><a href="#3-选择可引导设备" class="headerlink" title="3.选择可引导设备"></a>3.选择可引导设备</h2><p>然后BIOS&#x2F;UEFI去找引导设备,如果有多个可引导设备它会根据顺序来开始.这时候BIOS&#x2F;UEFI的工作就结束了,他把剩下的工作交给下面的引导程序.<br>如果是使用BIOS引导启动: </p>
+<p>BIOS会读取这个可引导设备的MBR扇区(也就是磁盘低级地址的一些数据),这些数据包含加载其余操作系统的代码,这个也叫引导加载程序(bootloader),BIOS执行这个引导加载程序,然后开始引导实际的操作系统.<br>如果是使用UEFI引导启动: </p>
+<p>UEFI仍然可以从旧的MBR分区里引导操作系统,但是一般使用存在EFI系统分区的EFI可执行文件来引导操作系统,所以数据不一定只能存在低地址.UEFI默认开启Secure Boot功能,用来检查bootloader是否被恶意软件篡改.</p>
+<h2 id="4-引导操作系统"><a href="#4-引导操作系统" class="headerlink" title="4.引导操作系统"></a>4.引导操作系统</h2><p>bootloader是一个小程序用来引导剩余的操作系统,Windows下使用名为Bootmgr.exe的引导程序,Linux下则是GRUB,Mac下叫boot.efi</p>
+<p>然而,bootloader无法靠自己加载整个操作系统,在Windows的bootloader里,他先去找和启动Windows系统加载器(Windows OS Loader),这个加载器会加载一些启动操作系统核心的必要硬件驱动,然后该核心就会加载系统注册表(存放Windows和很多程序的配置设定的数据库)进内存和加载一个标记了“BOOT_START”的格外硬件驱动,这意味着这些内容应该在引导时加载.然后核心再启动会话和加载格外格外驱动的管理程序(Smss.exe),这个过程继续进行,Windows加载后台服务和欢迎屏幕,然后你就可以通过这个屏幕登录.</p>
+<p>比如:Windows10的bootloader会先读取ESP里的BCD文件,BCD文件是Windows注册表格式,包含了操作系统列表,然后再查找BCD文件里写的目前活跃的操作系统,启动它(也就是winload),winload在加载完各种驱动和初始化完各种设备以后会再读一遍BCD看有没有别的系统,如果有别的系统就会显示操作系统选单,没有别的系统,如果连续启动失败两次就会开始尝试自动恢复,然后再去执行smss,smss会以nt authority\system的身份运行logonui,也就是登录屏幕.</p>
+<p>所谓的开机启动程序,事实上是在你登录进你的账户后才加载的.</p>
+<h1 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h1><p>启动Windows<br>BIOS：bootsect→bootmgr文件→winload.exe文件<br>UEFI：bootx64.efi文件→bootmgr.efi文件→winload.efi文件</p>
+<p>参考资料:<br><a target="_blank" rel="noopener" href="https://www.howtogeek.com/398493/what-exactly-happens-when-you-turn-on-your-computer/">howtogeek:what-exactly-happens-when-you-turn-on-your-computer</a><br><a target="_blank" rel="noopener" href="https://docs.microsoft.com/zh-cn/windows-hardware/drivers/bringup/boot-and-uefi">Microsoft:boot-and-uefi</a><br><a target="_blank" rel="noopener" href="https://www.bilibili.com/video/av12811563/">【科技百年】电脑开机的时候都发生了些什么？</a></p>
+
+            
+        </div>
+        
+            
+                <footer>
+                    <div class="copyright">
+    <p>本作品为原创作品,原创作品采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/">知识共享署名-非商业性使用-相同方式共享 3.0
+            中国大陆许可协议</a>进行许可. </p>
+    <div>
+        转载需标明出处, 本文链接: <a
+                href="/backup/20191019-what-happens-when-you-turn-on-your-computer.html">https://thesomeexp.github.io/backup/20191019-what-happens-when-you-turn-on-your-computer.html</a>
+    </div>
+</div>
+                </footer>
+            
+
+            <footer>
+                
+  
+  <div class="tags">
+    <a href="/undefined">undefined</a>, <a href="/undefined">undefined</a>
+  </div>
+
+            </footer>
+        
+    </div>
+</article>
+
+<!-- 代码块复制功能 -->
+<script type="text/javascript" src="/js/clipboard.min.js"></script>  
+<script type="text/javascript" src="/js/clipboard-use.js"></script></div></div>
+    <aside id="sidebar" class="alignright">
+  
+<div class="widget tag">
+  <ul class="entry">
+  
+    <li><a href="/tags/Android/">Android</a><small>1</small></li>
+  
+    <li><a href="/tags/Blog/">Blog</a><small>2</small></li>
+  
+    <li><a href="/tags/Book/">Book</a><small>2</small></li>
+  
+    <li><a href="/tags/Docker/">Docker</a><small>1</small></li>
+  
+    <li><a href="/tags/Essay/">Essay</a><small>7</small></li>
+  
+    <li><a href="/tags/Game/">Game</a><small>1</small></li>
+  
+    <li><a href="/tags/Git/">Git</a><small>1</small></li>
+  
+    <li><a href="/tags/Hexo/">Hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/Java/">Java</a><small>5</small></li>
+  
+    <li><a href="/tags/Lifestyle/">Lifestyle</a><small>1</small></li>
+  
+    <li><a href="/tags/Maven/">Maven</a><small>1</small></li>
+  
+    <li><a href="/tags/MySQL/">MySQL</a><small>1</small></li>
+  
+    <li><a href="/tags/Network/">Network</a><small>2</small></li>
+  
+    <li><a href="/tags/Nginx/">Nginx</a><small>1</small></li>
+  
+    <li><a href="/tags/Note/">Note</a><small>7</small></li>
+  
+    <li><a href="/tags/Phone/">Phone</a><small>2</small></li>
+  
+    <li><a href="/tags/RFID/">RFID</a><small>2</small></li>
+  
+    <li><a href="/tags/Spring/">Spring</a><small>1</small></li>
+  
+    <li><a href="/tags/Virtual-Machine/">Virtual Machine</a><small>1</small></li>
+  
+    <li><a href="/tags/Win10/">Win10</a><small>5</small></li>
+  
+  </ul>
+</div>
+
+
+  <div class="widget footer">
+  
+  <span>&copy;2017-2024 thesomeexp</span>
+  
+  </br>
+  <span>Powered by <a target="_blank" rel="noopener" href="http://hexo.io" >Hexo</a></span>
+  </br>
+    <span>Theme by <a target="_blank" rel="noopener" href="https://github.com/thesomeexp/hexo-theme-light-simple" >hexo-theme-light-simple</a></span>
+</div>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+</body>
+</html>

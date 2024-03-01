@@ -1,0 +1,167 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Scoop 笔记 | thesomeexp</title>
+  <meta name="author" content="thesomeexp">
+  
+  <meta name="description" content="Scoop 是一款非常好用的 Windows 包管理器. 简单记录下使用指南.">
+  
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Scoop 笔记"/>
+  <meta property="og:site_name" content="thesomeexp"/>
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">thesomeexp</a></h1>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+      <li><a href="/links">Links</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+    <div class="post-content">
+        <header>
+            
+  
+    <h1 class="title">Scoop 笔记</h1>
+  
+
+            
+                <time itemprop="datePublished"
+                      datetime="2020-05-06T16:00:00.000Z">2020-05-07</time>
+                <span style="color: rgb(153, 153, 153);">-</span>
+                <time itemprop="dateModified"
+                      updated="2022-11-15T16:00:00.000Z">2022-11-16</time>
+            
+        </header>
+        <div class="entry">
+            
+                <p>Scoop 是一款非常好用的 Windows 包管理器. 简单记录下使用指南.</p>
+<span id="more"></span>
+<p>可以使用 Scoop 来安装一些不需要 UAC 的软件. 当然你也可以使用微软官方的 WinGet.<br>首先Powershell这里要修改成允许远程脚本执行: </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">set-executionpolicy remotesigned -scope currentuser</span><br></pre></td></tr></table></figure>
+<p>然后执行远程的脚本进行安装: </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">iex (new-object net.webclient).downloadstring(&#x27;https://get.scoop.sh&#x27;)</span><br></pre></td></tr></table></figure>
+<p>安装完测试一次下: </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scoop help</span><br></pre></td></tr></table></figure>
+<p>添加一个软件比较多的bucket: </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scoop bucket add extras</span><br></pre></td></tr></table></figure>
+<p>查看所有bucket: </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scoop bucket known</span><br></pre></td></tr></table></figure>
+<p>添加一个大佬维护的bucket: </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scoop bucket add dorado https://github.com/h404bi/dorado</span><br></pre></td></tr></table></figure>
+<p>搜索微信: </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scoop search wechat</span><br></pre></td></tr></table></figure>
+<p>安装: </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">scoop install dorado/wechat</span><br></pre></td></tr></table></figure>
+
+<p><strong>数据隔离</strong></p>
+<p>可以使用 run as different user 方式运行, 利用 windows 的多用户机制来实现数据隔离.</p>
+<p>参考:<br><a target="_blank" rel="noopener" href="https://sspai.com/post/52496">少数派: 「一行代码」搞定软件安装卸载，用 Scoop 管理你的 Windows 软件(https://sspai.com/post/52710</a><br><a target="_blank" rel="noopener" href="https://sspai.com/post/52710">少数派: 给 Scoop 加上这些软件仓库，让它变成强大的 Windows 软件管理器</a><br><a target="_blank" rel="noopener" href="https://github.com/lukesampson/scoop">Scoop官方rep</a><br><a target="_blank" rel="noopener" href="https://github.com/h404bi/dorado">dorado</a></p>
+
+            
+        </div>
+        
+            
+
+            <footer>
+                
+  
+  <div class="tags">
+    <a href="/tags/Win10/">Win10</a>
+  </div>
+
+            </footer>
+        
+    </div>
+</article>
+
+<!-- 代码块复制功能 -->
+<script type="text/javascript" src="/js/clipboard.min.js"></script>  
+<script type="text/javascript" src="/js/clipboard-use.js"></script></div></div>
+    <aside id="sidebar" class="alignright">
+  
+<div class="widget tag">
+  <ul class="entry">
+  
+    <li><a href="/tags/Android/">Android</a><small>1</small></li>
+  
+    <li><a href="/tags/Blog/">Blog</a><small>2</small></li>
+  
+    <li><a href="/tags/Book/">Book</a><small>2</small></li>
+  
+    <li><a href="/tags/Docker/">Docker</a><small>1</small></li>
+  
+    <li><a href="/tags/Essay/">Essay</a><small>7</small></li>
+  
+    <li><a href="/tags/Game/">Game</a><small>1</small></li>
+  
+    <li><a href="/tags/Git/">Git</a><small>1</small></li>
+  
+    <li><a href="/tags/Hexo/">Hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/Java/">Java</a><small>5</small></li>
+  
+    <li><a href="/tags/Lifestyle/">Lifestyle</a><small>1</small></li>
+  
+    <li><a href="/tags/Maven/">Maven</a><small>1</small></li>
+  
+    <li><a href="/tags/MySQL/">MySQL</a><small>1</small></li>
+  
+    <li><a href="/tags/Network/">Network</a><small>2</small></li>
+  
+    <li><a href="/tags/Nginx/">Nginx</a><small>1</small></li>
+  
+    <li><a href="/tags/Note/">Note</a><small>7</small></li>
+  
+    <li><a href="/tags/Phone/">Phone</a><small>2</small></li>
+  
+    <li><a href="/tags/RFID/">RFID</a><small>2</small></li>
+  
+    <li><a href="/tags/Spring/">Spring</a><small>1</small></li>
+  
+    <li><a href="/tags/Virtual-Machine/">Virtual Machine</a><small>1</small></li>
+  
+    <li><a href="/tags/Win10/">Win10</a><small>5</small></li>
+  
+  </ul>
+</div>
+
+
+  <div class="widget footer">
+  
+  <span>&copy;2017-2024 thesomeexp</span>
+  
+  </br>
+  <span>Powered by <a target="_blank" rel="noopener" href="http://hexo.io" >Hexo</a></span>
+  </br>
+    <span>Theme by <a target="_blank" rel="noopener" href="https://github.com/thesomeexp/hexo-theme-light-simple" >hexo-theme-light-simple</a></span>
+</div>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+</body>
+</html>

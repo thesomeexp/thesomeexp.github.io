@@ -1,0 +1,167 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>Pixel 1 sideload ota 更新 | thesomeexp</title>
+  <meta name="author" content="thesomeexp">
+  
+  <meta name="description" content="记录一下使用 adb 工具 sideload ota 的过程.">
+  
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="Pixel 1 sideload ota 更新"/>
+  <meta property="og:site_name" content="thesomeexp"/>
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">thesomeexp</a></h1>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+      <li><a href="/links">Links</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+    <div class="post-content">
+        <header>
+            
+  
+    <h1 class="title">Pixel 1 sideload ota 更新</h1>
+  
+
+            
+                <time itemprop="datePublished"
+                      datetime="2018-10-19T16:00:00.000Z">2018-10-20</time>
+                <span style="color: rgb(153, 153, 153);">-</span>
+                <time itemprop="dateModified"
+                      updated="2022-05-29T16:00:00.000Z">2022-05-30</time>
+            
+        </header>
+        <div class="entry">
+            
+                <p>记录一下使用 adb 工具 sideload ota 的过程. <span id="more"></span></p>
+<h2 id="注意-最好先备份手机的数据-8-1OTA到9-0后有些问题-所以最后我OTA完还重置了一下"><a href="#注意-最好先备份手机的数据-8-1OTA到9-0后有些问题-所以最后我OTA完还重置了一下" class="headerlink" title="注意:最好先备份手机的数据,8.1OTA到9.0后有些问题,所以最后我OTA完还重置了一下."></a>注意:最好先备份手机的数据,8.1OTA到9.0后有些问题,所以最后我OTA完还重置了一下.</h2><h2 id="1-配置adb-fastboot环境"><a href="#1-配置adb-fastboot环境" class="headerlink" title="1.配置adb fastboot环境"></a>1.配置adb fastboot环境</h2><p>以windows系统为例,手机连接电脑,打开手机的USB调试允许Debug,配置好环境后,在adb在的路径下按住shift再右键,点击在此处打开Powershell窗口.<br>然后执行命令:</p>
+<pre>./adb devices</pre>
+<p><img src="/picture/20181020-0.jpg" alt="powershell查看到连接的手机"><br>如果List of devices attached下出现一串东西那连接应该就没问题了.</p>
+<h2 id="2-下载官方OTA包"><a href="#2-下载官方OTA包" class="headerlink" title="2.下载官方OTA包"></a>2.下载官方OTA包</h2><p>Pixel官方OTA包下载地址:<a target="_blank" rel="noopener" href="https://developers.google.cn/android/ota#sailfish">https://developers.google.cn/android/ota#sailfish</a><br>下载完后放到和adb工具同一目录的地方,也就是和adb.exe同目录.</p>
+<h2 id="3-手机进入recovery模式"><a href="#3-手机进入recovery模式" class="headerlink" title="3.手机进入recovery模式"></a>3.手机进入recovery模式</h2><p>直接在命令行窗口输入:</p>
+<pre>./adb reboot recovery</pre>
+<p>然后手机可能出现一个倒地的机器人和No Command,这时候同时按 [音量上] + [电源键]就出现选择的画面了(如果是安卓4.4以下就三个实体键一起按)(好久都没捣鼓过Pixel了, 这次是按了电源键然后再按下音量上),然后选择从OTA升级Apply update from ADB<br>之后执行:</p>
+<pre>./adb sideload 文件名.zip</pre>
+<p>这里的’文件名’是指你下载的那个OTA包的名字,要是名字长你可以改成update.zip之类的直接写update.zip代替就好.然后等待刷完重启就好.</p>
+<h2 id="写在最后"><a href="#写在最后" class="headerlink" title="写在最后:"></a>写在最后:</h2><p>8.1再刷OTA降回7.0的话会报错.</p>
+
+            
+        </div>
+        
+            
+                <footer>
+                    <div class="copyright">
+    <p>本作品为原创作品,原创作品采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/">知识共享署名-非商业性使用-相同方式共享 3.0
+            中国大陆许可协议</a>进行许可. </p>
+    <div>
+        转载需标明出处, 本文链接: <a
+                href="/post/sideload-ota-updates-on-google-pixel/">https://thesomeexp.github.io/post/sideload-ota-updates-on-google-pixel/</a>
+    </div>
+</div>
+                </footer>
+            
+
+            <footer>
+                
+  
+  <div class="tags">
+    <a href="/tags/Phone/">Phone</a>
+  </div>
+
+            </footer>
+        
+    </div>
+</article>
+
+<!-- 代码块复制功能 -->
+<script type="text/javascript" src="/js/clipboard.min.js"></script>  
+<script type="text/javascript" src="/js/clipboard-use.js"></script></div></div>
+    <aside id="sidebar" class="alignright">
+  
+<div class="widget tag">
+  <ul class="entry">
+  
+    <li><a href="/tags/Android/">Android</a><small>1</small></li>
+  
+    <li><a href="/tags/Blog/">Blog</a><small>2</small></li>
+  
+    <li><a href="/tags/Book/">Book</a><small>2</small></li>
+  
+    <li><a href="/tags/Docker/">Docker</a><small>1</small></li>
+  
+    <li><a href="/tags/Essay/">Essay</a><small>7</small></li>
+  
+    <li><a href="/tags/Game/">Game</a><small>1</small></li>
+  
+    <li><a href="/tags/Git/">Git</a><small>1</small></li>
+  
+    <li><a href="/tags/Hexo/">Hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/Java/">Java</a><small>5</small></li>
+  
+    <li><a href="/tags/Lifestyle/">Lifestyle</a><small>1</small></li>
+  
+    <li><a href="/tags/Maven/">Maven</a><small>1</small></li>
+  
+    <li><a href="/tags/MySQL/">MySQL</a><small>1</small></li>
+  
+    <li><a href="/tags/Network/">Network</a><small>2</small></li>
+  
+    <li><a href="/tags/Nginx/">Nginx</a><small>1</small></li>
+  
+    <li><a href="/tags/Note/">Note</a><small>7</small></li>
+  
+    <li><a href="/tags/Phone/">Phone</a><small>2</small></li>
+  
+    <li><a href="/tags/RFID/">RFID</a><small>2</small></li>
+  
+    <li><a href="/tags/Spring/">Spring</a><small>1</small></li>
+  
+    <li><a href="/tags/Virtual-Machine/">Virtual Machine</a><small>1</small></li>
+  
+    <li><a href="/tags/Win10/">Win10</a><small>5</small></li>
+  
+  </ul>
+</div>
+
+
+  <div class="widget footer">
+  
+  <span>&copy;2017-2024 thesomeexp</span>
+  
+  </br>
+  <span>Powered by <a target="_blank" rel="noopener" href="http://hexo.io" >Hexo</a></span>
+  </br>
+    <span>Theme by <a target="_blank" rel="noopener" href="https://github.com/thesomeexp/hexo-theme-light-simple" >hexo-theme-light-simple</a></span>
+</div>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+</body>
+</html>

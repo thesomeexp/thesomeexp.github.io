@@ -1,0 +1,156 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>使用虚拟机开热点 | thesomeexp</title>
+  <meta name="author" content="thesomeexp">
+  
+  <meta name="description" content="其实这件事捣鼓了两三个月了, 在 Ubuntu, CentOS, TinyCore 都不会用的情况下考虑回旧版的 Windows.">
+  
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="使用虚拟机开热点"/>
+  <meta property="og:site_name" content="thesomeexp"/>
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">thesomeexp</a></h1>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+      <li><a href="/links">Links</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="page">
+    <div class="post-content">
+        <header>
+            
+  
+    <h1 class="title">使用虚拟机开热点</h1>
+  
+
+            
+        </header>
+        <div class="entry">
+            
+                <p>其实这件事捣鼓了两三个月了, 在 Ubuntu, CentOS, TinyCore 都不会用的情况下考虑回旧版的 Windows. <span id="more"></span><br>先上效果图吧.<br><img src="/picture/20180908-2.jpg" alt="成功效果图"><br>上工具:win10笔记本电脑 腾达U6无线网卡<br>鉴于VMware不能调用笔记本自带的网卡, 所以只能够外接一个网卡设备了.</p>
+<h1 id="1-安装Windows-Xp-Professional和VMtools"><a href="#1-安装Windows-Xp-Professional和VMtools" class="headerlink" title="1.安装Windows Xp Professional和VMtools"></a>1.安装Windows Xp Professional和VMtools</h1><p>主要是虚拟机的安装, 网上都有教程.内存推荐128M储存4GB就好了, 联网方式选择NAT.</p>
+<h1 id="2-安装网卡驱动程序"><a href="#2-安装网卡驱动程序" class="headerlink" title="2.安装网卡驱动程序"></a>2.安装网卡驱动程序</h1><p>可考虑网上下载或者用VMtools的文件共享功能.</p>
+<h1 id="3-分配网卡到虚拟机"><a href="#3-分配网卡到虚拟机" class="headerlink" title="3.分配网卡到虚拟机."></a>3.分配网卡到虚拟机.</h1><p>这样就可以开热点了.</p>
+<h2 id="4-酸酸乳局域网代理-扩展"><a href="#4-酸酸乳局域网代理-扩展" class="headerlink" title="4.酸酸乳局域网代理(扩展)"></a>4.酸酸乳局域网代理(扩展)</h2><p>选项设置 –&gt; 本地代理 –&gt; 勾选 允许来自局域网的连接.<br>控制面板 –&gt; 安全中心 –&gt; 防火墙 –&gt; 例外 –&gt; 勾选 对应的代理程序.<br>开始运行 –&gt; CMD –&gt; 输入 ipconfig  –&gt; 记录ip.<br>手机连接wifi后修改代理为手动, 修改代理服务器主机名为对应的ip, 修改代理服务器端口为1080(默认端口)</p>
+<h1 id="过程图"><a href="#过程图" class="headerlink" title="过程图"></a>过程图</h1><p>可以参考一下.<br><img src="/picture/20180908-0.jpg" alt="虚拟机配置"><br><img src="/picture/20180908-1.jpg" alt="手机配置"></p>
+
+            
+        </div>
+        
+            
+                <footer>
+                    <div class="copyright">
+    <p>本作品为原创作品,原创作品采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/">知识共享署名-非商业性使用-相同方式共享 3.0
+            中国大陆许可协议</a>进行许可. </p>
+    <div>
+        转载需标明出处, 本文链接: <a
+                href="/backup/20180908-mobile-hotspot-on-virtual-machine.html">https://thesomeexp.github.io/backup/20180908-mobile-hotspot-on-virtual-machine.html</a>
+    </div>
+</div>
+                </footer>
+            
+
+            <footer>
+                
+  
+  <div class="tags">
+    <a href="/undefined">undefined</a>
+  </div>
+
+            </footer>
+        
+    </div>
+</article>
+
+<!-- 代码块复制功能 -->
+<script type="text/javascript" src="/js/clipboard.min.js"></script>  
+<script type="text/javascript" src="/js/clipboard-use.js"></script></div></div>
+    <aside id="sidebar" class="alignright">
+  
+<div class="widget tag">
+  <ul class="entry">
+  
+    <li><a href="/tags/Android/">Android</a><small>1</small></li>
+  
+    <li><a href="/tags/Blog/">Blog</a><small>2</small></li>
+  
+    <li><a href="/tags/Book/">Book</a><small>2</small></li>
+  
+    <li><a href="/tags/Docker/">Docker</a><small>1</small></li>
+  
+    <li><a href="/tags/Essay/">Essay</a><small>7</small></li>
+  
+    <li><a href="/tags/Game/">Game</a><small>1</small></li>
+  
+    <li><a href="/tags/Git/">Git</a><small>1</small></li>
+  
+    <li><a href="/tags/Hexo/">Hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/Java/">Java</a><small>5</small></li>
+  
+    <li><a href="/tags/Lifestyle/">Lifestyle</a><small>1</small></li>
+  
+    <li><a href="/tags/Maven/">Maven</a><small>1</small></li>
+  
+    <li><a href="/tags/MySQL/">MySQL</a><small>1</small></li>
+  
+    <li><a href="/tags/Network/">Network</a><small>2</small></li>
+  
+    <li><a href="/tags/Nginx/">Nginx</a><small>1</small></li>
+  
+    <li><a href="/tags/Note/">Note</a><small>7</small></li>
+  
+    <li><a href="/tags/Phone/">Phone</a><small>2</small></li>
+  
+    <li><a href="/tags/RFID/">RFID</a><small>2</small></li>
+  
+    <li><a href="/tags/Spring/">Spring</a><small>1</small></li>
+  
+    <li><a href="/tags/Virtual-Machine/">Virtual Machine</a><small>1</small></li>
+  
+    <li><a href="/tags/Win10/">Win10</a><small>5</small></li>
+  
+  </ul>
+</div>
+
+
+  <div class="widget footer">
+  
+  <span>&copy;2017-2024 thesomeexp</span>
+  
+  </br>
+  <span>Powered by <a target="_blank" rel="noopener" href="http://hexo.io" >Hexo</a></span>
+  </br>
+    <span>Theme by <a target="_blank" rel="noopener" href="https://github.com/thesomeexp/hexo-theme-light-simple" >hexo-theme-light-simple</a></span>
+</div>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+</body>
+</html>

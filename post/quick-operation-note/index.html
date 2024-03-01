@@ -1,0 +1,186 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>快速操作笔记 | thesomeexp</title>
+  <meta name="author" content="thesomeexp">
+  
+  <meta name="description" content="那些搜索过两次以上的解决办法.">
+  
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="快速操作笔记"/>
+  <meta property="og:site_name" content="thesomeexp"/>
+
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">thesomeexp</a></h1>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+      <li><a href="/links">Links</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+    <div class="post-content">
+        <header>
+            
+  
+    <h1 class="title">快速操作笔记</h1>
+  
+
+            
+                <time itemprop="datePublished"
+                      datetime="2020-05-28T16:00:00.000Z">2020-05-29</time>
+                <span style="color: rgb(153, 153, 153);">-</span>
+                <time itemprop="dateModified"
+                      updated="2020-05-28T16:00:00.000Z">2020-05-29</time>
+            
+        </header>
+        <div class="entry">
+            
+                <p>那些搜索过两次以上的解决办法. </p>
+<span id="more"></span>
+
+<h1 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h1><h2 id="CentOS7配置静态ip"><a href="#CentOS7配置静态ip" class="headerlink" title="CentOS7配置静态ip"></a>CentOS7配置静态ip</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">/etc/sysconfig/network-scripts/ifcfg-ens33</span><br><span class="line"></span><br><span class="line">BOOTPROTO=static</span><br><span class="line">IPADDR=</span><br><span class="line">NETMASK=</span><br><span class="line">GATEWAY=</span><br><span class="line">DNS1=</span><br><span class="line">DNS2=</span><br></pre></td></tr></table></figure>
+
+<h2 id="CentOS7-ifconfig-command-not-found"><a href="#CentOS7-ifconfig-command-not-found" class="headerlink" title="CentOS7 ifconfig command not found"></a>CentOS7 ifconfig command not found</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 安装net-tools</span><br><span class="line">sudo yum install net-tools</span><br></pre></td></tr></table></figure>
+
+<h2 id="CentOS7修改软件源"><a href="#CentOS7修改软件源" class="headerlink" title="CentOS7修改软件源:"></a>CentOS7修改软件源:</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// 下面的操作结果还有点问题, 懒得搞了</span><br><span class="line">cd /etc/yum.repos.d/</span><br><span class="line">// 安装weget</span><br><span class="line">yum install -y wget</span><br><span class="line">// 下载CentOS 7的repo文件</span><br><span class="line">wget -O /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repop://mirrors.aliyun.com/repo/Centos-7.repo</span><br><span class="line">// 或者</span><br><span class="line">curl -o /etc/yum.repos.d/CentOS-Base.repo http://mirrors.aliyun.com/repo/Centos-7.repo</span><br><span class="line">// 清除缓存</span><br><span class="line">yum clean all</span><br><span class="line">// 生成缓存</span><br><span class="line">yum makecache</span><br></pre></td></tr></table></figure>
+
+<h2 id="CentOS7安装Docker"><a href="#CentOS7安装Docker" class="headerlink" title="CentOS7安装Docker"></a>CentOS7安装Docker</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 切换root用户</span><br><span class="line">// 照着官网教程跑, 修改为阿里云的镜像</span><br><span class="line">yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo</span><br><span class="line">// 启动并加入开机启动</span><br><span class="line">systemctl start docker</span><br><span class="line">systemctl enable docker</span><br></pre></td></tr></table></figure>
+
+<h2 id="CentOS7防火墙"><a href="#CentOS7防火墙" class="headerlink" title="CentOS7防火墙"></a>CentOS7防火墙</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// 开启防火墙</span><br><span class="line">systemctl start firewalld</span><br><span class="line">// 关闭防火墙</span><br><span class="line">systemctl stop firewalld.service</span><br><span class="line">// 查看已开放的端口(默认不开放任何端口)</span><br><span class="line">firewall-cmd --list-ports</span><br><span class="line">// 开启80端口</span><br><span class="line">// --zone(作用域), --add-port(端口和访问类型) , --permanent(永久生效) 记得重启</span><br><span class="line">firewall-cmd --zone=public --add-port=80/tcp --permanent</span><br><span class="line">// 重启防火墙</span><br><span class="line">firewall-cmd --reload</span><br><span class="line">// 禁止防火墙开机启动</span><br><span class="line">systemctl disable firewalld.service</span><br><span class="line">// 删除</span><br><span class="line">firewall-cmd --zone= public --remove-port=80/tcp --permanent</span><br></pre></td></tr></table></figure>
+
+<h2 id="进程"><a href="#进程" class="headerlink" title="进程"></a>进程</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 列出所有用户的</span><br><span class="line">ps -aux</span><br><span class="line">// 杀掉进程</span><br><span class="line">kill -9 &#123;pid&#125;</span><br><span class="line">// 后台运行</span><br><span class="line">nohup ./frps -c frps.ini &gt;/home/lighthouse/frp/frp_0.39.0_linux_amd64/log 2&gt;&amp;1 &amp;</span><br></pre></td></tr></table></figure>
+
+<h2 id="CentOS7使用Docker"><a href="#CentOS7使用Docker" class="headerlink" title="CentOS7使用Docker"></a>CentOS7使用Docker</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line">// 列出所有镜像</span><br><span class="line">docker images</span><br><span class="line">// 删除镜像(需要先停止容器)</span><br><span class="line">docker rmi image_id</span><br><span class="line">// 运行 --name(容器名) -i(交互模式) -t(tty打开终端) -d(后台运行)(可以合成-itd) -p 容器外:容器内(端口映射) image-name:tag(版本) </span><br><span class="line">docker run --name container-name -d image-name:tag</span><br><span class="line">如:docker run --name myredis –d redis</span><br><span class="line">// 查看运行中容器命令 -a(全部)</span><br><span class="line">docker ps</span><br><span class="line">// 停止容器</span><br><span class="line">docker stop container_id</span><br><span class="line">// 启动容器</span><br><span class="line">docker start container_id</span><br><span class="line">// 删除容器</span><br><span class="line">docker rm container_id</span><br><span class="line">// 进入容器</span><br><span class="line">docker exec -it container_id /bin/bash</span><br><span class="line">// 使用当前目录的 Dockerfile 创建镜像，镜像名字:版本号</span><br><span class="line">docker build -t 名字:版本号 .</span><br><span class="line">示例: docker build -t runoob/ubuntu:v1 .</span><br><span class="line">// 启动时配置文件挂载 </span><br><span class="line">示例: docker run -p 82:80 --name nginx1 -v /src/nginx/nginx.conf:/etc/nginx/nginx.conf -d nginx</span><br><span class="line">// 拷贝文件进容器(覆盖)</span><br><span class="line">示例: docker cp nginx.conf nginx1:/etc/nginx/nginx.conf</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+<p>错误:<br>WARNING: IPv4 forwarding is disabled. Networking will not work.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">// 有些容器好像默认是ipv6, 需要指定ipv4, 或者修改系统配置:</span><br><span class="line"> /usr/lib/sysctl.d/00-system.conf</span><br><span class="line">// 中添加</span><br><span class="line">net.ipv4.ip_forward=1</span><br><span class="line">// 再重启</span><br><span class="line"> systemctl restart network</span><br><span class="line"></span><br><span class="line"> // mysql时区问题 </span><br><span class="line"> # docker exec -it 5c02cf9db889 bash</span><br><span class="line"># date</span><br><span class="line"># ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span><br><span class="line">退出重启docker</span><br><span class="line"># exit</span><br><span class="line"># docker restart 5c02cf9db889</span><br></pre></td></tr></table></figure>
+
+<h2 id="CentOS7网卡地址-路径"><a href="#CentOS7网卡地址-路径" class="headerlink" title="CentOS7网卡地址, 路径"></a>CentOS7网卡地址, 路径</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/etc/sysconfig/network-scripts/</span><br></pre></td></tr></table></figure>
+
+
+<h1 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 服务器运行jar定义输出</span><br><span class="line">nohup java -jar getCimiss-surf.jar &gt;consoleMsg.log 2&gt;&amp;1 &amp;</span><br><span class="line"></span><br><span class="line">tail -fn 50 nohup.out</span><br></pre></td></tr></table></figure>
+
+<h1 id="Docker"><a href="#Docker" class="headerlink" title="Docker"></a>Docker</h1><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br></pre></td><td class="code"><pre><span class="line">docker pull centos // 从镜像仓库下载镜像</span><br><span class="line">docker images // 列出所有本地镜像</span><br><span class="line">docker run -it &#123;id&#125;  // 运行某个容器 --name给它名字</span><br><span class="line">docker run -it -p &#123;外部暴露端口&#125;:&#123;容器内部端口&#125; &#123;name&#125; // 小p是指定端口, 大P是随机端口</span><br><span class="line"></span><br><span class="line">exit  // 关闭退出容器</span><br><span class="line">Ctrl P Q  // 不关闭退出容器</span><br><span class="line">docker attach &#123;id&#125; // 重新回到容器</span><br><span class="line"></span><br><span class="line">docker start &#123;id&#125; // 启动容器</span><br><span class="line"></span><br><span class="line">stop // 停止容器</span><br><span class="line">kill // 强制停止</span><br><span class="line"></span><br><span class="line">docker ps -l   // 上一次运行的容器</span><br><span class="line">docker ps -n &#123;n&#125; // 上n次运行的</span><br><span class="line"></span><br><span class="line">docker rmi &#123;id&#125; // 删除镜像</span><br><span class="line">docker rm &#123;id&#125; // 删除已停止容器</span><br><span class="line"></span><br><span class="line">docker run -d &#123;name&#125; // 运行在后台了, 如果它没有什么任务会自动关闭</span><br><span class="line"></span><br><span class="line">docker logs -t时间 -f实时刷新 &#123;id&#125; // 查看容器日志</span><br><span class="line"></span><br><span class="line">docker top &#123;id&#125; // 查看容器内进程</span><br><span class="line"></span><br><span class="line">docker inspect &#123;id&#125; // 查看容器内部细节(盒子)</span><br><span class="line"></span><br><span class="line">docker exec -t &#123;id&#125; &#123;command&#125; // 直接执行命令, 不需要进入容器</span><br><span class="line"></span><br><span class="line">docker cp &#123;id&#125;:&#123;容器文件路径&#125; &#123;宿主机路径&#125; // 将文件拷贝到宿主机持久化</span><br><span class="line"></span><br><span class="line">docker commit -a=&quot;作者名&quot; -m=&quot;描述&quot; &#123;id&#125; &#123;命名空间/镜像名&#125;:&#123;version&#125; // 就是保存为自己的镜像</span><br><span class="line"></span><br><span class="line">// 容器数据卷(相当于外部硬盘, 用来持久化容器数据, 可以修改读写权限)</span><br><span class="line">docker run -it -v &#123;宿主机目录&#125;:&#123;容器内目录&#125; &#123;name&#125;</span><br><span class="line"></span><br><span class="line">docker inspect &#123;id&#125; // 查看容器详情</span><br><span class="line"></span><br><span class="line">// DockerFile相当于描述Docker镜像的文件(添加卷或者命令等), 可以通过image+DockerFile生成新的image: </span><br><span class="line">docker build -f &#123;DockerFile路径&#125; -t &#123;命名空间/镜像名&#125;</span><br><span class="line"></span><br><span class="line">// 容器继承, 继承的容器卷内容能实现共享. 容器之间配置信息的传递, 数据卷的生命周期一直持续到没有容器使用它为止. </span><br><span class="line"></span><br><span class="line">// 保留字指令: </span><br><span class="line">FROM 基础镜像, 当前镜像基于哪个镜像, 顶层是scratch</span><br><span class="line">MAINTAINER 维护者的名字邮箱</span><br><span class="line">RUN 容器构建时需要运行的命令</span><br><span class="line">EXPOSE 当前容器对外暴露出的端口号</span><br><span class="line">WORKDIR 登录容器后的默认路径</span><br><span class="line">ENV 构建时设置环境变量</span><br><span class="line">ADD 将宿主机目录下的文件拷贝+解压缩进镜像, ADD会自动解压tar</span><br><span class="line">COPY 类似ADD但直接拷贝没有解压</span><br><span class="line">VOLUME 容器数据卷, 用于数据保存和持久化工作</span><br><span class="line">CMD 指定容器启动时要运行的命令, 可以有多个CMD命令, 但是只有最后一个命令会生效, CMD会被docker run之后的参数覆盖</span><br><span class="line">ENTRYPOINT 和CMD一样, 都是在指定容器启动程序及参数(不会覆盖, 会被追加组合使用)</span><br><span class="line">ONBUILD 父镜像在被子镜像继承后这个命令构建时会被触发</span><br><span class="line"></span><br><span class="line">dockerfile示例: </span><br><span class="line">FROM centos // 父镜像</span><br><span class="line">MAINTAINER xxxyyy&lt;xxyyy@qq.com&gt;</span><br><span class="line"></span><br><span class="line">ENV MYPATH /usr/local</span><br><span class="line">WORKDIR $MYPATH</span><br><span class="line"></span><br><span class="line">RUN yum -y install vim // 安装vim</span><br><span class="line">RUN yum -y install net-tools // 安装网络工具</span><br><span class="line"></span><br><span class="line">EXPOSE 80 // 暴露端口</span><br><span class="line"></span><br><span class="line">CMD echo $MYPATH</span><br><span class="line">CMD echo &quot;success ===== ok&quot;</span><br><span class="line">CMD /bin/bash</span><br><span class="line">构建示例: </span><br><span class="line">docker build -f /mydocker/Dockerfile -t mycentos:1.3 .</span><br><span class="line"></span><br><span class="line">docker history &#123;镜像id&#125; // 列出镜像变更历史</span><br><span class="line"></span><br><span class="line">docker配置代理示例: </span><br><span class="line">mkdir /etc/systemd/system/docker.service.d</span><br><span class="line">vi /etc/systemd/system/docker.service.d/http-proxy.conf</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Environment=&quot;HTTP_PROXY=http://192.168.52.1:7890/&quot; &quot;HTTPS_PROXY=http://192.168.52.1:7890/&quot;</span><br><span class="line"></span><br><span class="line">systemctl daemon-reload</span><br><span class="line">systemctl restart docker</span><br></pre></td></tr></table></figure>
+
+<h2 id="Docker使用Redis"><a href="#Docker使用Redis" class="headerlink" title="Docker使用Redis"></a>Docker使用Redis</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 进入容器</span><br><span class="line">docker exec -it container_id /bin/bash</span><br><span class="line"></span><br><span class="line">// 使用redis-cli, h-host, p-port, a-password</span><br><span class="line">redis-cli -h 127.0.0.1 -p 6379 -a 123456</span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<h2 id="Docker使用Mysql"><a href="#Docker使用Mysql" class="headerlink" title="Docker使用Mysql"></a>Docker使用Mysql</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// 忽略大小写敏感</span><br><span class="line">docker run --name WinMysql -p 3306:3306 -e MYSQL_ROOT_PASSWORD=123456 -d mysql:5.7.30 --lower_case_table_names=1</span><br></pre></td></tr></table></figure>
+
+<h1 id="GIT"><a href="#GIT" class="headerlink" title="GIT"></a>GIT</h1><h2 id="添加错文件"><a href="#添加错文件" class="headerlink" title="添加错文件"></a>添加错文件</h2><p>git reset HEAD XXX&#x2F;XXX&#x2F;XXX.java 就是对某个文件进行撤销了<br>然后再checkout就好了</p>
+<h1 id="MySQL"><a href="#MySQL" class="headerlink" title="MySQL"></a>MySQL</h1><p>清空表数据, id从1开始: </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">truncate table TABLE_NAME</span><br></pre></td></tr></table></figure>
+
+<p>mysqldump 数据参数</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-- --column-statistics=0 修复高版本 mysqldump 导出低版本数据</span><br><span class="line">-- -d 表示不导出数据只导出表结构</span><br><span class="line">&quot;DATABASE_NAME&quot; -d --column-statistics=0 --result-file=&quot;C:\\Users\\i\\Desktop\\&#123;data_source&#125;-&#123;timestamp&#125;-dump.sql&quot;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Navicat"><a href="#Navicat" class="headerlink" title="Navicat"></a>Navicat</h1><h2 id="导出数据字典"><a href="#导出数据字典" class="headerlink" title="导出数据字典"></a>导出数据字典</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">SELECT</span><br><span class="line">TABLE_NAME &#x27;表名&#x27;,</span><br><span class="line">COLUMN_NAME &#x27;字段名&#x27;,</span><br><span class="line">COLUMN_TYPE &#x27;数据类型&#x27;,</span><br><span class="line">COLUMN_COMMENT &#x27;备注&#x27;</span><br><span class="line">FROM</span><br><span class="line">information_schema.COLUMNS</span><br><span class="line">WHERE</span><br><span class="line">TABLE_SCHEMA = &#x27;admin&#x27; and table_name = &#x27;sys_menu&#x27;;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Photoshop"><a href="#Photoshop" class="headerlink" title="Photoshop"></a>Photoshop</h1><p>对你没看错还有ps的. </p>
+<h2 id="抠出照片的文字"><a href="#抠出照片的文字" class="headerlink" title="抠出照片的文字"></a>抠出照片的文字</h2><p>选择 -&gt; 色彩范围 -&gt; 然后选择选’阴影’, 下面选’灰度’, 容易看些. </p>
+<h1 id="Windows-10"><a href="#Windows-10" class="headerlink" title="Windows 10"></a>Windows 10</h1><h2 id="使用其他用户运行"><a href="#使用其他用户运行" class="headerlink" title="使用其他用户运行"></a>使用其他用户运行</h2><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">runas /user:&#123;USERNAME&#125; /savecred &#123;Full path of file&#125;</span><br></pre></td></tr></table></figure>
+            
+        </div>
+        
+            
+
+            <footer>
+                
+  
+  <div class="tags">
+    <a href="/tags/Note/">Note</a>
+  </div>
+
+            </footer>
+        
+    </div>
+</article>
+
+<!-- 代码块复制功能 -->
+<script type="text/javascript" src="/js/clipboard.min.js"></script>  
+<script type="text/javascript" src="/js/clipboard-use.js"></script></div></div>
+    <aside id="sidebar" class="alignright">
+  
+<div class="widget tag">
+  <ul class="entry">
+  
+    <li><a href="/tags/Android/">Android</a><small>1</small></li>
+  
+    <li><a href="/tags/Blog/">Blog</a><small>2</small></li>
+  
+    <li><a href="/tags/Book/">Book</a><small>2</small></li>
+  
+    <li><a href="/tags/Docker/">Docker</a><small>1</small></li>
+  
+    <li><a href="/tags/Essay/">Essay</a><small>7</small></li>
+  
+    <li><a href="/tags/Game/">Game</a><small>1</small></li>
+  
+    <li><a href="/tags/Git/">Git</a><small>1</small></li>
+  
+    <li><a href="/tags/Hexo/">Hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/Java/">Java</a><small>5</small></li>
+  
+    <li><a href="/tags/Lifestyle/">Lifestyle</a><small>1</small></li>
+  
+    <li><a href="/tags/Maven/">Maven</a><small>1</small></li>
+  
+    <li><a href="/tags/MySQL/">MySQL</a><small>1</small></li>
+  
+    <li><a href="/tags/Network/">Network</a><small>2</small></li>
+  
+    <li><a href="/tags/Nginx/">Nginx</a><small>1</small></li>
+  
+    <li><a href="/tags/Note/">Note</a><small>7</small></li>
+  
+    <li><a href="/tags/Phone/">Phone</a><small>2</small></li>
+  
+    <li><a href="/tags/RFID/">RFID</a><small>2</small></li>
+  
+    <li><a href="/tags/Spring/">Spring</a><small>1</small></li>
+  
+    <li><a href="/tags/Virtual-Machine/">Virtual Machine</a><small>1</small></li>
+  
+    <li><a href="/tags/Win10/">Win10</a><small>5</small></li>
+  
+  </ul>
+</div>
+
+
+  <div class="widget footer">
+  
+  <span>&copy;2017-2024 thesomeexp</span>
+  
+  </br>
+  <span>Powered by <a target="_blank" rel="noopener" href="http://hexo.io" >Hexo</a></span>
+  </br>
+    <span>Theme by <a target="_blank" rel="noopener" href="https://github.com/thesomeexp/hexo-theme-light-simple" >hexo-theme-light-simple</a></span>
+</div>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+</body>
+</html>
