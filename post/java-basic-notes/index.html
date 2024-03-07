@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   
   
-  <title>Java 基础笔记 | thesomeexp</title>
-  <meta name="author" content="thesomeexp">
+  <title>Java 基础笔记 | SomeExp</title>
+  <meta name="author" content="SomeExp">
   
   <meta name="description" content="关于Java技术, 官方给出的Hello World解读.">
   
@@ -14,7 +14,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   <meta property="og:title" content="Java 基础笔记"/>
-  <meta property="og:site_name" content="thesomeexp"/>
+  <meta property="og:site_name" content="SomeExp"/>
 
   <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
 <meta name="generator" content="Hexo 7.1.1"></head>
@@ -22,7 +22,7 @@
 
 <body>
   <header id="header" class="inner"><div class="alignleft">
-  <h1><a href="/">thesomeexp</a></h1>
+  <h1><a href="/">SomeExp</a></h1>
 </div>
 <nav id="main-nav" class="alignright">
   <ul>
@@ -1089,7 +1089,7 @@ long max(long arg1, long arg2)</td>
 
 <p>这个方法接收什么参数? 通过看他的方法签名, 你可以看到它接收一个 Box&lt;Number&gt; 参数类型. 但是这是什么意思呢? 你允许传递 Box&lt;Integer&gt; 或者 Box&lt;Double&gt; 类型吗? 或者你是这么期望的? 但很可惜答案是”不”, 因为 Box&lt;Integer&gt; 和 Box&lt;Double&gt; 不是 Box&lt;Number&gt; 的子类类型. </p>
 <p>这是一个使用泛型编程时的常用的误解, 但是这是一个值得学习的重要的观念. </p>
-<p><img src="/picture/20200720-0.png" alt="Box&lt;Integer&gt;不是Box&lt;Number&gt;的子类型, 尽管Integer是Number的子类型"></p>
+<p><img src="/picture/20200720-0.jpg" alt="Box&lt;Integer&gt;不是Box&lt;Number&gt;的子类型, 尽管Integer是Number的子类型"></p>
 <p>注: 给定两个不同的类型A和B(例如Number和Integer), MyClass&lt;A&gt;和MyClass&lt;B&gt; 没有关系, 不管A和B有没有关系. MyClass&lt;A&gt; 和MyClass&lt;B&gt;的父类都是Object. </p>
 <h3 id="泛型类和子类型Generic-Classes-and-Subtyping"><a href="#泛型类和子类型Generic-Classes-and-Subtyping" class="headerlink" title="泛型类和子类型Generic Classes and Subtyping"></a>泛型类和子类型Generic Classes and Subtyping</h3><p>你可以通过继承和实现来产生泛型类型的子类型. 泛型类型参数的关系是由extends和implement决定的. </p>
 <p>我们使用Collections类作为例子, ArrayList&lt;E&gt;实现List&lt;E&gt;, 而List&lt;E&gt;继承了Collection&lt;E&gt;. 所以ArrayList&lt;String&gt;是List&lt;String&gt;的子类型, 而它也是Collection&lt;String&gt;的子类型. </p>
@@ -1139,11 +1139,7 @@ long max(long arg1, long arg2)</td>
             </footer>
         
     </div>
-</article>
-
-<!-- 代码块复制功能 -->
-<script type="text/javascript" src="/js/clipboard.min.js"></script>  
-<script type="text/javascript" src="/js/clipboard-use.js"></script></div></div>
+</article></div></div>
     <aside id="sidebar" class="alignright">
   
 <div class="widget tag">
@@ -1151,7 +1147,7 @@ long max(long arg1, long arg2)</td>
   
     <li><a href="/tags/Android/">Android</a><small>1</small></li>
   
-    <li><a href="/tags/Blog/">Blog</a><small>2</small></li>
+    <li><a href="/tags/Blog/">Blog</a><small>1</small></li>
   
     <li><a href="/tags/Book/">Book</a><small>2</small></li>
   
@@ -1195,7 +1191,7 @@ long max(long arg1, long arg2)</td>
 
   <div class="widget footer">
   
-  <span>&copy;2017-2024 thesomeexp</span>
+  <span>&copy;2017-2024 SomeExp</span>
   
   </br>
   <span>Powered by <a target="_blank" rel="noopener" href="http://hexo.io" >Hexo</a></span>

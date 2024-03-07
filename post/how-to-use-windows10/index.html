@@ -4,8 +4,8 @@
   <meta charset="utf-8">
   
   
-  <title>如何使用 windows10 | thesomeexp</title>
-  <meta name="author" content="thesomeexp">
+  <title>如何使用 windows10 | SomeExp</title>
+  <meta name="author" content="SomeExp">
   
   <meta name="description" content="使用 Windows 10 的指南. 正确使用姿势是什么? 如何解决和避免 Windows 的一些问题?">
   
@@ -14,7 +14,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
   <meta property="og:title" content="如何使用 windows10"/>
-  <meta property="og:site_name" content="thesomeexp"/>
+  <meta property="og:site_name" content="SomeExp"/>
 
   <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
 <meta name="generator" content="Hexo 7.1.1"></head>
@@ -22,7 +22,7 @@
 
 <body>
   <header id="header" class="inner"><div class="alignleft">
-  <h1><a href="/">thesomeexp</a></h1>
+  <h1><a href="/">SomeExp</a></h1>
 </div>
 <nav id="main-nav" class="alignright">
   <ul>
@@ -66,7 +66,7 @@
 <h2 id="为什么不用PE-ghost之类的方式安装-其他地方下载的镜像可以用吗"><a href="#为什么不用PE-ghost之类的方式安装-其他地方下载的镜像可以用吗" class="headerlink" title="为什么不用PE, ghost之类的方式安装? 其他地方下载的镜像可以用吗?"></a>为什么不用PE, ghost之类的方式安装? 其他地方下载的镜像可以用吗?</h2><p>我本人不了解PE, ghost的安装机制, 不确定这种方式安装的系统安全性. 同样, 来自非官方的镜像的安全性是未知的. </p>
 <h2 id="如何分区"><a href="#如何分区" class="headerlink" title="如何分区?"></a>如何分区?</h2><p>系统盘一般建议放在比较快的硬盘, 如何分区看个人, 善用搜索. </p>
 <h2 id="如何激活我的windows"><a href="#如何激活我的windows" class="headerlink" title="如何激活我的windows?"></a>如何激活我的windows?</h2><p>经济实力允许的范围内请支持正版(去微软官网购买), 像我这样的贫穷屌丝也可以选择不激活. 你也可以选择冒着电脑被病毒感染的风险在网上下载各种激活工具. </p>
-<h1 id="关于软件"><a href="#关于软件" class="headerlink" title="关于软件"></a>关于软件</h1><p>个人建议所有软件都在微软商店下载, 在安装和使用软件时请谨慎选择在UAC(User Account Control)面前点击’是’, 也就是win10在安装一些软件时弹出来的这样的窗口:<br><img src="/picture/20200208-0.png" alt="UAC窗口"><br>如果点了’是’, 该程序就能在你的电脑为所欲为. 很多网上下载的程序都会这样, 给电脑装一大堆无用软件甚至修改系统相关配置信息.如果你确实需要安装这个软件, 那就承担相应的后果. 如果你和我一样装软件有UAC强迫症, 那么可以<a href="/post/how-to-get-started-with-scoop-quickly">使用Scoop</a>来安装软件. 除了安装好, 如果对软件不信任, 那可以新建一个账户来运行, 或者丢虚拟机中运行.</p>
+<h1 id="关于软件"><a href="#关于软件" class="headerlink" title="关于软件"></a>关于软件</h1><p>个人建议所有软件都在微软商店下载, 在安装和使用软件时请谨慎选择在UAC(User Account Control)面前点击’是’, 也就是win10在安装一些软件时弹出来的这样的窗口:<br><img src="/picture/20200208-0.jpg" alt="UAC窗口"><br>如果点了’是’, 该程序就能在你的电脑为所欲为. 很多网上下载的程序都会这样, 给电脑装一大堆无用软件甚至修改系统相关配置信息.如果你确实需要安装这个软件, 那就承担相应的后果. 如果你和我一样装软件有UAC强迫症, 那么可以<a href="/post/how-to-get-started-with-scoop-quickly">使用Scoop</a>来安装软件. 除了安装好, 如果对软件不信任, 那可以新建一个账户来运行, 或者丢虚拟机中运行.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">runas /user:&quot;USERNAME&quot; /savecred &quot;Full path of file&quot;</span><br></pre></td></tr></table></figure>
 <h2 id="我下载的软件默认安装在哪里"><a href="#我下载的软件默认安装在哪里" class="headerlink" title="我下载的软件默认安装在哪里?"></a>我下载的软件默认安装在哪里?</h2><p>一般自己下载的软件都可以选择安装路径, 而一位<a target="_blank" rel="noopener" href="https://www.v2ex.com/member/lm902">不愿意透露的大佬</a>跟我说默认他们的路径是: </p>
 <ul>
@@ -76,7 +76,7 @@
 <li>用户数据放在~&#x2F;AppData&#x2F;Roaming</li>
 <li>所有用户共享的数据放在C:&#x2F;ProgramData<br>而~指的是系统的用户路径, 如果你按照上面的方式安装了系统, 那么你的路径就是: C:\Users\{你的用户名}\我的话一般都会自己新建文件夹放在~&#x2F;program&#x2F;下, 因为上面那些目录存了很多东西非常乱.<br>如果要清理垃圾可以翻一下上面的目录.<br>如果程序有管理员权限, 他们还可以放在C:\Program Files\下.<br>(ref: <a target="_blank" rel="noopener" href="https://www.zhihu.com/question/318988385/answer/651195330">为什么安卓移动的应用缓存被扔的到处都是，而不是像Windows那样放到Program Files里？</a></li>
 </ul>
-<h1 id="关于卡顿"><a href="#关于卡顿" class="headerlink" title="关于卡顿"></a>关于卡顿</h1><p>在明显感觉到电脑卡顿的时候, 可以提前打开电脑的 任务管理器 , 点击性能面板, 你就能了解到当前电脑硬件的一些情况, 下面是我电脑的情况:<br><img src="/picture/20200208-1.png" alt="我的电脑情况"><br>因为我运行了一些软件, 可以看到内存占用率比较高, 而我在这种使用情况下CPU的占用率不是很高, 所以对于我的日常使用而言我的电脑配置是足够的. 如果你的电脑某项占用率超过90%那么可以考虑升级硬件或者修改软件配置. </p>
+<h1 id="关于卡顿"><a href="#关于卡顿" class="headerlink" title="关于卡顿"></a>关于卡顿</h1><p>在明显感觉到电脑卡顿的时候, 可以提前打开电脑的 任务管理器 , 点击性能面板, 你就能了解到当前电脑硬件的一些情况, 下面是我电脑的情况:<br><img src="/picture/20200208-1.jpg" alt="我的电脑情况"><br>因为我运行了一些软件, 可以看到内存占用率比较高, 而我在这种使用情况下CPU的占用率不是很高, 所以对于我的日常使用而言我的电脑配置是足够的. 如果你的电脑某项占用率超过90%那么可以考虑升级硬件或者修改软件配置. </p>
 <h2 id="我是否需要修改注册表或者关闭系统服务来提高系统的运行速度"><a href="#我是否需要修改注册表或者关闭系统服务来提高系统的运行速度" class="headerlink" title="我是否需要修改注册表或者关闭系统服务来提高系统的运行速度?"></a>我是否需要修改注册表或者关闭系统服务来提高系统的运行速度?</h2><p>我个人不建议这么做, 修改注册表信息和关闭一些系统服务可能是危险的, 比如导致系统崩溃. </p>
 <h1 id="关于组件缺失"><a href="#关于组件缺失" class="headerlink" title="关于组件缺失"></a>关于组件缺失</h1><p>经常玩游戏的朋友或者安装大型软件的时候可能会遇到一些xx组件缺失的错误提示, 个人建议在搜索相关信息的时候, 在关键词后面加上 site:microsoft.com 优先查询微软官网提供的信息. </p>
 <h1 id="我的习惯"><a href="#我的习惯" class="headerlink" title="我的习惯"></a>我的习惯</h1><p>通过上面你可以看到我的电脑配置比你们的还低, 多么瞩目的2代i3.<br>我日常使用觉得不错的软件:<br>解压: 7-zip<br>浏览器: firefox(别下载到某智版本)<a target="_blank" rel="noopener" href="https://www.mozilla.org/en-US/firefox/all.html">https://www.mozilla.org/en-US/firefox/all.html</a>, brave, chrome, 新版Edge, Tor<br>截屏: Snipaste<br>录屏: OBS Studio<br>视频播放器: VLC<br>文本编辑器: Notepad++, vscode<br>pdf查看器: SumatraPDF<br>安全防护: win10自带的Windows Defender<br>虚拟机: Hyper-V, (自己用Vmware感觉方便点)<br>密码管理: KeePass<br>磁盘加密: win10自带的BitLocker, Veracrypt<br>输入法: RIME<br>其他: 7+ Taskbar Tweaker, DocFetcher, WinMerge, Rufus<br>以上软件大多可绿色安装, 如果你有更好的软件推荐给我, 那么请联系我, 谢谢. </p>
@@ -109,11 +109,7 @@
             </footer>
         
     </div>
-</article>
-
-<!-- 代码块复制功能 -->
-<script type="text/javascript" src="/js/clipboard.min.js"></script>  
-<script type="text/javascript" src="/js/clipboard-use.js"></script></div></div>
+</article></div></div>
     <aside id="sidebar" class="alignright">
   
 <div class="widget tag">
@@ -121,7 +117,7 @@
   
     <li><a href="/tags/Android/">Android</a><small>1</small></li>
   
-    <li><a href="/tags/Blog/">Blog</a><small>2</small></li>
+    <li><a href="/tags/Blog/">Blog</a><small>1</small></li>
   
     <li><a href="/tags/Book/">Book</a><small>2</small></li>
   
@@ -165,7 +161,7 @@
 
   <div class="widget footer">
   
-  <span>&copy;2017-2024 thesomeexp</span>
+  <span>&copy;2017-2024 SomeExp</span>
   
   </br>
   <span>Powered by <a target="_blank" rel="noopener" href="http://hexo.io" >Hexo</a></span>
