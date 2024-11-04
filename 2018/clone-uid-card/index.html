@@ -1,0 +1,171 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  
+  <title>克隆一张 UID 卡(门禁卡) | SomeExp</title>
+  <meta name="author" content="SomeExp">
+  
+  <meta name="description" content="克隆 MIFARE 门禁卡教程.">
+  
+  
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="克隆一张 UID 卡(门禁卡)"/>
+  <meta property="og:site_name" content="SomeExp"/>
+  <link rel="icon" href="/unicorn.jpg">
+  <link rel="stylesheet" href="/css/style.css" media="screen" type="text/css">
+<meta name="generator" content="Hexo 7.1.1"></head>
+
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">SomeExp</a></h1>
+</div>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+      <li><a href="/about">About</a></li>
+    
+      <li><a href="/links">Links</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article class="post">
+    <div class="post-content">
+        <header>
+            
+  
+    <h1 class="title">克隆一张 UID 卡(门禁卡)</h1>
+  
+
+            
+                <time itemprop="datePublished"
+                      datetime="2018-01-09T16:00:00.000Z">2018-01-10</time>
+                <span style="color: rgb(153, 153, 153);">-</span>
+                <time itemprop="dateModified"
+                      updated="2022-05-29T16:00:00.000Z">2022-05-30</time>
+            
+        </header>
+        <div class="entry">
+            
+                <p>21世纪初门禁系统运用得比较广泛了，最常见的莫过于刷卡的门禁。这篇文章以MIFARE卡为例，克隆一张可用的门禁卡。<br>工具：可读写MIFARE卡片的手机(图为YoutaPhone 2)，白卡，一卡通门禁卡。</p>
+<span id="more"></span>
+<p><img src="/picture/20180110-0.jpg" alt="工具: 支持nfc手机, 白卡, 一卡通门禁卡"></p>
+<p>一卡通门禁卡一般都进行了加密，这里不详细说明解密。（左转搜索ACR122U PM3）</p>
+<p>手机上运用工具查看门禁卡的UID（先假设我们没有该卡的密码），我用的是Mifareclassictool，当然你也可以用Taginfo。</p>
+<p><img src="/picture/20180110-1.jpg" alt="卡片信息"></p>
+<p>UID就是卡片0扇区0块的前4个字节（前8位），这里卡片的UID是B67A4C81，但我们不可以直接把白卡里面的前4字节进行修改，因为卡片的第五字节那两位是校验位，而校验方式是从左到右每两位进行异或运算所以计算该卡的校验位为：B6 Xor 7A Xor 4C Xor 81 &#x3D; 01</p>
+<p><img src="/picture/20180110-2.jpg" alt="计算校验值"></p>
+<p>所以第五个字节也需要进行改写，接下来就是用工具修改白卡的UID了。</p>
+<p><img src="/picture/20180110-3.jpg" alt="写标签"></p>
+<p>注意不可以随意修改划红线的那4位数字，否则就会造成卡片不可读写。<br>假如没有修改校验位会出现如下结果：</p>
+<p><img src="/picture/20180110-4.jpg" alt="卡锁死"></p>
+<p>这是被锁死了,UID锁死修复请参考bobylive博主发的<a target="_blank" rel="noopener" href="https://bobylive.com/static/1936469">UID 修改 &amp; UID 锁死修复</a>,修改成功就是下面这样：</p>
+<p><img src="/picture/20180110-5.jpg" alt="修改成功"></p>
+<p>接下来我们就拿着这张白卡刷门禁。</p>
+<p><img src="/picture/20180110-6.jpg" alt="测试刷卡"></p>
+<p>成功，结束。</p>
+<p>（可见这种门禁的安全性并不算很高，UID卡最多有有限种组合，只要有时间，几乎该类卡的所有门禁都可以克隆。还有，拥有nfc功能的手机也可以模拟UID卡。）</p>
+<p><font color=red >转载请注明出处，任何因本文章造成的法律问题，与本人无关！ 如有错误请指出，谢谢</font></p>
+
+            
+        </div>
+        
+            
+                <footer>
+                    <div class="copyright">
+    <p>本作品为原创作品,原创作品采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/3.0/cn/">知识共享署名-非商业性使用-相同方式共享 3.0
+            中国大陆许可协议</a>进行许可. </p>
+    <div>
+        转载需标明出处, 本文链接: <a
+                href="/2018/clone-uid-card/">https://someexp.com/2018/clone-uid-card/</a>
+    </div>
+</div>
+                </footer>
+            
+
+            <footer>
+                
+  
+  <div class="tags">
+    <a href="/tags/RFID/">RFID</a>
+  </div>
+
+            </footer>
+        
+    </div>
+</article></div></div>
+    <aside id="sidebar" class="alignright">
+  
+<div class="widget tag">
+  <ul class="entry">
+  
+    <li><a href="/tags/Android/">Android</a><small>1</small></li>
+  
+    <li><a href="/tags/Blog/">Blog</a><small>1</small></li>
+  
+    <li><a href="/tags/Book/">Book</a><small>2</small></li>
+  
+    <li><a href="/tags/Docker/">Docker</a><small>1</small></li>
+  
+    <li><a href="/tags/Essay/">Essay</a><small>7</small></li>
+  
+    <li><a href="/tags/Game/">Game</a><small>1</small></li>
+  
+    <li><a href="/tags/Git/">Git</a><small>1</small></li>
+  
+    <li><a href="/tags/Hexo/">Hexo</a><small>1</small></li>
+  
+    <li><a href="/tags/Java/">Java</a><small>5</small></li>
+  
+    <li><a href="/tags/Lifestyle/">Lifestyle</a><small>2</small></li>
+  
+    <li><a href="/tags/Maven/">Maven</a><small>1</small></li>
+  
+    <li><a href="/tags/MySQL/">MySQL</a><small>1</small></li>
+  
+    <li><a href="/tags/Network/">Network</a><small>2</small></li>
+  
+    <li><a href="/tags/Nginx/">Nginx</a><small>1</small></li>
+  
+    <li><a href="/tags/Note/">Note</a><small>7</small></li>
+  
+    <li><a href="/tags/Phone/">Phone</a><small>2</small></li>
+  
+    <li><a href="/tags/RFID/">RFID</a><small>2</small></li>
+  
+    <li><a href="/tags/Spring/">Spring</a><small>1</small></li>
+  
+    <li><a href="/tags/Virtual-Machine/">Virtual Machine</a><small>1</small></li>
+  
+    <li><a href="/tags/Win10/">Win10</a><small>5</small></li>
+  
+  </ul>
+</div>
+
+
+  <div class="widget footer">
+  
+  <span>&copy;2017-2024 SomeExp</span>
+  
+  </br>
+  <span>Powered by <a target="_blank" rel="noopener" href="http://hexo.io" >Hexo</a></span>
+  </br>
+    <span>Theme by <a target="_blank" rel="noopener" href="https://github.com/thesomeexp/hexo-theme-light-simple" >hexo-theme-light-simple</a></span>
+</div>
+</aside>
+    <div class="clearfix"></div>
+  </div>
+</body>
+</html>
