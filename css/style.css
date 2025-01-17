@@ -113,6 +113,7 @@ article {
   -webkit-box-shadow: 1px 2px 3px #ddd;
   box-shadow: 1px 2px 3px #ddd;
   background: #fff;
+  border-radius: 12px;
 }
 article.page .icon {
   display: none;
@@ -554,6 +555,7 @@ article footer .copyright a:hover {
   font-family: Consolas;
   text-shadow: 0 0 1px #fff;
   margin-bottom: 20px;
+  border-radius: 12px;
 }
 #pagination a:hover {
   background: #258fb8;
@@ -601,6 +603,7 @@ article footer .copyright a:hover {
   box-shadow: 1px 2px 3px #ddd;
   margin-bottom: 20px;
   word-wrap: break-word;
+  border-radius: 12px;
 }
 #sidebar .widget .title {
   padding: 15px 20px;
