@@ -1,0 +1,414 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0"
+  xmlns:atom="http://www.w3.org/2005/Atom"
+  xmlns:content="http://purl.org/rss/1.0/modules/content/">
+  <channel>
+    <title>SomeExp</title>
+    <link>https://someexp.com/</link>
+    
+    <atom:link href="https://someexp.com/rss2.xml" rel="self" type="application/rss+xml"/>
+    
+    <description>SomeExp&#39;s Blog</description>
+    <pubDate>Fri, 21 Mar 2025 16:00:00 GMT</pubDate>
+    <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Stevens-Johnson 综合征自救指南</title>
+      <link>https://someexp.com/2025/stevens-johnson-syndrome-self-rescue-guide/</link>
+      <guid>https://someexp.com/2025/stevens-johnson-syndrome-self-rescue-guide/</guid>
+      <pubDate>Fri, 21 Mar 2025 16:00:00 GMT</pubDate>
+      
+      <description>记录每位热心病友的经验分享.</description>
+      
+      
+      
+      
+      
+      <category domain="https://someexp.com/tags/Guide/">Guide</category>
+      
+      
+      <comments>https://someexp.com/2025/stevens-johnson-syndrome-self-rescue-guide/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>2024年年度碎碎念</title>
+      <link>https://someexp.com/2024/annual-summary/</link>
+      <guid>https://someexp.com/2024/annual-summary/</guid>
+      <pubDate>Wed, 25 Dec 2024 16:00:00 GMT</pubDate>
+      
+      <description>What doesn&#39;t kill you makes you stronger.</description>
+      
+      
+      
+      
+      
+      <category domain="https://someexp.com/tags/Essay/">Essay</category>
+      
+      
+      <comments>https://someexp.com/2024/annual-summary/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>我喜欢的游戏</title>
+      <link>https://someexp.com/2024/favorite-games/</link>
+      <guid>https://someexp.com/2024/favorite-games/</guid>
+      <pubDate>Tue, 24 Dec 2024 16:00:00 GMT</pubDate>
+      
+      <description>游戏推荐榜.</description>
+      
+      
+      
+      
+      
+      <category domain="https://someexp.com/tags/Game/">Game</category>
+      
+      
+      <comments>https://someexp.com/2024/favorite-games/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>对中国人寿保险公司拒赔感到羞耻</title>
+      <link>https://someexp.com/2024/shame-on-china-life-insurance-company/</link>
+      <guid>https://someexp.com/2024/shame-on-china-life-insurance-company/</guid>
+      <pubDate>Thu, 28 Nov 2024 16:00:00 GMT</pubDate>
+      
+      <description>记录一下生病住院了, 人寿保险公司拒赔相关事宜.</description>
+      
+      
+      
+      
+      
+      <category domain="https://someexp.com/tags/Essay/">Essay</category>
+      
+      
+      <comments>https://someexp.com/2024/shame-on-china-life-insurance-company/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>选购推荐清单</title>
+      <link>https://someexp.com/2024/shopping/</link>
+      <guid>https://someexp.com/2024/shopping/</guid>
+      <pubDate>Thu, 29 Aug 2024 16:00:00 GMT</pubDate>
+      
+      <description>&lt;p&gt;之前写的&lt;a href=&quot;/2022/life-notes&quot;&gt;生活笔记&lt;/a&gt;网友反馈还行, 希望我能出一份带图文和链接的, 于是就诞生了这篇.&lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://someexp.com/tags/Lifestyle/">Lifestyle</category>
+      
+      
+      <comments>https://someexp.com/2024/shopping/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>2023年年度小结</title>
+      <link>https://someexp.com/2023/annual-summary/</link>
+      <guid>https://someexp.com/2023/annual-summary/</guid>
+      <pubDate>Fri, 22 Dec 2023 16:00:00 GMT</pubDate>
+      
+      <description>&lt;p&gt;copy 2020, paste 2023.&lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://someexp.com/tags/Essay/">Essay</category>
+      
+      
+      <comments>https://someexp.com/2023/annual-summary/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>生活笔记</title>
+      <link>https://someexp.com/2022/life-notes/</link>
+      <guid>https://someexp.com/2022/life-notes/</guid>
+      <pubDate>Fri, 28 Jan 2022 16:00:00 GMT</pubDate>
+      
+      <description>丁香生活研究所的文章整理. 选购, 种草笔记.</description>
+      
+      
+      
+      
+      
+      <category domain="https://someexp.com/tags/Note/">Note</category>
+      
+      <category domain="https://someexp.com/tags/Lifestyle/">Lifestyle</category>
+      
+      
+      <comments>https://someexp.com/2022/life-notes/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>如何使用 Android</title>
+      <link>https://someexp.com/2021/how-to-use-android/</link>
+      <guid>https://someexp.com/2021/how-to-use-android/</guid>
+      <pubDate>Wed, 14 Apr 2021 16:00:00 GMT</pubDate>
+      
+      <description>使用 Android 的指南. 正确使用姿势是什么? 如何隔离流氓应用?</description>
+      
+      
+      
+      
+      
+      <category domain="https://someexp.com/tags/Phone/">Phone</category>
+      
+      <category domain="https://someexp.com/tags/Android/">Android</category>
+      
+      
+      <comments>https://someexp.com/2021/how-to-use-android/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>Cookie 和 Session</title>
+      <link>https://someexp.com/2021/cookie-and-session/</link>
+      <guid>https://someexp.com/2021/cookie-and-session/</guid>
+      <pubDate>Mon, 15 Mar 2021 16:00:00 GMT</pubDate>
+      
+      <description>Cookie, Session, Token, SessionId 到底是什么?</description>
+      
+      
+      
+      
+      
+      <category domain="https://someexp.com/tags/Network/">Network</category>
+      
+      
+      <comments>https://someexp.com/2021/cookie-and-session/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>MySQL 的学习</title>
+      <link>https://someexp.com/2021/mysql-learning/</link>
+      <guid>https://someexp.com/2021/mysql-learning/</guid>
+      <pubDate>Sun, 21 Feb 2021 16:00:00 GMT</pubDate>
+      
+      <description>关于 MySQL 基础, 架构, 事物, 并发, 索引的笔记.</description>
+      
+      
+      
+      
+      
+      <category domain="https://someexp.com/tags/MySQL/">MySQL</category>
+      
+      
+      <comments>https://someexp.com/2021/mysql-learning/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>Servlet 中的 Filter</title>
+      <link>https://someexp.com/2021/servlet-filter/</link>
+      <guid>https://someexp.com/2021/servlet-filter/</guid>
+      <pubDate>Fri, 19 Feb 2021 16:00:00 GMT</pubDate>
+      
+      <description>记录一些 Tomcat 容器中常见的 Filter 和作用.</description>
+      
+      
+      
+      
+      
+      <category domain="https://someexp.com/tags/Java/">Java</category>
+      
+      
+      <comments>https://someexp.com/2021/servlet-filter/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>计算机相关书单</title>
+      <link>https://someexp.com/2021/books-about-computer-science/</link>
+      <guid>https://someexp.com/2021/books-about-computer-science/</guid>
+      <pubDate>Thu, 31 Dec 2020 16:00:00 GMT</pubDate>
+      
+      <description>&lt;p&gt;计算机相关的书单, 非计算机类的书单请请看&lt;a href=&quot;/2020/the-book-i-read&quot;&gt;这里这里&lt;/a&gt;. &lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://someexp.com/tags/Book/">Book</category>
+      
+      
+      <comments>https://someexp.com/2021/books-about-computer-science/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>2020年年度小结</title>
+      <link>https://someexp.com/2020/annual-summary/</link>
+      <guid>https://someexp.com/2020/annual-summary/</guid>
+      <pubDate>Tue, 29 Dec 2020 16:00:00 GMT</pubDate>
+      
+      <description>2020这年我在想些什么呢?</description>
+      
+      
+      
+      
+      
+      <category domain="https://someexp.com/tags/Essay/">Essay</category>
+      
+      
+      <comments>https://someexp.com/2020/annual-summary/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>Maven 笔记</title>
+      <link>https://someexp.com/2020/maven-notes/</link>
+      <guid>https://someexp.com/2020/maven-notes/</guid>
+      <pubDate>Sun, 29 Nov 2020 16:00:00 GMT</pubDate>
+      
+      <description>Maven 笔记.</description>
+      
+      
+      
+      
+      
+      <category domain="https://someexp.com/tags/Java/">Java</category>
+      
+      <category domain="https://someexp.com/tags/Maven/">Maven</category>
+      
+      
+      <comments>https://someexp.com/2020/maven-notes/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>计算机网络基础知识</title>
+      <link>https://someexp.com/2020/basic-computer-network/</link>
+      <guid>https://someexp.com/2020/basic-computer-network/</guid>
+      <pubDate>Fri, 30 Oct 2020 16:00:00 GMT</pubDate>
+      
+      <description>记录计算机网络学习的笔记.</description>
+      
+      
+      
+      
+      
+      <category domain="https://someexp.com/tags/Note/">Note</category>
+      
+      <category domain="https://someexp.com/tags/Network/">Network</category>
+      
+      
+      <comments>https://someexp.com/2020/basic-computer-network/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>Spring 的学习</title>
+      <link>https://someexp.com/2020/spring-learning/</link>
+      <guid>https://someexp.com/2020/spring-learning/</guid>
+      <pubDate>Mon, 26 Oct 2020 16:00:00 GMT</pubDate>
+      
+      <description>记录 Spring 的学习笔记</description>
+      
+      
+      
+      
+      
+      <category domain="https://someexp.com/tags/Note/">Note</category>
+      
+      <category domain="https://someexp.com/tags/Java/">Java</category>
+      
+      <category domain="https://someexp.com/tags/Spring/">Spring</category>
+      
+      
+      <comments>https://someexp.com/2020/spring-learning/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>Nginx 搭建图片服务器</title>
+      <link>https://someexp.com/2020/serve-image-with-nginx/</link>
+      <guid>https://someexp.com/2020/serve-image-with-nginx/</guid>
+      <pubDate>Fri, 12 Jun 2020 16:00:00 GMT</pubDate>
+      
+      <description>使用 Docker 和 Nginx 搭建图片服务器的示例.</description>
+      
+      
+      
+      
+      
+      <category domain="https://someexp.com/tags/Note/">Note</category>
+      
+      <category domain="https://someexp.com/tags/Nginx/">Nginx</category>
+      
+      <category domain="https://someexp.com/tags/Docker/">Docker</category>
+      
+      
+      <comments>https://someexp.com/2020/serve-image-with-nginx/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>快速操作笔记</title>
+      <link>https://someexp.com/2020/quick-operation-note/</link>
+      <guid>https://someexp.com/2020/quick-operation-note/</guid>
+      <pubDate>Thu, 28 May 2020 16:00:00 GMT</pubDate>
+      
+      <description>&lt;p&gt;那些搜索过两次以上的解决办法. &lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://someexp.com/tags/Note/">Note</category>
+      
+      
+      <comments>https://someexp.com/2020/quick-operation-note/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>看过的书</title>
+      <link>https://someexp.com/2020/the-book-i-read/</link>
+      <guid>https://someexp.com/2020/the-book-i-read/</guid>
+      <pubDate>Wed, 13 May 2020 16:00:00 GMT</pubDate>
+      
+      <description>&lt;p&gt;非计算机相关的书单. 计算机类的书单请请看&lt;a href=&quot;/2021/books-about-computer-science&quot;&gt;这里这里&lt;/a&gt;. &lt;/p&gt;</description>
+      
+      
+      
+      
+      
+      <category domain="https://someexp.com/tags/Essay/">Essay</category>
+      
+      <category domain="https://someexp.com/tags/Book/">Book</category>
+      
+      
+      <comments>https://someexp.com/2020/the-book-i-read/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>Scoop 笔记</title>
+      <link>https://someexp.com/2020/scoop-notes/</link>
+      <guid>https://someexp.com/2020/scoop-notes/</guid>
+      <pubDate>Wed, 06 May 2020 16:00:00 GMT</pubDate>
+      
+      <description>简单记录下 Scoop 使用指南.</description>
+      
+      
+      
+      
+      
+      <category domain="https://someexp.com/tags/Win10/">Win10</category>
+      
+      
+      <comments>https://someexp.com/2020/scoop-notes/#disqus_thread</comments>
+      
+    </item>
+    
+  </channel>
+</rss>
