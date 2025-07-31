@@ -6,7 +6,7 @@
   <link href="https://p2gg.com/atom.xml" rel="self"/>
   
   <link href="https://p2gg.com/"/>
-  <updated>2025-04-17T04:31:00.000Z</updated>
+  <updated>2024-12-25T16:00:00.000Z</updated>
   <id>https://p2gg.com/</id>
   
   <author>
@@ -17,40 +17,6 @@
   <generator uri="https://hexo.io/">Hexo</generator>
   
   <entry>
-    <title>历年购买的物品及其解决的问题</title>
-    <link href="https://p2gg.com/2025/shopping/"/>
-    <id>https://p2gg.com/2025/shopping/</id>
-    <published>2025-04-17T00:00:00.000Z</published>
-    <updated>2025-04-17T04:31:00.000Z</updated>
-    
-    
-    <summary type="html">产品是一门技术与成本的艺术.</summary>
-    
-    
-    
-    
-    <category term="Lifestyle" scheme="https://p2gg.com/tags/Lifestyle/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>Stevens-Johnson 综合征自救指南</title>
-    <link href="https://p2gg.com/2025/stevens-johnson-syndrome-self-rescue-guide/"/>
-    <id>https://p2gg.com/2025/stevens-johnson-syndrome-self-rescue-guide/</id>
-    <published>2025-03-22T06:09:00.000Z</published>
-    <updated>2025-03-22T06:09:00.000Z</updated>
-    
-    
-    <summary type="html">记录每位热心病友的经验分享.</summary>
-    
-    
-    
-    
-    <category term="Guide" scheme="https://p2gg.com/tags/Guide/"/>
-    
-  </entry>
-  
-  <entry>
     <title>2024年年度碎碎念</title>
     <link href="https://p2gg.com/2024/annual-summary/"/>
     <id>https://p2gg.com/2024/annual-summary/</id>
@@ -59,40 +25,6 @@
     
     
     <summary type="html">What doesn&#39;t kill you makes you stronger.</summary>
-    
-    
-    
-    
-    <category term="Essay" scheme="https://p2gg.com/tags/Essay/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>我喜欢的游戏</title>
-    <link href="https://p2gg.com/2024/favorite-games/"/>
-    <id>https://p2gg.com/2024/favorite-games/</id>
-    <published>2024-12-25T05:00:00.000Z</published>
-    <updated>2025-04-29T05:00:00.000Z</updated>
-    
-    
-    <summary type="html">游戏推荐榜.</summary>
-    
-    
-    
-    
-    <category term="Game" scheme="https://p2gg.com/tags/Game/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>对中国人寿保险公司拒赔感到羞耻</title>
-    <link href="https://p2gg.com/2024/shame-on-china-life-insurance-company/"/>
-    <id>https://p2gg.com/2024/shame-on-china-life-insurance-company/</id>
-    <published>2024-11-28T16:00:00.000Z</published>
-    <updated>2024-12-25T16:00:00.000Z</updated>
-    
-    
-    <summary type="html">记录一下生病住院了, 人寿保险公司拒赔相关事宜.</summary>
     
     
     
@@ -282,7 +214,7 @@
     <link href="https://p2gg.com/2020/basic-computer-network/"/>
     <id>https://p2gg.com/2020/basic-computer-network/</id>
     <published>2020-10-30T16:00:00.000Z</published>
-    <updated>2024-11-06T09:51:55.423Z</updated>
+    <updated>2025-07-31T05:31:16.667Z</updated>
     
     
     <summary type="html">记录计算机网络学习的笔记.</summary>
@@ -371,6 +303,74 @@
     <category term="Essay" scheme="https://p2gg.com/tags/Essay/"/>
     
     <category term="Book" scheme="https://p2gg.com/tags/Book/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Scoop 笔记</title>
+    <link href="https://p2gg.com/2020/scoop-notes/"/>
+    <id>https://p2gg.com/2020/scoop-notes/</id>
+    <published>2020-05-06T16:00:00.000Z</published>
+    <updated>2022-11-15T16:00:00.000Z</updated>
+    
+    
+    <summary type="html">简单记录下 Scoop 使用指南.</summary>
+    
+    
+    
+    
+    <category term="Win10" scheme="https://p2gg.com/tags/Win10/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>关于 Java 中 String 类的浅克隆和深克隆</title>
+    <link href="https://p2gg.com/2020/shallow-clone-and-deep-clone-of-string-in-java/"/>
+    <id>https://p2gg.com/2020/shallow-clone-and-deep-clone-of-string-in-java/</id>
+    <published>2020-03-24T16:00:00.000Z</published>
+    <updated>2022-05-29T16:00:00.000Z</updated>
+    
+    
+    <summary type="html">Java 中 String 对象是如何进行克隆的</summary>
+    
+    
+    
+    
+    <category term="Java" scheme="https://p2gg.com/tags/Java/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>如何使用 windows10</title>
+    <link href="https://p2gg.com/2020/how-to-use-windows10/"/>
+    <id>https://p2gg.com/2020/how-to-use-windows10/</id>
+    <published>2020-02-07T16:00:00.000Z</published>
+    <updated>2024-08-22T16:00:00.000Z</updated>
+    
+    
+    <summary type="html">使用 Windows 10 的指南. 正确使用姿势是什么?</summary>
+    
+    
+    
+    
+    <category term="Win10" scheme="https://p2gg.com/tags/Win10/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Java 基础笔记</title>
+    <link href="https://p2gg.com/2019/java-basic-notes/"/>
+    <id>https://p2gg.com/2019/java-basic-notes/</id>
+    <published>2019-11-25T16:00:00.000Z</published>
+    <updated>2022-02-28T16:00:00.000Z</updated>
+    
+    
+    <summary type="html">关于Java, 官方给出的Hello World解读.</summary>
+    
+    
+    
+    
+    <category term="Java" scheme="https://p2gg.com/tags/Java/"/>
     
   </entry>
   
