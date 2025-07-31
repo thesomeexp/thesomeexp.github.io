@@ -9,46 +9,8 @@
     <atom:link href="https://p2gg.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>希望世界更开源, 透明与自由.</description>
-    <pubDate>Thu, 17 Apr 2025 04:31:00 GMT</pubDate>
+    <pubDate>Wed, 25 Dec 2024 16:00:00 GMT</pubDate>
     <generator>http://hexo.io/</generator>
-    
-    <item>
-      <title>历年购买的物品及其解决的问题</title>
-      <link>https://p2gg.com/2025/shopping/</link>
-      <guid>https://p2gg.com/2025/shopping/</guid>
-      <pubDate>Thu, 17 Apr 2025 00:00:00 GMT</pubDate>
-      
-      <description>产品是一门技术与成本的艺术.</description>
-      
-      
-      
-      
-      
-      <category domain="https://p2gg.com/tags/Lifestyle/">Lifestyle</category>
-      
-      
-      <comments>https://p2gg.com/2025/shopping/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>Stevens-Johnson 综合征自救指南</title>
-      <link>https://p2gg.com/2025/stevens-johnson-syndrome-self-rescue-guide/</link>
-      <guid>https://p2gg.com/2025/stevens-johnson-syndrome-self-rescue-guide/</guid>
-      <pubDate>Sat, 22 Mar 2025 06:09:00 GMT</pubDate>
-      
-      <description>记录每位热心病友的经验分享.</description>
-      
-      
-      
-      
-      
-      <category domain="https://p2gg.com/tags/Guide/">Guide</category>
-      
-      
-      <comments>https://p2gg.com/2025/stevens-johnson-syndrome-self-rescue-guide/#disqus_thread</comments>
-      
-    </item>
     
     <item>
       <title>2024年年度碎碎念</title>
@@ -66,44 +28,6 @@
       
       
       <comments>https://p2gg.com/2024/annual-summary/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>我喜欢的游戏</title>
-      <link>https://p2gg.com/2024/favorite-games/</link>
-      <guid>https://p2gg.com/2024/favorite-games/</guid>
-      <pubDate>Wed, 25 Dec 2024 05:00:00 GMT</pubDate>
-      
-      <description>游戏推荐榜.</description>
-      
-      
-      
-      
-      
-      <category domain="https://p2gg.com/tags/Game/">Game</category>
-      
-      
-      <comments>https://p2gg.com/2024/favorite-games/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>对中国人寿保险公司拒赔感到羞耻</title>
-      <link>https://p2gg.com/2024/shame-on-china-life-insurance-company/</link>
-      <guid>https://p2gg.com/2024/shame-on-china-life-insurance-company/</guid>
-      <pubDate>Thu, 28 Nov 2024 16:00:00 GMT</pubDate>
-      
-      <description>记录一下生病住院了, 人寿保险公司拒赔相关事宜.</description>
-      
-      
-      
-      
-      
-      <category domain="https://p2gg.com/tags/Essay/">Essay</category>
-      
-      
-      <comments>https://p2gg.com/2024/shame-on-china-life-insurance-company/#disqus_thread</comments>
       
     </item>
     
@@ -407,6 +331,82 @@
       
       
       <comments>https://p2gg.com/2020/the-book-i-read/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>Scoop 笔记</title>
+      <link>https://p2gg.com/2020/scoop-notes/</link>
+      <guid>https://p2gg.com/2020/scoop-notes/</guid>
+      <pubDate>Wed, 06 May 2020 16:00:00 GMT</pubDate>
+      
+      <description>简单记录下 Scoop 使用指南.</description>
+      
+      
+      
+      
+      
+      <category domain="https://p2gg.com/tags/Win10/">Win10</category>
+      
+      
+      <comments>https://p2gg.com/2020/scoop-notes/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>关于 Java 中 String 类的浅克隆和深克隆</title>
+      <link>https://p2gg.com/2020/shallow-clone-and-deep-clone-of-string-in-java/</link>
+      <guid>https://p2gg.com/2020/shallow-clone-and-deep-clone-of-string-in-java/</guid>
+      <pubDate>Tue, 24 Mar 2020 16:00:00 GMT</pubDate>
+      
+      <description>Java 中 String 对象是如何进行克隆的</description>
+      
+      
+      
+      
+      
+      <category domain="https://p2gg.com/tags/Java/">Java</category>
+      
+      
+      <comments>https://p2gg.com/2020/shallow-clone-and-deep-clone-of-string-in-java/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>如何使用 windows10</title>
+      <link>https://p2gg.com/2020/how-to-use-windows10/</link>
+      <guid>https://p2gg.com/2020/how-to-use-windows10/</guid>
+      <pubDate>Fri, 07 Feb 2020 16:00:00 GMT</pubDate>
+      
+      <description>使用 Windows 10 的指南. 正确使用姿势是什么?</description>
+      
+      
+      
+      
+      
+      <category domain="https://p2gg.com/tags/Win10/">Win10</category>
+      
+      
+      <comments>https://p2gg.com/2020/how-to-use-windows10/#disqus_thread</comments>
+      
+    </item>
+    
+    <item>
+      <title>Java 基础笔记</title>
+      <link>https://p2gg.com/2019/java-basic-notes/</link>
+      <guid>https://p2gg.com/2019/java-basic-notes/</guid>
+      <pubDate>Mon, 25 Nov 2019 16:00:00 GMT</pubDate>
+      
+      <description>关于Java, 官方给出的Hello World解读.</description>
+      
+      
+      
+      
+      
+      <category domain="https://p2gg.com/tags/Java/">Java</category>
+      
+      
+      <comments>https://p2gg.com/2019/java-basic-notes/#disqus_thread</comments>
       
     </item>
     
