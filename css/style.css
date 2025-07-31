@@ -254,6 +254,11 @@ article header .title a:hover {
   color: #258fb8;
   text-decoration: none;
 }
+@media print {
+  article header .print-button {
+    display: none; /* 打印时隐藏按钮 */
+  }
+}
 article .entry {
   text-align: justify;
   line-height: 1.6;
