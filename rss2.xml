@@ -9,8 +9,27 @@
     <atom:link href="https://p2gg.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>希望世界更开源, 透明与自由.</description>
-    <pubDate>Wed, 25 Dec 2024 16:00:00 GMT</pubDate>
+    <pubDate>Thu, 31 Jul 2025 05:00:00 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>利用 Cloudflare Workers 来回显请求</title>
+      <link>https://p2gg.com/2025/echo-request-by-cloudflare-workers/</link>
+      <guid>https://p2gg.com/2025/echo-request-by-cloudflare-workers/</guid>
+      <pubDate>Thu, 31 Jul 2025 05:00:00 GMT</pubDate>
+      
+      <description>边缘计算实现在线 Mock 小工具.</description>
+      
+      
+      
+      
+      
+      <category domain="https://p2gg.com/tags/Dev/">Dev</category>
+      
+      
+      <comments>https://p2gg.com/2025/echo-request-by-cloudflare-workers/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>2024年年度碎碎念</title>
@@ -388,25 +407,6 @@
       
       
       <comments>https://p2gg.com/2020/how-to-use-windows10/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>Java 基础笔记</title>
-      <link>https://p2gg.com/2019/java-basic-notes/</link>
-      <guid>https://p2gg.com/2019/java-basic-notes/</guid>
-      <pubDate>Mon, 25 Nov 2019 16:00:00 GMT</pubDate>
-      
-      <description>关于Java, 官方给出的Hello World解读.</description>
-      
-      
-      
-      
-      
-      <category domain="https://p2gg.com/tags/Java/">Java</category>
-      
-      
-      <comments>https://p2gg.com/2019/java-basic-notes/#disqus_thread</comments>
       
     </item>
     
