@@ -142,6 +142,21 @@ article .post-content {
     padding-left: 20px;
   }
 }
+article .post-content .resume-photo {
+  float: right;
+  width: 120px;
+  height: 160px;
+  margin-left: 20px;
+  margin-bottom: 10px;
+  object-fit: cover;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+@media screen and (max-width: 600px) {
+  article .post-content .resume-photo {
+    display: none;
+  }
+}
 article .archive-post-content {
   overflow: auto;
   padding: 10px 20px 0px 20px;
