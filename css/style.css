@@ -275,7 +275,7 @@ article header .title a:hover {
   }
 }
 article .entry {
-  text-align: justify;
+  text-align: left;
   line-height: 1.6;
 }
 article .entry p,
