@@ -14,9 +14,7 @@
   <meta property="og:site_name" content="p2gg"/>
   <link rel="icon" href="/unicorn.jpg">
   <link rel="stylesheet" href="/css/style.css" media="all" type="text/css">
-<meta name="generator" content="Hexo 7.1.1"><link rel="alternate" href="/atom.xml" title="p2gg" type="application/atom+xml">
-<link rel="alternate" href="/rss2.xml" title="p2gg" type="application/rss+xml">
-</head>
+<meta name="generator" content="Hexo 7.3.0"></head>
 <body>
   <header id="header" class="inner"><div class="alignleft">
   <h1><a href="/">p2gg</a></h1>
@@ -139,7 +137,7 @@
 <p><img src="/picture/2021-02-23-11-40-08.png"></p>
 <p>依然是占用一整页, 其中红色代表的是Key, 黄色代表的是数据.</p>
 <p>使用InnoDB创建一张表时, 会默认使用主键创建聚簇索引, 这个通过主键创建的索引树也叫主键索引, 它的叶子节点存储的是整行数据. 我们创建表:</p>
-<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE</span> <span class="keyword">TABLE</span> people</span><br><span class="line">(</span><br><span class="line">    pel_id           <span class="type">int</span> AUTO_INCREMENT <span class="keyword">PRIMARY</span> KEY,</span><br><span class="line">    pel_first_name      <span class="type">char</span>(<span class="number">16</span>),</span><br><span class="line">    pel_last_name     <span class="type">char</span>(<span class="number">16</span>),</span><br><span class="line">    pel_birthday  datetime</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">CREATE TABLE</span> people</span><br><span class="line">(</span><br><span class="line">    pel_id           <span class="type">int</span> AUTO_INCREMENT <span class="keyword">PRIMARY KEY</span>,</span><br><span class="line">    pel_first_name      <span class="type">char</span>(<span class="number">16</span>),</span><br><span class="line">    pel_last_name     <span class="type">char</span>(<span class="number">16</span>),</span><br><span class="line">    pel_birthday  datetime</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
 
 <p>然后插入10行数据, 那么通过主键创建的索引(主键索引)大概是长这个样子的(为了便于理解我们这里一个页中只存放3条记录,实际情况可以存放很多):</p>
 <p><img src="/picture/2021-02-23-11-53-05.png"></p>
