@@ -6,7 +6,7 @@
   <link href="https://p2gg.com/atom.xml" rel="self"/>
   
   <link href="https://p2gg.com/"/>
-  <updated>2025-07-31T05:00:00.000Z</updated>
+  <updated>2025-10-15T16:30:00.000Z</updated>
   <id>https://p2gg.com/</id>
   
   <author>
@@ -15,6 +15,21 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>干眼人的湿房镜, 巩膜镜佩戴体验</title>
+    <link href="https://p2gg.com/2025/lenses-about-dry-eyes/"/>
+    <id>https://p2gg.com/2025/lenses-about-dry-eyes/</id>
+    <published>2025-10-15T16:00:00.000Z</published>
+    <updated>2025-10-15T16:30:00.000Z</updated>
+    
+    
+    <summary type="html">干眼后的物理防护经历.</summary>
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>利用 Cloudflare Workers 来回显请求</title>
@@ -231,7 +246,7 @@
     <link href="https://p2gg.com/2020/basic-computer-network/"/>
     <id>https://p2gg.com/2020/basic-computer-network/</id>
     <published>2020-10-30T16:00:00.000Z</published>
-    <updated>2025-07-31T05:31:16.667Z</updated>
+    <updated>2025-09-22T07:09:25.255Z</updated>
     
     
     <summary type="html">记录计算机网络学习的笔记.</summary>
@@ -354,23 +369,6 @@
     
     
     <category term="Java" scheme="https://p2gg.com/tags/Java/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>如何使用 windows10</title>
-    <link href="https://p2gg.com/2020/how-to-use-windows10/"/>
-    <id>https://p2gg.com/2020/how-to-use-windows10/</id>
-    <published>2020-02-07T16:00:00.000Z</published>
-    <updated>2024-08-22T16:00:00.000Z</updated>
-    
-    
-    <summary type="html">使用 Windows 10 的指南. 正确使用姿势是什么?</summary>
-    
-    
-    
-    
-    <category term="Win10" scheme="https://p2gg.com/tags/Win10/"/>
     
   </entry>
   

@@ -9,8 +9,25 @@
     <atom:link href="https://p2gg.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>希望世界更开源, 透明与自由.</description>
-    <pubDate>Thu, 31 Jul 2025 05:00:00 GMT</pubDate>
+    <pubDate>Wed, 15 Oct 2025 16:30:00 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>干眼人的湿房镜, 巩膜镜佩戴体验</title>
+      <link>https://p2gg.com/2025/lenses-about-dry-eyes/</link>
+      <guid>https://p2gg.com/2025/lenses-about-dry-eyes/</guid>
+      <pubDate>Wed, 15 Oct 2025 16:00:00 GMT</pubDate>
+      
+      <description>干眼后的物理防护经历.</description>
+      
+      
+      
+      
+      
+      
+      <comments>https://p2gg.com/2025/lenses-about-dry-eyes/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>利用 Cloudflare Workers 来回显请求</title>
@@ -388,25 +405,6 @@
       
       
       <comments>https://p2gg.com/2020/shallow-clone-and-deep-clone-of-string-in-java/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>如何使用 windows10</title>
-      <link>https://p2gg.com/2020/how-to-use-windows10/</link>
-      <guid>https://p2gg.com/2020/how-to-use-windows10/</guid>
-      <pubDate>Fri, 07 Feb 2020 16:00:00 GMT</pubDate>
-      
-      <description>使用 Windows 10 的指南. 正确使用姿势是什么?</description>
-      
-      
-      
-      
-      
-      <category domain="https://p2gg.com/tags/Win10/">Win10</category>
-      
-      
-      <comments>https://p2gg.com/2020/how-to-use-windows10/#disqus_thread</comments>
       
     </item>
     
