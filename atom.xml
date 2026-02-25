@@ -6,7 +6,7 @@
   <link href="https://p2gg.com/atom.xml" rel="self"/>
   
   <link href="https://p2gg.com/"/>
-  <updated>2025-10-15T16:30:00.000Z</updated>
+  <updated>2026-02-25T13:00:00.000Z</updated>
   <id>https://p2gg.com/</id>
   
   <author>
@@ -15,6 +15,21 @@
   </author>
   
   <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>2025及历年个人年度好物推荐</title>
+    <link href="https://p2gg.com/2026/awesome-shopping/"/>
+    <id>https://p2gg.com/2026/awesome-shopping/</id>
+    <published>2026-02-25T13:00:00.000Z</published>
+    <updated>2026-02-25T13:00:00.000Z</updated>
+    
+    
+    <summary type="html">精选好物.</summary>
+    
+    
+    
+    
+  </entry>
   
   <entry>
     <title>干眼人的湿房镜, 巩膜镜佩戴体验</title>
@@ -352,23 +367,6 @@
     
     
     <category term="Win10" scheme="https://p2gg.com/tags/Win10/"/>
-    
-  </entry>
-  
-  <entry>
-    <title>关于 Java 中 String 类的浅克隆和深克隆</title>
-    <link href="https://p2gg.com/2020/shallow-clone-and-deep-clone-of-string-in-java/"/>
-    <id>https://p2gg.com/2020/shallow-clone-and-deep-clone-of-string-in-java/</id>
-    <published>2020-03-24T16:00:00.000Z</published>
-    <updated>2022-05-29T16:00:00.000Z</updated>
-    
-    
-    <summary type="html">Java 中 String 对象是如何进行克隆的</summary>
-    
-    
-    
-    
-    <category term="Java" scheme="https://p2gg.com/tags/Java/"/>
     
   </entry>
   

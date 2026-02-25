@@ -9,8 +9,25 @@
     <atom:link href="https://p2gg.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>希望世界更开源, 透明与自由.</description>
-    <pubDate>Wed, 15 Oct 2025 16:30:00 GMT</pubDate>
+    <pubDate>Wed, 25 Feb 2026 13:00:00 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>2025及历年个人年度好物推荐</title>
+      <link>https://p2gg.com/2026/awesome-shopping/</link>
+      <guid>https://p2gg.com/2026/awesome-shopping/</guid>
+      <pubDate>Wed, 25 Feb 2026 13:00:00 GMT</pubDate>
+      
+      <description>精选好物.</description>
+      
+      
+      
+      
+      
+      
+      <comments>https://p2gg.com/2026/awesome-shopping/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>干眼人的湿房镜, 巩膜镜佩戴体验</title>
@@ -386,25 +403,6 @@
       
       
       <comments>https://p2gg.com/2020/scoop-notes/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>关于 Java 中 String 类的浅克隆和深克隆</title>
-      <link>https://p2gg.com/2020/shallow-clone-and-deep-clone-of-string-in-java/</link>
-      <guid>https://p2gg.com/2020/shallow-clone-and-deep-clone-of-string-in-java/</guid>
-      <pubDate>Tue, 24 Mar 2020 16:00:00 GMT</pubDate>
-      
-      <description>Java 中 String 对象是如何进行克隆的</description>
-      
-      
-      
-      
-      
-      <category domain="https://p2gg.com/tags/Java/">Java</category>
-      
-      
-      <comments>https://p2gg.com/2020/shallow-clone-and-deep-clone-of-string-in-java/#disqus_thread</comments>
       
     </item>
     
