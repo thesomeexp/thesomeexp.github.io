@@ -9,8 +9,27 @@
     <atom:link href="https://p2gg.com/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>希望世界更开源, 透明与自由.</description>
-    <pubDate>Wed, 25 Feb 2026 13:00:00 GMT</pubDate>
+    <pubDate>Sun, 05 Apr 2026 04:00:00 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>洛克王国:世界, 图鉴工具, 属性克制计算器</title>
+      <link>https://p2gg.com/2026/roco-tool/</link>
+      <guid>https://p2gg.com/2026/roco-tool/</guid>
+      <pubDate>Sun, 05 Apr 2026 04:00:00 GMT</pubDate>
+      
+      <description>游戏相关工具.</description>
+      
+      
+      
+      
+      
+      <category domain="https://p2gg.com/tags/Game/">Game</category>
+      
+      
+      <comments>https://p2gg.com/2026/roco-tool/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>2025及历年个人年度好物推荐</title>
@@ -384,25 +403,6 @@
       
       
       <comments>https://p2gg.com/2020/the-book-i-read/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>Scoop 笔记</title>
-      <link>https://p2gg.com/2020/scoop-notes/</link>
-      <guid>https://p2gg.com/2020/scoop-notes/</guid>
-      <pubDate>Wed, 06 May 2020 16:00:00 GMT</pubDate>
-      
-      <description>简单记录下 Scoop 使用指南.</description>
-      
-      
-      
-      
-      
-      <category domain="https://p2gg.com/tags/Win10/">Win10</category>
-      
-      
-      <comments>https://p2gg.com/2020/scoop-notes/#disqus_thread</comments>
       
     </item>
     
